@@ -1,0 +1,6 @@
+# OS artifacts
+.DS_Store
+
+# External projects (managed as standalone repos)
+Python_Automation/deep-agents-from-scratch/
+Python_Automation/deep_research_from_scratch/
