@@ -2553,7 +2553,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer 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"
+              "value": "Bearer {{PERPLEXITY_API_KEY}}"
             }
           ]
         },
@@ -10575,7 +10575,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer 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"
+              "value": "Bearer {{PERPLEXITY_API_KEY}}"
             }
           ]
         },
