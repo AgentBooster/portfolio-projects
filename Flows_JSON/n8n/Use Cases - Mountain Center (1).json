@@ -1205,7 +1205,7 @@
           "parameters": [
             {
               "name": "key",
-              "value": "AIzaSyAr5MFVKxMDr1EdB9XB71Di7YtKq1pNMRo"
+              "value": "GOOGLE_SEARCH_API"
             },
             {
               "name": "cx",
