@@ -1,0 +1,1157 @@
+{
+  "name": "arXiv.org AI News",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        2544
+      ],
+      "id": "80ed7edc-5c66-4a22-afa1-346173c4d5f8",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## 6. DISCORD\nEnvío de los papers al canal de Telegram.",
+        "height": 304,
+        "width": 368,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2448,
+        1584
+      ],
+      "typeVersion": 1,
+      "id": "cde19d11-ba69-4487-8240-a0a5f5e23c95",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=**{{ $('Register to Notion Database').item.json.property_title }}**\n\n`{{ $('Register to Notion Database').item.json.property_published.start }}`\n*{{ $('Register to Notion Database').item.json.property_authors }}*\n\n**ABSTRACT (short):**\n{{ $('Edit Fields for Notion (incl. pdf)').item.json.abstract_clean.slice(0, 900) }}\n\n**Links**  \n• arXiv: {{ $json.url || $json.arxiv_id || '' }}  \n• Complete paper (pdf): {{ $json.property_url_pdf || '' }}  \n• Deep Summary (Notion): {{ $('Register to Notion Database').item.json.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        1712
+      ],
+      "id": "998f89dc-65c0-43bb-a305-55d09c0f7e48",
+      "name": "arXiv AI News",
+      "webhookId": "5ed459fd-4c91-47f4-a7f0-2a6e0dd6e805",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "BaGTVtWhdLgFGGrL",
+          "name": "Discord arXiv AI News"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 2. Website Scraper\nScraping papers from [arXiv.org] filtered by **Artificial Intelligence** and then converting the results to JSON",
+        "height": 336,
+        "width": 368
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -352,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "cc88b1fd-ba19-4085-a314-92c9ab363af3",
+      "name": "Sticky Note32"
+    },
+    {
+      "parameters": {
+        "content": "## 1. Daily arXiv AI News Trigger\nExecuted daily at 8.00 am CET\n\nlink: https://arxiv.org/search/?query=Artificial+Intelligence&searchtype=all&source=header",
+        "height": 368,
+        "width": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -656,
+        2032
+      ],
+      "typeVersion": 1,
+      "id": "8646772f-5bf3-4aa5-8d18-90b96d53695c",
+      "name": "Sticky Note33"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\nUse this trigger to test the workflow",
+        "height": 304,
+        "width": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -656,
+        2432
+      ],
+      "typeVersion": 1,
+      "id": "51c21d96-6f3b-46e5-998c-7a227da33345",
+      "name": "Sticky Note34"
+    },
+    {
+      "parameters": {
+        "content": "## 3. Result Splitter\nSplitting feed results to separe items",
+        "height": 336
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        48,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "d213020f-3dec-4e75-a30e-1da7974495a7",
+      "name": "Sticky Note35"
+    },
+    {
+      "parameters": {
+        "content": "## 3. Filter by last 24h\nYou can edit HOURS in the code if you need a wider window.",
+        "height": 336,
+        "width": 288,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        320,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "f178ab4c-944c-4641-90f9-8afb45f79aee",
+      "name": "Sticky Note36"
+    },
+    {
+      "parameters": {
+        "content": "## 5. Register in Notion\n* Filter fields before Notion\n* Register to Notion\n* Freeze **page_id** of each record\n* Add subtitle **Deep Research Summary** inside new pages (will be used later)",
+        "height": 352,
+        "width": 880,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1344,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "2e164a74-c41c-4c3b-9405-842b5258212b",
+      "name": "Sticky Note37"
+    },
+    {
+      "parameters": {
+        "content": "## 7. Generating and Saving a Deep Research Summary for each Paper\nProcessing every paper (full documents), one by one. Then generating a **Deep Research Summary** for each document and saving it to Notion. The **Deep Research Summary** provides a deeper analysis explaining paper's ideas and meanings clearly to curious professionals and non technical experts.\n\nContents Generated:\n-> 1) 3–5 core insights; 2) Core idea and motivation — explained simply; 3) Why this research matters now (context & importance); 4) Key innovations & contributions; 5) Method — explained step-by-step in plain language; 6) Math / theory intuition (no formulas); 7) Experiments and evaluation — what was tested and why it matters; 8) Key results & what they prove; 9) Limitations / where it may fail; 10) Real-world impact and applications; 11) Future work / open questions; 12) Closing takeaway — 2-3 sentences summarizing the big picture",
+        "height": 800,
+        "width": 2240,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2256,
+        1920
+      ],
+      "typeVersion": 1,
+      "id": "fcb7090c-3579-49b1-8c7d-f7f87f304e48",
+      "name": "Sticky Note39"
+    },
+    {
+      "parameters": {
+        "content": "## 4. Result Cleaner\nDedupe results in case of repeated items and prepare clean fields for the next node\nLimit maximum results to 10 items",
+        "height": 352,
+        "width": 656
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        640,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "125d98bf-51e4-4fc2-a28a-57bae5b238a1",
+      "name": "Sticky Note41"
+    },
+    {
+      "parameters": {
+        "content": "## 9. Splitting Output\nThe Output Data is too long to be saved to Notion, so is splitted into different chunks [<2000 characters], then debuged before saving",
+        "height": 352,
+        "width": 496
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3248,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "ed165553-b1df-4e7a-a530-74af0e9d282b",
+      "name": "Sticky Note43"
+    },
+    {
+      "parameters": {
+        "content": "## 8. Generating Deep Research Summary\nEach paper's pfd is analized to get a **Deep Research Summary**, and then **merge** the result with the related **page_id** to be saved to Notion.",
+        "height": 464,
+        "width": 576,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2640,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "7b35ecd4-f1af-4f3e-8682-24adc4379671",
+      "name": "Sticky Note44"
+    },
+    {
+      "parameters": {
+        "content": "## 11. Wait and Start Over\nAfter saving a paper's **Deep Research Summary**, wait and start over with remaining ones.",
+        "height": 320,
+        "width": 400
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4064,
+        2304
+      ],
+      "typeVersion": 1,
+      "id": "4936d833-6edd-47ca-ac45-fe27f7a6186c",
+      "name": "Sticky Note45"
+    },
+    {
+      "parameters": {
+        "content": "## Try It Out\n\n### What this template does (end-to-end)\n* Fetches new AI papers from arXiv.\n* Filters by last 24h time window and de-duplicates papers.\n* Creates a Notion database page per paper and stores key fields (+ the PDF link).\n* Generates a plain-English **Deep Research** summary from the PDF (Gemini) and saves it as child blocks in the same Notion page.\n* Posts a Telegram update at **08:00** with title + link(s) + a short abstract, including a link to the Deep Research in Notion.\n\n### Run it now\n* Click **Execute workflow** to test manually.\n* When ready, enable the **Scheduled Trigger** (08:00 local by default).\n\n### Configure these nodes (minimal)\n* **HTTP Request** → arXiv feed/query (e.g., your AI categories or keywords).\n* **Filter by last 24h** -> you can edit HOURS in the code if you need a wider window.\n* **Result Cleaner** → keeps first occurrence of each `arxiv_id`.\n* **Register in Notion**\n  * Notion account (integration added to the target DB)\n  * Database ID and property mapping (`name`, `url`, `abstract`, `authors`, `tags`, `pdf_url`, `arxiv_id`, `status`).\n* **Freeze page_id** → carries the created Notion `page_id` forward.\n* **Analyze doc (Gemini)** → set your model + API key (env var recommended).\n* **Code (Parse Gemini JSON in chunks)** → splits the model output into ≤1900-char slices.\n* **Append chunks (Notion)** → appends each slice under the same `page_id`.\n* **Send to Telegram** → bot token + `chat_id` (channel or group).\n\n### What you’ll see\n* One Notion page per paper with metadata, PDF link, and a **Deep Research** section composed of multiple rich-text blocks.\n* One Telegram post per paper with the Notion page link and the PDF.\n\n### Notes & limits\n* The summarizer reads the PDF and returns a structured explainer (core insights, method, results, limits, applications).\n* Chunking ensures each block ≤1900 chars to avoid Notion/API errors.\n* If you expect many items, keep **Wait** enabled to pace API calls.\n\n### Requirements\n* Notion integration with access to your target database.\n* Telegram bot + channel/group `chat_id`.\n* Gemini API key and model (e.g., `gemini-2.5-pro`).\n* Optional: environment variables for secrets and IDs.\n\n### Troubleshooting\n* Empty summaries → check PDF URL reachability and Gemini key/model.\n* \"Page not found\" on append → verify `page_id` is set before Append.\n* Duplicates → confirm `arxiv_id` exists and the dedupe node is before Notion create.\n* Telegram not posting → bot must be **admin** of the channel.\n",
+        "height": 1248,
+        "width": 652
+      },
+      "id": "f35627a8-ed30-4ec2-a397-c7399e58c007",
+      "name": "Sticky Note12",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1488,
+        1632
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# AI NEWS FROM ARXIV",
+        "height": 80,
+        "width": 4992,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -752,
+        1472
+      ],
+      "typeVersion": 1,
+      "id": "3edfb40d-fc86-4649-a0e5-c843bc5f26e2",
+      "name": "Sticky Note47"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 80,
+        "width": 4992,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -688,
+        2912
+      ],
+      "typeVersion": 1,
+      "id": "c997c384-1051-4bb6-a56a-24ca4a23b93a",
+      "name": "Sticky Note48"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2256,
+        1712
+      ],
+      "id": "215f7296-1628-47f6-86d2-46c36d9874c6",
+      "name": "End Telegram branch (no further actions)1"
+    },
+    {
+      "parameters": {
+        "content": "## 6. Send News to Telegram\nMessages are sent as separate items, which include **title**, **authors**, **data** and **links** (including a link to Notion with **Deep Resume** we will be generating).",
+        "height": 304,
+        "width": 528,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1904,
+        1584
+      ],
+      "typeVersion": 1,
+      "id": "3290bf3c-213b-4508-abaf-11d33b41c8d9",
+      "name": "Sticky Note49"
+    },
+    {
+      "parameters": {
+        "chatId": "=-1003277954309",
+        "text": "=<b>{{ $('Register to Notion Database').item.json.property_title }}</b>\n\n<b>{{ $('Register to Notion Database').item.json.property_published.start }}</b>\n\n<b>{{ $('Register to Notion Database').item.json.property_authors }}</b>\n\n<em>ABSTRACT (short):</em>\n{{ $('Edit Fields for Notion (incl. pdf)').item.json.abstract_clean }}\n\n<b>Links</b>\n• arXiv: {{ $json.url || $json.arxiv_id || '' }}\n• Complete paper (pdf): {{ $json.property_url_pdf || '' }}\n• Deep Summary (Notion): {{ $('Register to Notion Database').item.json.url }}\n",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "=HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2016,
+        1712
+      ],
+      "id": "4d49dd0a-6dab-4376-83c4-83e5c4266cbf",
+      "name": "Send a text message",
+      "webhookId": "a378df9b-5cfb-416e-bf4c-77d857db4650",
+      "credentials": {
+        "telegramApi": {
+          "id": "Jq0dgMUvaY669VzB",
+          "name": "arXiv AI News"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -560,
+        2256
+      ],
+      "id": "4eae1149-b67c-4555-a0cb-631418daa971",
+      "name": "Schedule Daily Trigger"
+    },
+    {
+      "parameters": {
+        "options": {
+          "mergeAttrs": true
+        }
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        2256
+      ],
+      "id": "e02e3556-ca56-4f37-8f1a-4e496096b777",
+      "name": "Format Conversor"
+    },
+    {
+      "parameters": {
+        "url": "https://export.arxiv.org/api/query",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "search_query",
+              "value": "abs:\"artificial intelligence\""
+            },
+            {
+              "name": "sortBy",
+              "value": "submittedDate"
+            },
+            {
+              "name": "sortOrder",
+              "value": "descending"
+            },
+            {
+              "name": "start",
+              "value": "0"
+            },
+            {
+              "name": "max_results",
+              "value": "100"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -304,
+        2256
+      ],
+      "id": "0143b982-eeb8-4345-8fa6-c9eb0ec5cd8f",
+      "name": "HTTP Request",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "feed.entry",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        112,
+        2256
+      ],
+      "id": "96378512-f3a3-48f3-a01d-03db868ba654",
+      "name": "Split Results"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => ({\n  json: {\n    parent: { database_id: \"TU_DATABASE_ID\" },\n    properties: {\n      title: {\n        title: [{ text: { content: item.json.title || \"Sin título\" } }]\n      },\n      arxiv_id: {\n        rich_text: [{ text: { content: item.json.arxiv_id || \"\" } }]\n      },\n      abstract: {\n        rich_text: [{ text: { content: item.json.summary || \"\" } }]\n      },\n      authors: {\n        rich_text: [{ text: { content: item.json.authors || \"\" } }]\n      },\n      categories: {\n        rich_text: [{ text: { content: item.json.categories || \"\" } }]\n      },\n      published: {\n        date: { start: item.json.published || null }\n      },\n      link: {\n        url: item.json.link || null\n      }\n    }\n  }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1136,
+        2256
+      ],
+      "id": "61015207-00ce-4772-9190-7a1fb8294135",
+      "name": "Prepare Notion payload (JSON)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2b4c8c3c-d029-4d03-a74b-85c361e7c0ec",
+              "name": "=page_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1856,
+        2256
+      ],
+      "id": "1a293058-de3a-4e52-ab68-a53aedcdabca",
+      "name": "Freeze page_id"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "2992729c-bda2-8008-950c-f617082228a1",
+          "mode": "list",
+          "cachedResultName": "ARXIV",
+          "cachedResultUrl": "https://www.notion.so/2992729cbda28008950cf617082228a1"
+        },
+        "title": "={{ $json.title }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "arxiv_id|url",
+              "urlValue": "={{ $json.arxiv_id }}"
+            },
+            {
+              "key": "authors|rich_text",
+              "textContent": "={{ $json.authors }}"
+            },
+            {
+              "key": "published|date",
+              "date": "={{ $json.published }}",
+              "timezone": "US/Eastern"
+            },
+            {
+              "key": "abstract|rich_text",
+              "textContent": "={{ $json.abstract_clean }}"
+            },
+            {
+              "key": "url_pdf|url",
+              "urlValue": "={{ $json.url_pdf }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1648,
+        2256
+      ],
+      "id": "4c6bcb33-0898-4437-8335-90b0bc0605cb",
+      "name": "Register to Notion Database",
+      "credentials": {
+        "notionApi": {
+          "id": "KXvPyfkb7IRVYpfJ",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4f50a382-fd77-425b-b583-5140078f1d15",
+              "name": "title",
+              "value": "={{ $json.properties.title.title[0].text.content }}",
+              "type": "string"
+            },
+            {
+              "id": "943afbe5-13a8-46e8-8904-6c9139e741a5",
+              "name": "published",
+              "value": "={{ $json.properties.published.date.start }}",
+              "type": "string"
+            },
+            {
+              "id": "2476f04e-1db7-41aa-9388-bc9d692883bf",
+              "name": "arxiv_id",
+              "value": "={{ $json.properties.arxiv_id.rich_text[0].text.content }}",
+              "type": "string"
+            },
+            {
+              "id": "ca36a055-966b-4b29-a164-cfee360fc999",
+              "name": "authors",
+              "value": "={{ $json.properties.authors.rich_text[0].text.content }}",
+              "type": "string"
+            },
+            {
+              "id": "e820d5fd-d900-4b00-82d3-773a9eafe6a6",
+              "name": "abstract",
+              "value": "={{ $json.properties.abstract.rich_text[0].text.content }}",
+              "type": "string"
+            },
+            {
+              "id": "1e5e2d1b-ae9b-4a7a-b6c3-aa4b80751a61",
+              "name": "abstract_clean",
+              "value": "={{ \n  String($json.properties.abstract.rich_text[0].text.content || $json.summary)\n    .replace(/\\\\\\\\n/g, ' ')  // limpia \"\\n\" escapado\n    .replace(/\\\\n/g, ' ')    // limpia \"\\n\" si llega doble escapado\n    .replace(/\\n/g, ' ')     // limpia saltos reales\n    .replace(/\\s+/g, ' ')    // colapsa espacios múltiples\n    .trim() \n}}",
+              "type": "string"
+            },
+            {
+              "id": "eece341f-e5cc-4d2f-8c0b-66796d7e5c45",
+              "name": "url_pdf",
+              "value": "={{ (() => {\n     const src = ($json.link || $json.properties.arxiv_id.rich_text[0].text.content || '').trim();\n     if (!src) return '';\n     // Cambia /abs/ por /pdf/\n     let u = src.replace('/abs/', '/pdf/');\n     // Asegura protocolo\n     if (!/^https?:\\/\\//i.test(u)) u = 'https://' + u.replace(/^\\/+/, '');\n     // Añade .pdf si no lo tiene\n     if (!u.toLowerCase().endsWith('.pdf')) u += '.pdf';\n     return u;\n})() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1424,
+        2256
+      ],
+      "id": "ef52b033-0e88-43e2-820a-7771564cc477",
+      "name": "Edit Fields for Notion (incl. pdf)"
+    },
+    {
+      "parameters": {
+        "resource": "block",
+        "blockId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "blockUi": {
+          "blockValues": [
+            {
+              "type": "heading_2",
+              "textContent": "Deep Research Summary"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        2048,
+        2256
+      ],
+      "id": "ac598c63-edfd-405d-abae-0f155fdbaa15",
+      "name": "Append a block (adding childpage subtitle)",
+      "credentials": {
+        "notionApi": {
+          "id": "KXvPyfkb7IRVYpfJ",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "document",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "text": "You are an elite AI research analyst and science communicator.\n\nYour task:\nDeeply read and understand the attached research PDF and generate a structured, high-value explainer that will be stored inside a Notion child page.\n\nAudience:\n- Curious, intelligent founders and professionals\n- Not technical experts, but can understand advanced concepts when clearly explained\n\nPrimary mission:\nExplain the paper’s ideas, meaning, and significance — NOT the metadata.\nDo NOT repeat title, authors, arXiv ID, year, or publication info. We already store those separately.\n\nTone:\n- Clear, sharp, human, insightful\n- Like Karpathy + Paul Graham + Ali Abdaal\n- No fluff, no hype, no academic filler\n- Metaphors and intuitive explanations welcome\n- Convey meaning and understanding, not jargon\n\nCONTENT YOU MUST PRODUCE (as narrative with brief bold section headers inside text):\n\n1) 3–5 core insights (executive brief)\n2) Core idea and motivation — explained simply\n3) Why this research matters now (context & importance)\n4) Key innovations & contributions\n5) Method — explained step-by-step in plain language\n6) Math / theory intuition (no formulas — explain what they *mean*)\n7) Experiments and evaluation — what was tested and why it matters\n8) Key results & what they prove (plain English significance)\n9) Limitations / where it may fail\n10) Real-world impact and applications\n11) Future work / open questions\n12) Closing takeaway — 2-3 sentences summarizing the big picture\n\nOutput rules:\n- DO NOT repeat metadata (title, authors, arXiv ID, etc.)\n- DO NOT output anything outside JSON\n- NO chunk > 1900 characters\n- NO markdown blocks, no backticks inside chunks\n- Make the text feel like a human expert teaching\n\nReturn only valid JSON in this format:\n\n{\n  \"chunks\": [\n    \"chunk1 <= 1900 chars\",\n    \"chunk2 <= 1900 chars\",\n    \"...if needed\"\n  ]\n}\n\nBegin your analysis now.\n",
+        "documentUrls": "={{ $('Edit Fields for Notion (incl. pdf)').item.json.url_pdf }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2864,
+        2400
+      ],
+      "id": "e35e1408-0fb4-44f9-800f-2b95537940af",
+      "name": "Analyze doc (Prompt Ultra-Pro)",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "gdgstNCbhqFkcmqB",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d928dfb2-65a2-449e-8297-d458471a5075",
+              "name": "=page_id",
+              "value": "={{$json.page_id || $json.parent?.page_id || $json.page_id || $json.results?.[0]?.parent?.page_id || $json.id}}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2672,
+        2272
+      ],
+      "id": "0ddcabae-ca74-4ced-b361-ce92d8248621",
+      "name": "Clean page_id"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3040,
+        2288
+      ],
+      "id": "c8e9c42a-2000-45e6-afec-a50cf6e1e20a",
+      "name": "Merge page_id & Summary"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Toma todos los items del Merge\nconst items = $input.all();\n\n// 1) Localiza page_id y el texto de Gemini\nconst pageId =\n  items.find(it => it.json?.page_id)?.json.page_id ?? null;\n\nconst rawText =\n  items.find(it => it.json?.content)?.json?.content?.parts?.[0]?.text ?? \"\";\n\n// 2) Limpia fences ```json ... ``` y espacios\nconst cleaned = String(rawText)\n  .replace(/```json/gi, \"\")\n  .replace(/```/g, \"\")\n  .trim();\n\n// 3) Intenta parsear JSON. Si falla, deja objeto vacío.\nlet parsed = {};\ntry {\n  parsed = cleaned ? JSON.parse(cleaned) : {};\n} catch (_) {\n  parsed = {};\n}\n\n// 4) Extrae el array de trozos con tolerancia de nombres\nconst chunks =\n  Array.isArray(parsed.chunks) ? parsed.chunks :\n  Array.isArray(parsed.summary_chunks) ? parsed.summary_chunks :\n  Array.isArray(parsed.slices) ? parsed.slices :\n  [];\n\n// 5) Si no hay page_id o no hay chunks, no emites nada útil\nif (!pageId || !Array.isArray(chunks) || chunks.length === 0) {\n  // Opcional: emite un item de depuración para ver qué llegó\n  return [{\n    json: {\n      __parse_debug: true,\n      page_id_present: !!pageId,\n      got_chunks: Array.isArray(chunks) ? chunks.length : -1,\n      preview: cleaned.slice(0, 280)\n    }\n  }];\n}\n\n// 6) Emite un item por chunk: { page_id, slice, chunk_index, slice_index }\nreturn chunks.map((chunk, i) => ({\n  json: {\n    page_id: pageId,\n    slice: String(chunk).trim(),\n    chunk_index: i,\n    slice_index: 0,\n  }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3312,
+        2288
+      ],
+      "id": "3450a04f-a211-4578-8480-a0989e2e476e",
+      "name": "Code (Parse Gemini JSON in chunks)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1465705-0160-46c2-8d10-50beede0eb11",
+              "name": "page_id",
+              "value": "={{$json.db_page_id || $json.page_id}}",
+              "type": "string"
+            },
+            {
+              "id": "9c3f2c3c-1139-4919-a45b-46db0f62659d",
+              "name": "slice",
+              "value": "={{$json.slice}}",
+              "type": "string"
+            },
+            {
+              "id": "f9db996a-ae16-4f8c-89ac-02f7bcc9dcee",
+              "name": "=dbg_page_id",
+              "value": "={{$json.page_id}}",
+              "type": "string"
+            },
+            {
+              "id": "ab9d751f-bd50-45d5-a560-65a8b8650ff1",
+              "name": "dbg_slice_len",
+              "value": "={{$json.slice.length}}",
+              "type": "string"
+            },
+            {
+              "id": "50a5acfd-0878-4340-8ba6-c996b5132dc6",
+              "name": "dbg_chunk",
+              "value": "={{$json.chunk_index}}",
+              "type": "string"
+            },
+            {
+              "id": "0c89088e-fd2b-4286-a1c3-f737efde3ae0",
+              "name": "dbg_slice_index",
+              "value": "={{$json.slice_index}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3552,
+        2288
+      ],
+      "id": "939d3cc0-f3ee-4ab6-81fb-4607d152ea23",
+      "name": "Debug before append"
+    },
+    {
+      "parameters": {
+        "content": "## 10. Saving to Notion\nEach chunk is saved, one by one, under the related paper according to their **page_id**",
+        "height": 352,
+        "width": 256,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3776,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "78b52110-6951-45bc-a328-b9ab79926a22",
+      "name": "Sticky Note40"
+    },
+    {
+      "parameters": {
+        "resource": "block",
+        "blockId": {
+          "__rl": true,
+          "value": "={{$json.page_id}}",
+          "mode": "id"
+        },
+        "blockUi": {
+          "blockValues": [
+            {
+              "textContent": "={{$json.slice || '—'}}\n"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        3840,
+        2288
+      ],
+      "id": "87005f82-43e3-41c0-845d-cee1d83ffe5d",
+      "name": "Append chunks",
+      "credentials": {
+        "notionApi": {
+          "id": "KXvPyfkb7IRVYpfJ",
+          "name": "Notion account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// === Configuración ===\nconst HOURS = 24; // últimas 24 horas\nconst now = new Date();\nconst threshold = new Date(now.getTime() - HOURS * 60 * 60 * 1000);\n\n// === Utilidad para limpiar texto ===\nconst get = v => Array.isArray(v) ? String(v[0] ?? '').trim() : String(v ?? '').trim();\n\n// === Procesar cada paper ===\nconst out = [];\n\nfor (const it of items) {\n  const e = it.json;\n\n  // Convertimos fechas\n  const published = new Date(get(e.published || e.updated));\n  if (isNaN(published) || published < threshold) continue; // filtra los más antiguos\n\n  // --- Autores ---\n  const authorList = Array.isArray(e.author) ? e.author : [e.author];\n  const authors = authorList\n    .filter(Boolean)\n    .map(a => get(a.name))\n    .join(', ');\n\n  // --- Categorías ---\n  const categoryList = Array.isArray(e.category) ? e.category : [e.category];\n  const categories = categoryList\n    .filter(Boolean)\n    .map(c => c?.['@_term'] || c?.['$'] || '')\n    .filter(Boolean)\n    .join(', ');\n\n  // --- Añadir al resultado ---\n  out.push({\n    json: {\n      arxiv_id: get(e.id),\n      title: get(e.title),\n      summary: get(e.summary),\n      authors,\n      categories,\n      published: published.toISOString(),\n      link: get(e.id)\n    }\n  });\n}\n\nreturn out;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        2256
+      ],
+      "id": "82a5bdb1-a2b6-4608-9eda-924df2b47305",
+      "name": "Filter recent papers (last 24h)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// === DEDUPLICADOR PERSISTENTE ===\n// Guarda IDs ya vistos entre ejecuciones (funciona en \"Code\" con modo Run Once for All Items)\n\nconst store = $getWorkflowStaticData('global'); // ✅ Correcta sintaxis en n8n actual\nif (!store.seen) store.seen = {}; // mapa id -> fecha\nconst seen = store.seen;\n\n// Dedupe dentro de la misma ejecución\nconst batchSeen = new Set();\nconst out = [];\n\nfor (const it of items) {\n  const id = it.json.arxiv_id || it.json.link || it.json.id;\n  if (!id) continue;\n\n  if (batchSeen.has(id)) continue;  // ya apareció en esta ejecución\n  batchSeen.add(id);\n\n  if (seen[id]) continue;           // ya apareció en ejecuciones previas\n\n  // marcar como nuevo\n  seen[id] = new Date().toISOString();\n  out.push(it);\n}\n\n// Limpiar registros viejos si excede 2000 entradas\nconst MAX = 2000;\nconst entries = Object.entries(seen)\n  .sort((a, b) => new Date(b[1]) - new Date(a[1]));\nif (entries.length > MAX) {\n  const keep = new Set(entries.slice(0, MAX).map(([k]) => k));\n  for (const k of Object.keys(seen)) {\n    if (!keep.has(k)) delete seen[k];\n  }\n}\n\nreturn out;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        2256
+      ],
+      "id": "98612e64-9416-4f37-8a4e-55685fc3f04b",
+      "name": "Dedupe with Static Data"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2400,
+        2256
+      ],
+      "id": "d07b687d-886c-48b9-86dd-50c0f46bcee5",
+      "name": "Process each paper (Gemini + Notion loop)"
+    },
+    {
+      "parameters": {
+        "amount": 0.4
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4112,
+        2432
+      ],
+      "id": "40e912e7-aa45-420f-a8d7-5039c16b037b",
+      "name": "Delay between paper summaries",
+      "webhookId": "30b9bb72-11cc-4626-ab76-ef424aff4bfd"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Return to paper loop (next paper)",
+      "typeVersion": 1,
+      "position": [
+        4304,
+        2432
+      ],
+      "id": "5f28fdc3-9f0e-4b5b-947f-15c714723670"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        928,
+        2256
+      ],
+      "id": "54a25a68-4dd9-4a9b-8ed3-071ab3cfc661",
+      "name": "Limiting 5 results"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "End Telegram branch (no further actions)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Daily Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Conversor": {
+      "main": [
+        [
+          {
+            "node": "Split Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Format Conversor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Results": {
+      "main": [
+        [
+          {
+            "node": "Filter recent papers (last 24h)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Notion payload (JSON)": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields for Notion (incl. pdf)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Freeze page_id": {
+      "main": [
+        [
+          {
+            "node": "Append a block (adding childpage subtitle)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Register to Notion Database": {
+      "main": [
+        [
+          {
+            "node": "Freeze page_id",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "arXiv AI News",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields for Notion (incl. pdf)": {
+      "main": [
+        [
+          {
+            "node": "Register to Notion Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append a block (adding childpage subtitle)": {
+      "main": [
+        [
+          {
+            "node": "Process each paper (Gemini + Notion loop)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze doc (Prompt Ultra-Pro)": {
+      "main": [
+        [
+          {
+            "node": "Merge page_id & Summary",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Clean page_id": {
+      "main": [
+        [
+          {
+            "node": "Analyze doc (Prompt Ultra-Pro)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge page_id & Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge page_id & Summary": {
+      "main": [
+        [
+          {
+            "node": "Code (Parse Gemini JSON in chunks)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Parse Gemini JSON in chunks)": {
+      "main": [
+        [
+          {
+            "node": "Debug before append",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Debug before append": {
+      "main": [
+        [
+          {
+            "node": "Append chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append chunks": {
+      "main": [
+        [
+          {
+            "node": "Delay between paper summaries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter recent papers (last 24h)": {
+      "main": [
+        [
+          {
+            "node": "Dedupe with Static Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dedupe with Static Data": {
+      "main": [
+        [
+          {
+            "node": "Limiting 5 results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process each paper (Gemini + Notion loop)": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Clean page_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delay between paper summaries": {
+      "main": [
+        [
+          {
+            "node": "Return to paper loop (next paper)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Return to paper loop (next paper)": {
+      "main": [
+        [
+          {
+            "node": "Process each paper (Gemini + Notion loop)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "arXiv AI News": {
+      "main": [
+        []
+      ]
+    },
+    "Limiting 5 results": {
+      "main": [
+        [
+          {
+            "node": "Prepare Notion payload (JSON)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "f3abc431-b5d7-4508-912e-94a8313f163e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dea0fe42c4fc0a7d4eab96fc208153d329cc0d698330064077ad5d91e5842edc"
+  },
+  "id": "i4T89yqFpw5DepET",
+  "tags": [
+    {
+      "updatedAt": "2025-11-17T02:36:10.565Z",
+      "createdAt": "2025-11-17T02:36:10.565Z",
+      "id": "dZutKSl3mG4pfFNw",
+      "name": "News"
+    }
+  ]
+}

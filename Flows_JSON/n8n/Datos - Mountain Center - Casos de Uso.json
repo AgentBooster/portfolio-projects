@@ -1,0 +1,299 @@
+{
+  "name": "Datos - Mountain Center - Casos de Uso",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"Nombre Completo\": \"\",\n  \"Correo\": \"\",\n  \"Teléfono\": \"\",\n  \"User_id\": \"\",\n  \"Timestamp\": \"\",\n  \"Intención\": \"\",\n  \"Prioridad\": \"\",\n  \"Sentimiento\": \"\",\n  \"Producto o Servicio\": \"\",\n  \"Calificación del Cliente\": \"\",\n  \"Detección de Soporte\": \"\",\n  \"Datos Sensibles\": \"\",\n  \"Resumen\": \"\"\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "678810a1-1a37-4553-9805-4811b27dbdf5",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe756dbf-7cb3-4f05-8ba4-a85183e8adc8",
+              "name": "Nombre Completo",
+              "value": "={{ $json['Nombre Completo'] }}",
+              "type": "string"
+            },
+            {
+              "id": "e9e891df-e5ee-4ef9-82d2-84ef7d8f09b7",
+              "name": "Correo",
+              "value": "={{ $json.Correo }}",
+              "type": "string"
+            },
+            {
+              "id": "7f562a25-d447-407d-8acc-b2e4e9b3069d",
+              "name": "Teléfono",
+              "value": "={{ $json['Teléfono'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5438025d-a53e-4964-93a8-ce88f1e1ff3e",
+              "name": "User_id",
+              "value": "={{ $json.User_id }}",
+              "type": "string"
+            },
+            {
+              "id": "08df7138-b9fd-48ea-8d3a-74bf6d9f676f",
+              "name": "Timestamp",
+              "value": "={{ $json.Timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "19cbbcad-4da9-4e78-8eb2-6441906a1bd3",
+              "name": "Intención",
+              "value": "={{ $json['Intención'] }}",
+              "type": "string"
+            },
+            {
+              "id": "4ec1fc60-29a1-4717-b0ee-2fcc3fadcb62",
+              "name": "Prioridad",
+              "value": "={{ $json.Prioridad }}",
+              "type": "string"
+            },
+            {
+              "id": "d28fb2d3-2e95-4884-ae97-9920bfd76778",
+              "name": "Sentimiento",
+              "value": "={{ $json.Sentimiento }}",
+              "type": "string"
+            },
+            {
+              "id": "cbca279d-5d50-46f9-9889-1d5a95dc44e9",
+              "name": "Producto o Servicio",
+              "value": "={{ $json['Producto o Servicio'] }}",
+              "type": "string"
+            },
+            {
+              "id": "7f07ca65-6514-4968-99d4-aa1c3063de9d",
+              "name": "Calificación del Cliente",
+              "value": "={{ $json['Calificación del Cliente'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5bbed5e1-8ef8-474d-adb1-3f5477c57d70",
+              "name": "Detección de Soporte",
+              "value": "={{ $json['Detección de Soporte'] }}",
+              "type": "string"
+            },
+            {
+              "id": "68153204-6933-4641-87ff-e394c1a40f8c",
+              "name": "Datos Sensibles",
+              "value": "={{ $json['Datos Sensibles'] }}",
+              "type": "string"
+            },
+            {
+              "id": "9e881739-09a5-4fa7-9843-bb208408cce4",
+              "name": "Resumen",
+              "value": "={{ $json.Resumen }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "d20c8f06-7f9d-46fc-b60e-dca3445a5eee",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "chatId": "-1003060717750",
+        "text": "=Datos - Casos de Uso (DATOS AGRAGADOS DE UN USUARIO QUE USO EL AGENTE DE ALGUNA PÁGINA CASOS DE USO)\n{{ $json['Nombre Completo'] }}\n{{ $json.Correo }}\n{{ $json['Teléfono'] }}\n{{ $json.User_id }}\n{{ $json.Timestamp }}\n{{ $json['Intención'] }}\n{{ $json.Prioridad }}\n{{ $json.Sentimiento }}\n{{ $json['Producto o Servicio'] }}\n{{ $json['Calificación del Cliente'] }}\n{{ $json['Detección de Soporte'] }}\n{{ $json['Datos Sensibles'] }}\n{{ $json.Resumen }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        384,
+        0
+      ],
+      "id": "6db7fbe2-6558-47f0-b9f9-8afe7d53935b",
+      "name": "Send a text message",
+      "webhookId": "7bc372e1-c23d-474d-abf2-14e65bec0700",
+      "retryOnFail": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "8w61dIAh3fFRODEs",
+          "name": "Avisos n8n"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "tableId": "data_mountaincenter_use_cases",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "ID del Usuario",
+              "fieldValue": "={{ $('Edit Fields').item.json.User_id }}"
+            },
+            {
+              "fieldId": "Hora Creada",
+              "fieldValue": "={{ $('Edit Fields').item.json.Timestamp }}"
+            },
+            {
+              "fieldId": "Nombre Completo",
+              "fieldValue": "={{ $('Edit Fields').item.json['Nombre Completo'] }}"
+            },
+            {
+              "fieldId": "Correo",
+              "fieldValue": "={{ $('Edit Fields').item.json.Correo }}"
+            },
+            {
+              "fieldId": "Teléfono",
+              "fieldValue": "={{ $('Edit Fields').item.json['Teléfono'] }}"
+            },
+            {
+              "fieldId": "Intención",
+              "fieldValue": "={{ $('Edit Fields').item.json['Intención'] }}"
+            },
+            {
+              "fieldId": "Prioridad",
+              "fieldValue": "={{ $('Edit Fields').item.json.Prioridad }}"
+            },
+            {
+              "fieldId": "Sentimiento",
+              "fieldValue": "={{ $('Edit Fields').item.json.Sentimiento }}"
+            },
+            {
+              "fieldId": "Producto o Servicio",
+              "fieldValue": "={{ $('Edit Fields').item.json['Producto o Servicio'] }}"
+            },
+            {
+              "fieldId": "Calificación del Cliente",
+              "fieldValue": "={{ $('Edit Fields').item.json['Calificación del Cliente'] }}"
+            },
+            {
+              "fieldId": "Detección de Soporte",
+              "fieldValue": "={{ $('Edit Fields').item.json['Detección de Soporte'] }}"
+            },
+            {
+              "fieldId": "Datos Sensibles",
+              "fieldValue": "={{ $('Edit Fields').item.json['Datos Sensibles'] }}"
+            },
+            {
+              "fieldId": "Resumen",
+              "fieldValue": "={{ $('Edit Fields').item.json.Resumen }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        608,
+        0
+      ],
+      "id": "851cc011-411f-47c6-8922-e95e5ae27049",
+      "name": "Create a row",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "supabaseApi": {
+          "id": "KNC9EuwClK4Oo8w2",
+          "name": "Supabase account Agent Booster"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "98790d1f-5df0-4e4e-9dd2-cfc59f7cb078",
+              "name": "Respond",
+              "value": "=Perfecto, se ha enviado correctamente. Recuerda que si necesitas algo más puedes contar conmigo siempre. Saludos.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        864,
+        -16
+      ],
+      "id": "316cf3ec-952a-4e7c-ad1b-2f9e94b3d495",
+      "name": "Edit Fields to Agent"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields to Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d769aa91-d7b9-4864-9f06-d60f6ff6040a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dea0fe42c4fc0a7d4eab96fc208153d329cc0d698330064077ad5d91e5842edc"
+  },
+  "id": "PQWOGr8wHEHcyXOX",
+  "tags": []
+}

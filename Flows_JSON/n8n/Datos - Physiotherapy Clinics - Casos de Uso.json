@@ -1,0 +1,301 @@
+{
+  "name": "Datos - Physiotherapy Clinics - Casos de Uso",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"Nombre Completo\": \"\",\n  \"Correo\": \"\",\n  \"Teléfono\": \"\",\n  \"User_id\": \"\",\n  \"Timestamp\": \"\",\n  \"Motivo de consulta\": \"\",\n  \"Tipo de Servicio\": \"\",\n  \"Modalidad\": \"\",\n  \"Preferencia  de Fecha y Hora\": \"\",\n  \"Cliente nuevo o recurrente\": \"\",\n  \"Sentimiento\": \"\",\n  \"Datos Sensibles\": \"\",\n  \"Resumen\": \"\"\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -864,
+        16
+      ],
+      "id": "af46c666-c725-42b8-9f8d-d510cffb3ae2",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe756dbf-7cb3-4f05-8ba4-a85183e8adc8",
+              "name": "Nombre Completo",
+              "value": "={{ $json['Nombre Completo'] }}",
+              "type": "string"
+            },
+            {
+              "id": "e9e891df-e5ee-4ef9-82d2-84ef7d8f09b7",
+              "name": "Correo",
+              "value": "={{ $json.Correo }}",
+              "type": "string"
+            },
+            {
+              "id": "7f562a25-d447-407d-8acc-b2e4e9b3069d",
+              "name": "Teléfono",
+              "value": "={{ $json['Teléfono'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5438025d-a53e-4964-93a8-ce88f1e1ff3e",
+              "name": "User_id",
+              "value": "={{ $json.User_id }}",
+              "type": "string"
+            },
+            {
+              "id": "08df7138-b9fd-48ea-8d3a-74bf6d9f676f",
+              "name": "Timestamp",
+              "value": "={{ $json.Timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "d8eba407-87c4-4fba-afa0-9884ead37c3a",
+              "name": "Motivo de consulta",
+              "value": "={{ $json[\"Motivo de consulta\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "89f8fd89-652e-498b-b36b-98b346c0e5b2",
+              "name": "Tipo de Servicio",
+              "value": "={{ $json[\"Tipo de Servicio\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "328d70c6-8621-405a-8cc1-450bde5d27d9",
+              "name": "Modalidad",
+              "value": "={{ $json.Modalidad }}",
+              "type": "string"
+            },
+            {
+              "id": "abaad905-24fa-46cc-849d-cfd97d2ffea4",
+              "name": "Preferencia  de Fecha y Hora",
+              "value": "={{ $json[\"Preferencia  de Fecha y Hora\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "9ae0c0d1-6f3c-4e38-a7fb-9f7b660bc5e7",
+              "name": "Cliente nuevo o recurrente",
+              "value": "={{ $json[\"Cliente nuevo o recurrente\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "22a411ab-d07e-490b-874f-f73a3a870211",
+              "name": "Sentimiento",
+              "value": "={{ $json.Sentimiento }}",
+              "type": "string"
+            },
+            {
+              "id": "a90f7fe7-a69d-43c3-8484-e85e8bf84069",
+              "name": "Datos Sensibles",
+              "value": "={{ $json[\"Datos Sensibles\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "223daee8-5377-481a-9590-2a40d9bcc457",
+              "name": "Resumen",
+              "value": "={{ $json.Resumen }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -656,
+        16
+      ],
+      "id": "c3f37dad-950e-4147-bc62-ce0a8d51a38a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "tableId": "data_physiotherapy clinics_use_cases",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "ID del Usuario",
+              "fieldValue": "={{ $('Edit Fields').item.json.User_id }}"
+            },
+            {
+              "fieldId": "Hora Creada",
+              "fieldValue": "={{ $('Edit Fields').item.json.Timestamp }}"
+            },
+            {
+              "fieldId": "Nombre Completo",
+              "fieldValue": "={{ $('Edit Fields').item.json['Nombre Completo'] }}"
+            },
+            {
+              "fieldId": "Correo",
+              "fieldValue": "={{ $('Edit Fields').item.json.Correo }}"
+            },
+            {
+              "fieldId": "Teléfono",
+              "fieldValue": "={{ $('Edit Fields').item.json['Teléfono'] }}"
+            },
+            {
+              "fieldId": "Motivo de consulta",
+              "fieldValue": "={{ $('Edit Fields').item.json['Motivo de consulta'] }}"
+            },
+            {
+              "fieldId": "Tipo de Servicio",
+              "fieldValue": "={{ $('Edit Fields').item.json['Tipo de Servicio'] }}"
+            },
+            {
+              "fieldId": "Modalidad",
+              "fieldValue": "={{ $('Edit Fields').item.json.Sentimiento }}"
+            },
+            {
+              "fieldId": "Preferencia  de Fecha y Hora",
+              "fieldValue": "={{ $('Edit Fields').item.json['Preferencia  de Fecha y Hora'] }}"
+            },
+            {
+              "fieldId": "Cliente nuevo o recurrente",
+              "fieldValue": "={{ $('Edit Fields').item.json['Cliente nuevo o recurrente'] }}"
+            },
+            {
+              "fieldId": "Sentimiento",
+              "fieldValue": "={{ $('Edit Fields').item.json.Sentimiento }}"
+            },
+            {
+              "fieldId": "Datos Sensibles",
+              "fieldValue": "={{ $('Edit Fields').item.json['Datos Sensibles'] }}"
+            },
+            {
+              "fieldId": "Resumen",
+              "fieldValue": "={{ $('Edit Fields').item.json.Resumen }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        16
+      ],
+      "id": "68fca572-985c-4b02-8023-c80734e78678",
+      "name": "Create a row",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "supabaseApi": {
+          "id": "KNC9EuwClK4Oo8w2",
+          "name": "Supabase account Agent Booster"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "98790d1f-5df0-4e4e-9dd2-cfc59f7cb078",
+              "name": "Respond",
+              "value": "=Perfecto, se ha enviado correctamente. Ahora necesito reservar la cita en el calendario y, para ello, requiero tu aprobación nuevamente. Dime sí y lo hago enseguida.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b09245bf-91a6-45d7-b786-c788a054c0ff",
+      "name": "Edit Fields to Agent"
+    },
+    {
+      "parameters": {
+        "chatId": "-1003060717750",
+        "text": "=Datos - Casos de Uso Clínicas (DATOS AGRAGADOS DE UN USUARIO QUE USO EL AGENTE DE ALGUNA PÁGINA CASOS DE USO)\n{{ $json['Nombre Completo'] }}\n{{ $json.Correo }}\n{{ $json['Teléfono'] }}\n{{ $json.User_id }}\n{{ $json.Timestamp }}\n{{ $json['Motivo de consulta'] }}\n{{ $json['Tipo de Servicio'] }}\n{{ $json.Modalidad }}\n{{ $json['Preferencia  de Fecha y Hora'] }}\n{{ $json['Cliente nuevo o recurrente'] }}\n{{ $json.Sentimiento }}\n{{ $json['Datos Sensibles'] }}\n{{ $json.Resumen }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -464,
+        16
+      ],
+      "id": "5d87a978-9c55-476d-8ff0-cae4d1f77e7b",
+      "name": "Send a text message",
+      "webhookId": "24c745e2-3e16-438e-af72-3d58e1cae60a",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 2,
+      "credentials": {
+        "telegramApi": {
+          "id": "8w61dIAh3fFRODEs",
+          "name": "Avisos n8n"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields to Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "cc40877c-6a20-496d-a650-e3c2b0867b07",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dea0fe42c4fc0a7d4eab96fc208153d329cc0d698330064077ad5d91e5842edc"
+  },
+  "id": "zxqu0vJK9DrNtyws",
+  "tags": []
+}

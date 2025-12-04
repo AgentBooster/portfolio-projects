@@ -1,0 +1,265 @@
+{
+  "name": "Token Zoho",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://accounts.zoho.com/oauth/v2/token",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "grant_type",
+              "value": "refresh_token"
+            },
+            {
+              "name": "refresh_token",
+              "value": "1000.8cd1f3a3ad71b49f773948d2dcb24141.7f3ac29b45117cdd8add7aef8871e6e3"
+            },
+            {
+              "name": "client_id",
+              "value": "1000.U46VG7Y1RO1OFVU188CP5LPBRKXH2Q"
+            },
+            {
+              "name": "client_secret",
+              "value": "aca23f0f847bb97ae6d5eacd0283afac6910c23ea9"
+            },
+            {
+              "name": "redirect_uri",
+              "value": "https://www.zoho.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -560,
+        -64
+      ],
+      "id": "db9e6133-d69d-4f30-b706-6bacb330a0d8",
+      "name": "HTTP Request",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "executeOnce": false,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -816,
+        -64
+      ],
+      "id": "6b570738-a2e0-45e7-af17-11cc61fd3b12",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1ohDZmpgh0ZFvuJobC1lHh7BUjQ5C8UnSpvQRftPybOs/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1D_CWzGecQvXCfItKPnd5eR3T94gB2Ru9H5epBGu5lNU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Tabla": "1",
+            "Token": "={{ $json.access_token }}",
+            "Hora": "={{ $now.toLocal().toISO() }}"
+          },
+          "matchingColumns": [
+            "Tabla"
+          ],
+          "schema": [
+            {
+              "id": "Tabla",
+              "displayName": "Tabla",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Token",
+              "displayName": "Token",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hora",
+              "displayName": "Hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -240,
+        -80
+      ],
+      "id": "dc86eaf7-e5b6-4823-8de8-b448f3f8f578",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://accounts.zoho.com/oauth/v2/token",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "grant_type",
+              "value": "authorization_code"
+            },
+            {
+              "name": "code",
+              "value": "1000.e19895dc030587464449d476ebaf1f08.2ce41322af02de33f1b87ac7e1b31014"
+            },
+            {
+              "name": "client_id",
+              "value": "1000.U46VG7Y1RO1OFVU188CP5LPBRKXH2Q"
+            },
+            {
+              "name": "client_secret",
+              "value": "aca23f0f847bb97ae6d5eacd0283afac6910c23ea9"
+            },
+            {
+              "name": "redirect_uri",
+              "value": "https://www.zoho.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -560,
+        224
+      ],
+      "id": "c9ceaa52-51df-4246-b085-c74355505dff",
+      "name": "HTTP Request1",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "executeOnce": false,
+      "disabled": true,
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Santiago",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "07f6a796-dae1-4bea-acbb-9c076a03389b",
+  "meta": {
+    "instanceId": "dea0fe42c4fc0a7d4eab96fc208153d329cc0d698330064077ad5d91e5842edc"
+  },
+  "id": "BwKIl1CklWDNp2lG",
+  "tags": []
+}

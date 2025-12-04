@@ -1,0 +1,518 @@
+{
+  "name": "RisolvIA Data",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"Nombre Completo\": \"\",\n  \"Correo\": \"\",\n  \"Teléfono\": \"\",\n  \"Lugar\": \"\",\n  \"Resumen de la Consulta\": \"\",\n  \"session_id\": \"\"\n}\n\n"
+      },
+      "id": "c055762a-8fe7-4141-a639-df2372f30060",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        272,
+        352
+      ],
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "98790d1f-5df0-4e4e-9dd2-cfc59f7cb078",
+              "name": "Respond",
+              "value": "=Perfecto, se ha enviado correctamente el resumen a nuestro equipo, en la brevedad procederán a analizar su consulta y se pondrán en contacto pronto.\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1456,
+        352
+      ],
+      "id": "f03f6597-26a2-4a0e-bbf1-ed11e5b1d8e7",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "tableId": "risolvia_form_submissions",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "session_id",
+              "fieldValue": "={{ $json.session_id }}"
+            },
+            {
+              "fieldId": "nombre_completo",
+              "fieldValue": "={{ $json['Nombre Completo'] }}"
+            },
+            {
+              "fieldId": "email",
+              "fieldValue": "={{ $json.Correo }}"
+            },
+            {
+              "fieldId": "telefono",
+              "fieldValue": "={{ $json['Teléfono'] }}"
+            },
+            {
+              "fieldId": "tipo_consulta",
+              "fieldValue": "Otro"
+            },
+            {
+              "fieldId": "ubicacion",
+              "fieldValue": "={{ $json.Lugar }}"
+            },
+            {
+              "fieldId": "nivel_urgencia",
+              "fieldValue": "urgente-normal"
+            },
+            {
+              "fieldId": "descripcion_situacion",
+              "fieldValue": "={{ $json['Resumen de la Consulta'] }}"
+            },
+            {
+              "fieldId": "origen",
+              "fieldValue": "Javier n8n"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        528,
+        352
+      ],
+      "id": "b38dedfe-7775-4686-b2c6-900a6e445065",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "KNC9EuwClK4Oo8w2",
+          "name": "Supabase account Agent Booster"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Edit Fields1').item.json.fields.email }}",
+        "subject": "={{ $('Edit Fields1').item.json.fields.nombre_completo }}, tu consulta se ha enviado correctamente 😃",
+        "emailType": "text",
+        "message": "=Se ha enviado el siguiente resumen a nuestro equipo legal:\n\nUbicación: {{ $('Edit Fields1').item.json.fields.ubicacion }}\n\nEmail: {{ $('Edit Fields1').item.json.fields.email }}\n\nTeléfono: {{ $('Edit Fields1').item.json.fields.telefono }}\n\nSituación: {{ $('Edit Fields1').item.json.fields.descripcion_situacion }}\n\nPróximamente, nuestro equipo procederá a analizar tu consulta y se pondrán en contacto contigo pronto.\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1232,
+        144
+      ],
+      "id": "468b95a3-da7f-4892-b1e0-b0a6cb875beb",
+      "name": "Send a message (Al Usuario)",
+      "webhookId": "8e52bc78-5c0e-40d7-baf5-4cc964140365",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "c2dTdKlzqAgWqWaK",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "vasyl@risolvia.com",
+        "subject": "=Nueva consulta de {{ $json.fields.nombre_completo }} {{ $json.fields.nivel_urgencia }}",
+        "emailType": "text",
+        "message": "=Ubicación: {{ $json.fields.ubicacion }}\n\nEmail: {{ $json.fields.email }}\n\nTeléfono: {{ $json.fields.telefono }}\n\nSituación: {{ $json.fields.descripcion_situacion }}\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        992,
+        144
+      ],
+      "id": "67a2c210-e1b3-4978-b914-21ce171eeecb",
+      "name": "Send a message (Aviso Propio)",
+      "webhookId": "8e52bc78-5c0e-40d7-baf5-4cc964140365",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "c2dTdKlzqAgWqWaK",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "risolvia-supabase-to-airtable",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        272,
+        144
+      ],
+      "id": "7ea24aa9-0db6-4402-bcd9-aa05a1431c2a",
+      "name": "Webhook Forms",
+      "webhookId": "4b40bdaf-0d4f-4260-82b9-82b54bf0f107",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqdPLvSkHGvt01V",
+          "mode": "list",
+          "cachedResultName": "User Submissions",
+          "cachedResultUrl": "https://airtable.com/appqdPLvSkHGvt01V"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblaZ7uLJAM86Mqbb",
+          "mode": "list",
+          "cachedResultName": "Base de Risolvia (Supabase)",
+          "cachedResultUrl": "https://airtable.com/appqdPLvSkHGvt01V/tblaZ7uLJAM86Mqbb"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nombre_completo": "={{ $json.body.record.nombre_completo }}",
+            "email": "={{ $json.body.record.email }}",
+            "telefono": "={{ $json.body.record.telefono }}",
+            "tipo_consulta": "={{ $json.body.record.tipo_consulta }}",
+            "ubicacion": "={{ $json.body.record.ubicacion }}",
+            "nivel_urgencia": "={{ $json.body.record.nivel_urgencia }}",
+            "descripcion_situacion": "={{ $json.body.record.descripcion_situacion }}",
+            "origen": "={{ $json.body.record.origen }}",
+            "session_id": "={{ $json.body.record.user_id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "nombre_completo",
+              "displayName": "nombre_completo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ubicacion",
+              "displayName": "ubicacion",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "nivel_urgencia",
+              "displayName": "nivel_urgencia",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "descripcion_situacion",
+              "displayName": "descripcion_situacion",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "tipo_consulta",
+              "displayName": "tipo_consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "origen",
+              "displayName": "origen",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Despachos",
+              "displayName": "Despachos",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "session_id",
+              "displayName": "session_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Table 5 (2)",
+              "displayName": "Table 5 (2)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        528,
+        144
+      ],
+      "id": "8ab96a5e-3a64-460f-bff0-a93402253c13",
+      "name": "Create a record1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "zZ0zD5mPuycEf3sN",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ae16c020-add4-4fe8-90f3-fa0178fa114c",
+              "name": "fields.nombre_completo",
+              "value": "={{ $json.fields.nombre_completo }}",
+              "type": "string"
+            },
+            {
+              "id": "cac404c2-5bd1-4c2d-8123-6da6a161f2cb",
+              "name": "fields.nivel_urgencia",
+              "value": "={{ $json.fields.nivel_urgencia }}",
+              "type": "string"
+            },
+            {
+              "id": "93bbb7a3-a539-4910-b5e4-1126a2c97661",
+              "name": "fields.ubicacion",
+              "value": "={{ $json.fields.ubicacion }}",
+              "type": "string"
+            },
+            {
+              "id": "7735c3a0-69bc-4e94-9362-b6571a439d72",
+              "name": "fields.email",
+              "value": "={{ $json.fields.email }}",
+              "type": "string"
+            },
+            {
+              "id": "c5390ce8-99e6-408c-be95-d3b1539f0687",
+              "name": "fields.telefono",
+              "value": "={{ $json.fields.telefono }}",
+              "type": "string"
+            },
+            {
+              "id": "a4da7d1a-2ead-4e17-a537-9729912978d2",
+              "name": "fields.descripcion_situacion",
+              "value": "={{ $json.fields.descripcion_situacion }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        144
+      ],
+      "id": "6f7aee09-75c5-4fb9-b640-51e979109959",
+      "name": "Edit Fields1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "Create a row": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message (Aviso Propio)": {
+      "main": [
+        [
+          {
+            "node": "Send a message (Al Usuario)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message (Al Usuario)": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Forms": {
+      "main": [
+        [
+          {
+            "node": "Create a record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Send a message (Aviso Propio)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "80cc00b5-768d-4c3e-85eb-f30b471824a0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dea0fe42c4fc0a7d4eab96fc208153d329cc0d698330064077ad5d91e5842edc"
+  },
+  "id": "VWIChMIFoDhja19x",
+  "tags": []
+}

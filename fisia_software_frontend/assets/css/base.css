@@ -1,0 +1,102 @@
+:root {
+  color-scheme: light;
+}
+
+html {
+  font-family: "Inter", "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F4F7F6;
+  color: #283130;
+  min-height: 100vh;
+}
+
+body.dark {
+  background-color: #112117;
+  color: #EDF1F0;
+}
+
+a {
+  color: inherit;
+}
+
+[data-skip-link] {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+[data-skip-link]:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: #FFFFFF;
+  color: #135851;
+  border-radius: 0.5rem;
+  box-shadow: 0px 6px 20px rgba(12, 64, 59, 0.1);
+  z-index: 1000;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.badge--success {
+  background-color: rgba(60, 177, 121, 0.12);
+  color: #1A6F67;
+}
+
+.badge--warning {
+  background-color: rgba(225, 165, 56, 0.16);
+  color: #8A6317;
+}
+
+.badge--danger {
+  background-color: rgba(229, 115, 115, 0.16);
+  color: #932D2D;
+}
+
+.badge--info {
+  background-color: rgba(95, 134, 211, 0.16);
+  color: #2F4C8C;
+}
+
+.card {
+  background: white;
+  border: 1px solid #E1E8E7;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0px 12px 30px rgba(12, 64, 59, 0.08);
+}
+
+.card--subtle {
+  box-shadow: none;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+}

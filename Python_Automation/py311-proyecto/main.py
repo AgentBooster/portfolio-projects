@@ -1,0 +1,1 @@
+print("Entorno local OK")

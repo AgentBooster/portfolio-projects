@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv_tf/
+
+# Data / artifacts
+image-classifier/data/
+*.tfrecord*
+*.tar*
+*.zip
+*.cache/
+
+# OS
+.DS_Store
+
+# TF/keras artifacts (permitimos el checkpoint principal)
+*.h5
+*.ckpt*
+*.pb
+*.keras
+!image-classifier/models/mobilenetv2_model.keras

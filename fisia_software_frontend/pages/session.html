@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Fisia - Session Progress</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4A9A8A",
+              "secondary": "#5F86D3",
+              "background-light": "#F4F7F6",
+              "background-dark": "#112117",
+              "neutral-light": "#E1E8E7",
+              "neutral-dark": "#333D47",
+              "warning": "#F5C54B",
+              "danger": "#E57373",
+              "success": "#20df6c",
+              "text-light-primary": "#1F2937",
+              "text-light-secondary": "#6B7280",
+              "text-dark-primary": "#F9FAFB",
+              "text-dark-secondary": "#9CA3AF",
+              "card-surface": "#FFFFFF",
+              "panel-dark": "#1F2937",
+              "border-light": "#E5E7EB",
+              "border-dark": "#374151",
+              "accent-blue": "#4A90E2",
+              "accent-green": "#50E3C2"
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "0.75rem",
+              xl: "1rem",
+              full: "9999px"
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+  </head>
+  <body class="font-display bg-background-light dark:bg-background-dark text-text-light-primary dark:text-dark-primary" data-page="session">
+    <div class="relative flex min-h-screen w-full">
+      <!-- SideNavBar -->
+      <aside class="flex h-screen flex-col bg-white dark:bg-background-dark border-r border-neutral-light dark:border-neutral-dark w-64 p-4 sticky top-0">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3 p-2">
+            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Profile picture of Dr. Ana Torres" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBW5Rhpmggby9T4A_qYrVJW0fkaK-5h9Gqul10AyVK8AcyqzZeYXkmjkMymsItQ6dcJwrogWjhE5LJbCYg1_d1fJU4f3QYLQ6gv9tFm4sq5aCxmo4d3_ORwUeZuOyvW9odPO4KkbTXHYitN2MejLd1pKJRBbdYXjLKLsuToh5JYDkH5YqPtX1lw6Uo2vXDP0zwsSih7ycQiu2ZT84uOPD5Q4qXqGSqzAd5Ajz0LI5O7C4tk7FCg29ZTYKdRcd4t-PyK3xs5xPBp97o");'></div>
+            <div class="flex flex-col">
+              <h1 class="text-neutral-dark dark:text-white text-base font-medium leading-normal">Dr. Ana Torres</h1>
+              <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Administrator</p>
+            </div>
+          </div>
+          <nav class="flex flex-col gap-2 mt-4" data-nav>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="index.html" data-nav-link="dashboard">
+              <span class="material-symbols-outlined">dashboard</span>
+              <p class="text-sm font-medium leading-normal">Dashboard</p>
+            </a>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="calendar.html" data-nav-link="calendar">
+              <span class="material-symbols-outlined">calendar_month</span>
+              <p class="text-sm font-medium leading-normal">Agenda</p>
+            </a>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="patient.html" data-nav-link="patient">
+              <span class="material-symbols-outlined">groups</span>
+              <p class="text-sm font-medium leading-normal">Pacientes</p>
+            </a>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="billing.html" data-nav-link="billing">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <p class="text-sm font-medium leading-normal">Facturación</p>
+            </a>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="reports.html" data-nav-link="reports">
+              <span class="material-symbols-outlined">bar_chart</span>
+              <p class="text-sm font-medium leading-normal">Analítica</p>
+            </a>
+          </nav>
+        </div>
+        <div class="mt-auto flex flex-col gap-1">
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10" href="#">
+            <span class="material-symbols-outlined">settings</span>
+            <p class="text-sm font-medium leading-normal">Settings</p>
+          </a>
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10" href="#">
+            <span class="material-symbols-outlined">help_outline</span>
+            <p class="text-sm font-medium leading-normal">Help</p>
+          </a>
+        </div>
+      </aside>
+      <div class="flex-1 flex flex-col">
+        <!-- TopNavBar -->
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-neutral-light dark:border-neutral-dark px-10 py-3 bg-white dark:bg-background-dark sticky top-0 z-10">
+          <div class="flex items-center gap-8">
+            <div class="flex items-center gap-3 text-neutral-dark dark:text-white">
+              <div class="size-6 text-primary">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.3,6.3c-0.6,0.5-0.6,1.4,0,1.9l3.3,3.3c0.5,0.5,1.4,0.5,1.9,0s0.5-1.4,0-1.9L14.2,6.3C13.7,5.8,12.8,5.8,12.3,6.3z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10C22,6.5,17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8s8,3.6,8,8S16.4,20,12,20z M7,10.1l-1.4,1.4c-0.2,0.2-0.2,0.5,0,0.7l4.6,4.6C10.3,17,10.5,17,10.7,17s0.4-0.1,0.5-0.3l1.4-1.4c0.2-0.2,0.2-0.5,0-0.7L8.1,10.1C7.8,9.8,7.3,9.8,7,10.1z"></path></svg>
+              </div>
+              <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Fisia</h2>
+            </div>
+            <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-sm">
+              <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div class="text-gray-500 dark:text-gray-400 flex border-none bg-neutral-light/50 dark:bg-neutral-dark/40 items-center justify-center pl-4 rounded-l-lg border-r-0">
+                  <span class="material-symbols-outlined">search</span>
+                </div>
+                <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-neutral-dark dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-neutral-light/50 dark:bg-neutral-dark/40 h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Buscar pacientes, sesiones..." value="" />
+              </div>
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <p class="hidden text-sm text-text-light-secondary dark:text-dark-secondary md:block">Guardado automáticamente a las 14:32</p>
+            <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-neutral-light/50 dark:bg-neutral-dark/40 hover:bg-neutral-light dark:hover:bg-neutral-dark/60 text-neutral-dark dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-3" type="button">
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-neutral-light/50 dark:bg-neutral-dark/40 hover:bg-neutral-light dark:hover:bg-neutral-dark/60 text-neutral-dark dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0" type="button">
+              <span class="material-symbols-outlined">account_circle</span>
+            </button>
+          </div>
+        </header>
+        <main class="flex-1 p-10 overflow-y-auto">
+          <div class="mx-auto flex max-w-7xl flex-col gap-8">
+            <!-- Page Heading -->
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div class="flex min-w-72 flex-col gap-1">
+                <p class="text-text-light-primary dark:text-dark-primary text-3xl sm:text-4xl font-black leading-tight tracking-tighter">Progreso de la sesión para Maria Garcia</p>
+                <p class="text-text-light-secondary dark:text-dark-secondary text-base font-normal leading-normal">ID Paciente: FIS-73910</p>
+              </div>
+              <div class="flex flex-col justify-end gap-3 sm:flex-row sm:items-center">
+                <div class="flex items-center gap-2 text-sm text-text-light-secondary dark:text-dark-secondary">
+                  <span class="material-symbols-outlined text-base">schedule</span>
+                  <span>Guardado automáticamente a las 14:32</span>
+                </div>
+                <div class="flex gap-2">
+                  <button class="flex items-center justify-center rounded-md h-10 px-4 text-sm font-bold bg-white dark:bg-gray-800 border border-border-light dark:border-border-dark text-text-light-primary dark:text-dark-primary hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" type="button">Cancelar</button>
+                  <button class="flex items-center justify-center rounded-md h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/90 transition-colors" type="button" data-action="complete-session">Guardar y Finalizar</button>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+              <!-- SOAP Form -->
+              <form class="lg:col-span-2 flex flex-col gap-6" data-session-form>
+                <div class="flex items-center justify-between">
+                  <h3 class="text-text-light-primary dark:text-dark-primary text-xl font-bold leading-tight tracking-tight">Notas SOAP</h3>
+                  <button class="flex items-center gap-2 rounded-md bg-accent-blue px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-accent-blue/90 transition-colors" type="submit">
+                    <span class="material-symbols-outlined text-base">save</span>
+                    Guardar progreso
+                  </button>
+                </div>
+                <div class="flex flex-col gap-4">
+                  <details class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-surface dark:bg-gray-900 group" open>
+                    <summary class="flex cursor-pointer items-center justify-between gap-6 p-4">
+                      <div class="flex items-center gap-3">
+                        <p class="text-text-light-primary dark:text-dark-primary text-base font-bold leading-normal">S - Subjetivo</p>
+                        <span class="material-symbols-outlined text-text-light-secondary dark:text-dark-secondary text-xl">info</span>
+                      </div>
+                      <span class="material-symbols-outlined text-text-light-primary dark:text-dark-primary transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="px-4 pb-4">
+                      <label class="flex flex-col w-full">
+                        <textarea class="form-input flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-md text-text-light-primary dark:text-dark-primary focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-gray-700 min-h-36 placeholder:text-text-light-secondary dark:placeholder:text-dark-secondary p-3 text-base font-normal leading-normal" placeholder="Informe del paciente sobre dolor, limitaciones y progreso hacia los objetivos desde la última visita. Incluya citas directas cuando sea relevante." name="subjective" data-session-field="subjective"></textarea>
+                      </label>
+                    </div>
+                  </details>
+                  <details class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-surface dark:bg-gray-900 group">
+                    <summary class="flex cursor-pointer items-center justify-between gap-6 p-4">
+                      <p class="text-text-light-primary dark:text-dark-primary text-base font-bold leading-normal">O - Objetivo</p>
+                      <span class="material-symbols-outlined text-text-light-primary dark:text-dark-primary transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="px-4 pb-4">
+                      <label class="flex flex-col w-full">
+                        <textarea class="form-input flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-md text-text-light-primary dark:text-dark-primary focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-gray-700 min-h-36 placeholder:text-text-light-secondary dark:placeholder:text-dark-secondary p-3 text-base font-normal leading-normal" placeholder="Mediciones del rango de movimiento, pruebas de fuerza, marcha observada, etc." name="objective" data-session-field="objective"></textarea>
+                      </label>
+                    </div>
+                  </details>
+                  <details class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-surface dark:bg-gray-900 group">
+                    <summary class="flex cursor-pointer items-center justify-between gap-6 p-4">
+                      <p class="text-text-light-primary dark:text-dark-primary text-base font-bold leading-normal">A - Análisis</p>
+                      <span class="material-symbols-outlined text-text-light-primary dark:text-dark-primary transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="px-4 pb-4">
+                      <label class="flex flex-col w-full">
+                        <textarea class="form-input flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-md text-text-light-primary dark:text-dark-primary focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-gray-700 min-h-36 placeholder:text-text-light-secondary dark:placeholder:text-dark-secondary p-3 text-base font-normal leading-normal" placeholder="Evaluación profesional del terapeuta sobre la presentación del paciente y el progreso hacia las metas." name="assessment" data-session-field="assessment"></textarea>
+                      </label>
+                    </div>
+                  </details>
+                  <details class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-surface dark:bg-gray-900 group">
+                    <summary class="flex cursor-pointer items-center justify-between gap-6 p-4">
+                      <p class="text-text-light-primary dark:text-dark-primary text-base font-bold leading-normal">P - Plan</p>
+                      <span class="material-symbols-outlined text-text-light-primary dark:text-dark-primary transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="px-4 pb-4">
+                      <label class="flex flex-col w-full">
+                        <textarea class="form-input flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-md text-text-light-primary dark:text-dark-primary focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-gray-700 min-h-36 placeholder:text-text-light-secondary dark:placeholder:text-dark-secondary p-3 text-base font-normal leading-normal" placeholder="Próximos pasos inmediatos, ajustes al plan de tratamiento y plan para la próxima sesión." name="plan" data-session-field="plan"></textarea>
+                      </label>
+                    </div>
+                  </details>
+                </div>
+              </form>
+              <!-- Right Column: Patient Info & Attachments -->
+              <div class="lg:col-span-1 flex flex-col gap-8">
+                <div class="rounded-lg border border-border-light dark:border-border-dark bg-card-surface dark:bg-gray-900 p-6 flex flex-col gap-4">
+                  <h3 class="text-lg font-bold text-text-light-primary dark:text-dark-primary">Resumen del Paciente</h3>
+                  <div class="flex flex-col gap-3 text-sm">
+                    <div class="flex justify-between">
+                      <span class="text-text-light-secondary dark:text-dark-secondary">Fecha de Nacimiento</span>
+                      <span class="font-medium" data-session-summary="dob">15/05/1985</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-text-light-secondary dark:text-dark-secondary">Diagnóstico Principal</span>
+                      <span class="font-medium" data-session-summary="diagnosis">Hernia discal lumbar</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-text-light-secondary dark:text-dark-secondary">Próxima Cita</span>
+                      <span class="font-medium" data-session-summary="nextSession">25/10/2023, 11:00 AM</span>
+                    </div>
+                  </div>
+                  <button class="w-full mt-2 flex items-center justify-center rounded-md h-9 px-3 text-sm font-bold bg-neutral-light/50 dark:bg-gray-700 text-text-light-primary dark:text-dark-primary hover:bg-neutral-light dark:hover:bg-gray-600 transition-colors" type="button">Ver historial completo</button>
+                </div>
+                <div class="flex flex-col gap-4">
+                  <h3 class="text-text-light-primary dark:text-dark-primary text-xl font-bold leading-tight tracking-tight">Adjuntos</h3>
+                  <div class="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-border-light dark:border-border-dark bg-card-surface dark:bg-gray-900 p-8 text-center gap-3">
+                    <div class="bg-primary/10 rounded-full p-3">
+                      <span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+                    </div>
+                    <p class="font-bold text-text-light-primary dark:text-dark-primary">Arrastra y suelta archivos aquí</p>
+                    <p class="text-sm text-text-light-secondary dark:text-dark-secondary">o</p>
+                    <button class="font-bold text-primary text-sm hover:underline" type="button">Selecciona archivos</button>
+                    <p class="text-xs text-text-light-secondary dark:text-dark-secondary mt-2">JPG, PNG, PDF. Límite 10MB.</p>
+                  </div>
+                </div>
+                <div class="rounded-lg border border-border-light dark:border-border-dark bg-card-surface dark:bg-gray-900 p-6 flex flex-col gap-4">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-text-light-primary dark:text-dark-primary">Plan de Tratamiento Actual</h3>
+                    <button class="text-sm font-bold text-primary hover:underline" type="button">Actualizar Plan</button>
+                  </div>
+                  <div class="flex flex-col gap-3">
+                    <label class="flex items-center gap-3 p-3 rounded-md bg-background-light dark:bg-gray-700/50">
+                      <input checked class="form-checkbox rounded text-primary focus:ring-primary/50" type="checkbox" />
+                      <span class="text-sm">Fortalecimiento del core (3x15)</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-md bg-background-light dark:bg-gray-700/50">
+                      <input checked class="form-checkbox rounded text-primary focus:ring-primary/50" type="checkbox" />
+                      <span class="text-sm">Estiramientos de isquiotibiales (2x30s)</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-md bg-background-light dark:bg-gray-700/50">
+                      <input class="form-checkbox rounded text-primary focus:ring-primary/50" type="checkbox" />
+                      <span class="text-sm">Movilización nervio ciático</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="../assets/js/mock-data.js" defer></script>
+    <script src="../assets/js/app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo de Clasificación de Imágenes</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.19.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <h1>Demo de Clasificación de Imágenes</h1>
+      <p class="description">Arrastra una imagen o selecciónala para obtener la predicción del modelo. Checkpoint actual: razas de perro (120 clases).</p>
+      <input type="file" id="file-input" class="visually-hidden" accept="image/*" aria-label="Seleccionar imagen">
+      <label id="drop-zone" class="drop-zone" role="button" tabindex="0" for="file-input" aria-label="Seleccionar o soltar imagen">
+        <span id="drop-text">Arrastra tu imagen aquí o haz clic para seleccionar.</span>
+      </label>
+      <div class="preview-wrapper">
+        <img id="preview-image" alt="Vista previa" hidden>
+      </div>
+      <div class="controls">
+        <button id="predict-button" type="button">Ejecutar inferencia</button>
+        <button id="copy-button" type="button" disabled>Copiar resultados</button>
+      </div>
+      <div id="progress" class="progress hidden" role="status" aria-live="polite">
+        <div class="progress-bar"></div>
+      </div>
+      <div id="status" class="status" role="alert"></div>
+      <div id="results-container" class="results hidden" aria-live="polite">
+        <div class="top-one">
+          <h2>Top-1</h2>
+          <p id="top1" class="result-text"></p>
+        </div>
+        <div class="top-five">
+          <h2>Top-5</h2>
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Puesto</th>
+                <th>Clase</th>
+                <th>Probabilidad</th>
+              </tr>
+            </thead>
+            <tbody id="top5-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fisia Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4A9A8A",
+              "secondary": "#5F86D3",
+              "background-light": "#F4F7F6",
+              "background-dark": "#112117",
+              "neutral-light": "#E1E8E7",
+              "neutral-dark": "#333D47",
+              "warning": "#F5C54B",
+              "danger": "#E57373",
+              "success": "#20df6c",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-neutral-dark dark:text-neutral-light" data-page="dashboard">
+<div class="relative flex min-h-screen w-full">
+<!-- SideNavBar -->
+<aside class="flex h-screen flex-col bg-white dark:bg-background-dark border-r border-neutral-light dark:border-neutral-dark w-64 p-4 sticky top-0">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 p-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Profile picture of Dr. Ana Torres" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBW5Rhpmggby9T4A_qYrVJW0fkaK-5h9Gqul10AyVK8AcyqzZeYXkmjkMymsItQ6dcJwrogWjhE5LJbCYg1_d1fJU4f3QYLQ6gv9tFm4sq5aCxmo4d3_ORwUeZuOyvW9odPO4KkbTXHYitN2MejLd1pKJRBbdYXjLKLsuToh5JYDkH5YqPtX1lw6Uo2vXDP0zwsSih7ycQiu2ZT84uOPD5Q4qXqGSqzAd5Ajz0LI5O7C4tk7FCg29ZTYKdRcd4t-PyK3xs5xPBp97o");'></div>
+<div class="flex flex-col">
+<h1 class="text-neutral-dark dark:text-white text-base font-medium leading-normal">Dr. Ana Torres</h1>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Administrator</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4" data-nav>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="index.html" data-nav-link="dashboard">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="calendar.html" data-nav-link="calendar">
+<span class="material-symbols-outlined">calendar_month</span>
+<p class="text-sm font-medium leading-normal">Agenda</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="patient.html" data-nav-link="patient">
+<span class="material-symbols-outlined">groups</span>
+<p class="text-sm font-medium leading-normal">Pacientes</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="billing.html" data-nav-link="billing">
+<span class="material-symbols-outlined">receipt_long</span>
+<p class="text-sm font-medium leading-normal">Facturación</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-200 hover:bg-primary/10" href="reports.html" data-nav-link="reports">
+<span class="material-symbols-outlined">bar_chart</span>
+<p class="text-sm font-medium leading-normal">Analítica</p>
+</a>
+</nav>
+</div>
+<div class="mt-auto flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<p class="text-sm font-medium leading-normal">Help</p>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-neutral-light dark:border-neutral-dark px-10 py-3 bg-white dark:bg-background-dark sticky top-0 z-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-neutral-dark dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.3,6.3c-0.6,0.5-0.6,1.4,0,1.9l3.3,3.3c0.5,0.5,1.4,0.5,1.9,0s0.5-1.4,0-1.9L14.2,6.3C13.7,5.8,12.8,5.8,12.3,6.3z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10C22,6.5,17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8s8,3.6,8,8S16.4,20,12,20z M7,10.1l-1.4,1.4c-0.2,0.2-0.2,0.5,0,0.7l4.6,4.6C10.3,17,10.5,17,10.7,17s0.4-0.1,0.5-0.3l1.4-1.4c0.2-0.2,0.2-0.5,0-0.7L8.1,10.1C7.8,9.8,7.3,9.8,7,10.1z"></path></svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Fisia</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-sm">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-gray-500 dark:text-gray-400 flex border-none bg-neutral-light/50 dark:bg-neutral-dark/40 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-neutral-dark dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-neutral-light/50 dark:bg-neutral-dark/40 h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search patients, appointments..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-neutral-light/50 dark:bg-neutral-dark/40 hover:bg-neutral-light dark:hover:bg-neutral-dark/60 text-neutral-dark dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-neutral-light/50 dark:bg-neutral-dark/40 hover:bg-neutral-light dark:hover:bg-neutral-dark/60 text-neutral-dark dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-1 p-10">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-4 items-center">
+<div class="flex min-w-72 flex-col gap-2">
+<h1 class="text-neutral-dark dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Good Morning, Ana</h1>
+<p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal">Here's a summary of your clinic's activity today.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary hover:bg-primary/30 text-sm font-bold leading-normal tracking-[0.015em]" type="button" data-action="open-flow" data-flow-start="patient">
+<span class="material-symbols-outlined" style="font-size: 20px;">add_circle</span>
+<span class="truncate">Register Patient</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-primary text-white hover:bg-primary/90 text-sm font-bold leading-normal tracking-[0.015em]" type="button" data-action="open-flow" data-flow-start="session">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+<span class="truncate">New Appointment</span>
+</button>
+</div>
+</div>
+<!-- Stats -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8" data-dashboard-metrics>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+<!-- Today's Appointments -->
+<div class="lg:col-span-2 flex flex-col gap-4">
+<h2 class="text-neutral-dark dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Today's Appointments</h2>
+<div class="bg-white dark:bg-neutral-dark/40 rounded-xl border border-neutral-light dark:border-neutral-dark p-6 flex flex-col gap-4" data-dashboard-appointments>
+</div>
+</div>
+<!-- To-Do List -->
+<div class="lg:col-span-1 flex flex-col gap-4">
+<h2 class="text-neutral-dark dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Pending Tasks</h2>
+<div class="bg-white dark:bg-neutral-dark/40 rounded-xl border border-neutral-light dark:border-neutral-dark p-6 flex flex-col gap-4" data-dashboard-tasks>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script src="../assets/js/mock-data.js" defer></script>
+<script src="../assets/js/app.js" defer></script>
+</body></html>

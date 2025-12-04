@@ -1,0 +1,1238 @@
+{
+  "name": "Base Vectorial - La Parva",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Set File Type&ID').item.json.file_id }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        896,
+        336
+      ],
+      "id": "9d54bc6a-8c7e-4d43-8103-00dbb0cbbce4",
+      "name": "Download New File1",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "1jlMDjQ5x1BftlgN",
+          "name": "Google Drive account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "content": "# Actualización de base vectorial (ingesta)\n\n### Vigila carpeta de Drive; al crear/actualizar archivos (PDF/CSV/XLSX, etc.) los convierte a texto y actualiza embeddings. Con alertas de error a Inbox/soporte.\n\n",
+        "height": 960,
+        "width": 2560,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "01a9c421-8934-4dc6-8a93-c07e190f3fe4",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "options": {
+          "dimensions": 1536
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2128,
+        400
+      ],
+      "id": "0bf19c20-68f2-4fe2-b1dd-0e01a64ef19a",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "Dyy3ETOvWlLmlMcA",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "laparva_1536",
+          "mode": "list",
+          "cachedResultName": "laparva_1536"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        2128,
+        208
+      ],
+      "id": "2e496945-dd49-490a-9105-63d62f64a481",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "WTaHvfaGrY89LoXZ",
+          "name": "Supabase account Mountain_R."
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.text }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "=id",
+                "value": "={{ $('Set File Type&ID').item.json.file_id }}"
+              },
+              {
+                "name": "name",
+                "value": "={{ $('Set File Type&ID').item.json.file_name }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        2256,
+        416
+      ],
+      "id": "9dbbc1db-2cc9-4edc-8bcc-c10e6b9240c8",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        1856,
+        720
+      ],
+      "id": "24cd8cee-591f-4775-adbc-b746bc8d9be6",
+      "name": "Summarize"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1632,
+        720
+      ],
+      "id": "86ec001d-43c6-495e-92db-3c74bea88b70",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1424,
+        720
+      ],
+      "id": "094236eb-6236-428f-8bda-2a7cf21d9be3",
+      "name": "Extract from XLSX"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1632,
+        528
+      ],
+      "id": "1f0245db-e1e2-4805-857c-ab95bcde3908",
+      "name": "Extract from PDF"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1632,
+        352
+      ],
+      "id": "23e84cf4-65ff-48a8-872b-92ae54c5f754",
+      "name": "Extract from CSV"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1632,
+        176
+      ],
+      "id": "7a95827b-f81b-4387-a2b3-6aa57279faf9",
+      "name": "Extract from doc"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Set File Type&ID').item.json.file_type }}",
+                    "rightValue": "application/pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "7721fbe9-05d1-4652-b772-8982d677cc63"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PDF"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "bb719689-6fb4-4f3b-9ee5-fde5e01f1957",
+                    "leftValue": "={{ $('Set File Type&ID').item.json.file_type }}",
+                    "rightValue": "application/vnd.google-apps.document",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "doc"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b85f433f-c3a9-4e96-931c-b47a37548003",
+                    "leftValue": "={{ $('Set File Type&ID').item.json.file_type }}",
+                    "rightValue": "application/vnd.google-apps.spreadsheet",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "CSV"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6c266b6b-a6da-4ca1-b72d-1e25b63a000e",
+                    "leftValue": "={{ $('Set File Type&ID').item.json.file_type }}",
+                    "rightValue": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "XLSX"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1136,
+        272
+      ],
+      "id": "c3d8721e-b59f-4e7d-9337-633eb28eb7b3",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6df1e25e-690d-4658-b46b-9b9dbb388c80",
+              "name": "file_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "a9a3dcb9-3641-4ee2-93de-957dffa574bc",
+              "name": "file_type",
+              "value": "={{ $json.mimeType }}",
+              "type": "string"
+            },
+            {
+              "id": "36e0ccc5-7b20-45c1-9c6b-b40df7634fd3",
+              "name": "file_name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        656,
+        336
+      ],
+      "id": "0d905a5b-2032-40e1-a6f9-f01d58d18f22",
+      "name": "Set File Type&ID"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "laparva_1536",
+        "filterType": "string",
+        "filterString": "=metadata->>file_id=like.*{{ $json.file_id }}*"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        416,
+        480
+      ],
+      "id": "21f31f58-3389-4d7a-8484-18ea8a9bf701",
+      "name": "Delete Old File Version",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "WTaHvfaGrY89LoXZ",
+          "name": "Supabase account Mountain_R."
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1U8M0awzY8-14aCfy7DiYvNEIKi0ECuuM",
+          "mode": "list",
+          "cachedResultName": "Database - La Parva",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1U8M0awzY8-14aCfy7DiYvNEIKi0ECuuM"
+        },
+        "event": "fileUpdated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        128,
+        496
+      ],
+      "id": "07171939-eb43-490e-89c0-b3b1c78a4ff8",
+      "name": "File Updated",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "1jlMDjQ5x1BftlgN",
+          "name": "Google Drive account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1U8M0awzY8-14aCfy7DiYvNEIKi0ECuuM",
+          "mode": "list",
+          "cachedResultName": "Database - La Parva",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1U8M0awzY8-14aCfy7DiYvNEIKi0ECuuM"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        128,
+        224
+      ],
+      "id": "c59ee608-37eb-4a68-bb38-0d6952129006",
+      "name": "File Created",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "1jlMDjQ5x1BftlgN",
+          "name": "Google Drive account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.textSplitterTokenSplitter",
+      "typeVersion": 1,
+      "position": [
+        2256,
+        592
+      ],
+      "id": "18bbf78a-ff9c-404d-935e-1280ecffc990",
+      "name": "Token Splitter"
+    },
+    {
+      "parameters": {
+        "chatId": "-1003060717750",
+        "text": "=ERROR EN BASE VECTORIAL DE LA PARVA\n\nHubo un error en el flujo \"Base Vectorial - La Parva\"\n\nEn el nodo \"Drive\"",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        944
+      ],
+      "id": "096b3905-5050-4dd5-8616-a5cd4773e068",
+      "name": "Send a text message8",
+      "webhookId": "7bc372e1-c23d-474d-abf2-14e65bec0700",
+      "credentials": {
+        "telegramApi": {
+          "id": "8w61dIAh3fFRODEs",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 224,
+        "width": 2560,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        896
+      ],
+      "typeVersion": 1,
+      "id": "93c91d78-ce6c-46cd-b2c7-4965683e6cdd",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "chatId": "-1003060717750",
+        "text": "=ERROR EN BASE VECTORIAL DE LA PARVA\n\nHubo un error en el flujo \"Base Vectorial - La Parva\"\n\nEn el nodo \"Supabase\"",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        960,
+        960
+      ],
+      "id": "79672d5a-24d7-47c4-a09f-14e8f222f5fc",
+      "name": "Send a text message",
+      "webhookId": "7bc372e1-c23d-474d-abf2-14e65bec0700",
+      "credentials": {
+        "telegramApi": {
+          "id": "8w61dIAh3fFRODEs",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "File Created": [
+      {
+        "json": {
+          "parents": [
+            "1U8M0awzY8-14aCfy7DiYvNEIKi0ECuuM"
+          ],
+          "lastModifyingUser": {
+            "displayName": "cmmoraespedrozo",
+            "kind": "drive#user",
+            "me": false,
+            "permissionId": "13539237104375314966",
+            "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjV0bEWLgrsV-3myIoZXkb8u1T3h7_R4m_7Ge0objFKmuGlsOtv6=s64"
+          },
+          "spaces": [
+            "drive"
+          ],
+          "capabilities": {
+            "canAddChildren": false,
+            "canAddFolderFromAnotherDrive": false,
+            "canChangeCopyRequiresWriterPermission": true,
+            "canChangeItemDownloadRestriction": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canComment": true,
+            "canCopy": true,
+            "canDelete": true,
+            "canDeleteChildren": false,
+            "canDisableInheritedPermissions": false,
+            "canDownload": true,
+            "canEdit": true,
+            "canEnableInheritedPermissions": true,
+            "canListChildren": false,
+            "canModifyContent": true,
+            "canModifyContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyLabels": false,
+            "canMoveChildrenOutOfTeamDrive": false,
+            "canMoveChildrenOutOfDrive": false,
+            "canMoveChildrenWithinTeamDrive": false,
+            "canMoveChildrenWithinDrive": false,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveItemOutOfTeamDrive": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinTeamDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canMoveTeamDriveItem": true,
+            "canReadLabels": false,
+            "canReadRevisions": true,
+            "canReadTeamDrive": true,
+            "canReadDrive": true,
+            "canRemoveChildren": false,
+            "canRemoveContentRestriction": false,
+            "canRename": true,
+            "canShare": true,
+            "canTrash": true,
+            "canTrashChildren": false,
+            "canUntrash": true
+          },
+          "permissionIds": [
+            "17805159784734411172",
+            "13539237104375314966",
+            "12096206458616519060"
+          ],
+          "linkShareMetadata": {
+            "securityUpdateEligible": false,
+            "securityUpdateEnabled": true
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "kind": "drive#file",
+          "id": "14NT_hvoo27vwoOfDTnx9L-2GLBKxdt5o",
+          "name": "Normas_verano.pdf",
+          "mimeType": "application/pdf",
+          "starred": false,
+          "trashed": false,
+          "explicitlyTrashed": false,
+          "version": "3",
+          "webContentLink": "https://drive.google.com/uc?id=14NT_hvoo27vwoOfDTnx9L-2GLBKxdt5o&export=download",
+          "webViewLink": "https://drive.google.com/file/d/14NT_hvoo27vwoOfDTnx9L-2GLBKxdt5o/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/pdf",
+          "hasThumbnail": true,
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBOtcVe-L6C_9Xb2MDRyM0oSm4F_Mcl51J4keRa-DRNYakefHS-M_vIC0fr4mV2kZ5s3oY6gtm2ga5L9Y7k8Kbv95yN6xM6eTdciaYH34KiyKQ=s220",
+          "thumbnailVersion": "1",
+          "viewedByMe": false,
+          "createdTime": "2025-10-11T01:29:37.650Z",
+          "modifiedTime": "2025-10-10T23:59:57.000Z",
+          "modifiedByMe": false,
+          "teamDriveId": "0AMCva7mZxMVSUk9PVA",
+          "driveId": "0AMCva7mZxMVSUk9PVA",
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "hasAugmentedPermissions": false,
+          "originalFilename": "Normas_verano.pdf",
+          "fullFileExtension": "pdf",
+          "fileExtension": "pdf",
+          "md5Checksum": "814c5a6b37a2abc991d9367ffc9969f6",
+          "sha1Checksum": "79f9eae2b3a141f8815ee1882185c37fa1bd1689",
+          "sha256Checksum": "a83e13ad8e74ca1ec11831d54732287c0221984bd08dd721959510a766d867fb",
+          "size": "186806",
+          "quotaBytesUsed": "186806",
+          "headRevisionId": "0B0mvhtYJo6Ulb0pPMWZHeHlUdU5GZ25SdUpUM3RlaStRQTJNPQ",
+          "isAppAuthorized": false,
+          "inheritedPermissionsDisabled": false
+        }
+      },
+      {
+        "json": {
+          "parents": [
+            "1U8M0awzY8-14aCfy7DiYvNEIKi0ECuuM"
+          ],
+          "lastModifyingUser": {
+            "displayName": "cmmoraespedrozo",
+            "kind": "drive#user",
+            "me": false,
+            "permissionId": "13539237104375314966",
+            "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjV0bEWLgrsV-3myIoZXkb8u1T3h7_R4m_7Ge0objFKmuGlsOtv6=s64"
+          },
+          "spaces": [
+            "drive"
+          ],
+          "capabilities": {
+            "canAddChildren": false,
+            "canAddFolderFromAnotherDrive": false,
+            "canChangeCopyRequiresWriterPermission": true,
+            "canChangeItemDownloadRestriction": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canComment": true,
+            "canCopy": true,
+            "canDelete": true,
+            "canDeleteChildren": false,
+            "canDisableInheritedPermissions": false,
+            "canDownload": true,
+            "canEdit": true,
+            "canEnableInheritedPermissions": true,
+            "canListChildren": false,
+            "canModifyContent": true,
+            "canModifyContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyLabels": false,
+            "canMoveChildrenOutOfTeamDrive": false,
+            "canMoveChildrenOutOfDrive": false,
+            "canMoveChildrenWithinTeamDrive": false,
+            "canMoveChildrenWithinDrive": false,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveItemOutOfTeamDrive": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinTeamDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canMoveTeamDriveItem": true,
+            "canReadLabels": false,
+            "canReadRevisions": true,
+            "canReadTeamDrive": true,
+            "canReadDrive": true,
+            "canRemoveChildren": false,
+            "canRemoveContentRestriction": false,
+            "canRename": true,
+            "canShare": true,
+            "canTrash": true,
+            "canTrashChildren": false,
+            "canUntrash": true
+          },
+          "permissionIds": [
+            "17805159784734411172",
+            "13539237104375314966",
+            "12096206458616519060"
+          ],
+          "linkShareMetadata": {
+            "securityUpdateEligible": false,
+            "securityUpdateEnabled": true
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "kind": "drive#file",
+          "id": "1grnkDugKtUIPWZp9iDnrwJZ5QUTSCNCZ",
+          "name": "Normas_de_seguridad_invierno.pdf",
+          "mimeType": "application/pdf",
+          "starred": false,
+          "trashed": false,
+          "explicitlyTrashed": false,
+          "version": "3",
+          "webContentLink": "https://drive.google.com/uc?id=1grnkDugKtUIPWZp9iDnrwJZ5QUTSCNCZ&export=download",
+          "webViewLink": "https://drive.google.com/file/d/1grnkDugKtUIPWZp9iDnrwJZ5QUTSCNCZ/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/pdf",
+          "hasThumbnail": true,
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBPcMyvnNPX7vCAc8oTsuakNaCsLi4L88pH6Yi6_ZcqJdpjs1sLhLbFO0YtTYO6FSUBfFFL46zNUL62QD_SC4ItFPQN0uuxSz7IHflyc6_R61A=s220",
+          "thumbnailVersion": "1",
+          "viewedByMe": false,
+          "createdTime": "2025-10-11T01:29:37.524Z",
+          "modifiedTime": "2025-10-10T23:59:54.000Z",
+          "modifiedByMe": false,
+          "teamDriveId": "0AMCva7mZxMVSUk9PVA",
+          "driveId": "0AMCva7mZxMVSUk9PVA",
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "hasAugmentedPermissions": false,
+          "originalFilename": "Normas_de_seguridad_invierno.pdf",
+          "fullFileExtension": "pdf",
+          "fileExtension": "pdf",
+          "md5Checksum": "ee64073f6ce9da06b36f86f19b2500ab",
+          "sha1Checksum": "ac8cd1059ae9bfb09ef1f1058632c3b79609eb81",
+          "sha256Checksum": "39b9d8095904db8b1bb9ec538e1c548fd62f98b60aaa8a82504b13fd3d795d0a",
+          "size": "221663",
+          "quotaBytesUsed": "221663",
+          "headRevisionId": "0B0mvhtYJo6UlQ01Mdmg4cU04N2JBSWJocDZ5U0VFNjY0UUlJPQ",
+          "isAppAuthorized": false,
+          "inheritedPermissionsDisabled": false
+        }
+      },
+      {
+        "json": {
+          "parents": [
+            "1U8M0awzY8-14aCfy7DiYvNEIKi0ECuuM"
+          ],
+          "lastModifyingUser": {
+            "displayName": "cmmoraespedrozo",
+            "kind": "drive#user",
+            "me": false,
+            "permissionId": "13539237104375314966",
+            "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjV0bEWLgrsV-3myIoZXkb8u1T3h7_R4m_7Ge0objFKmuGlsOtv6=s64"
+          },
+          "spaces": [
+            "drive"
+          ],
+          "capabilities": {
+            "canAddChildren": false,
+            "canAddFolderFromAnotherDrive": false,
+            "canChangeCopyRequiresWriterPermission": true,
+            "canChangeItemDownloadRestriction": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canComment": true,
+            "canCopy": true,
+            "canDelete": true,
+            "canDeleteChildren": false,
+            "canDisableInheritedPermissions": false,
+            "canDownload": true,
+            "canEdit": true,
+            "canEnableInheritedPermissions": true,
+            "canListChildren": false,
+            "canModifyContent": true,
+            "canModifyContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyLabels": false,
+            "canMoveChildrenOutOfTeamDrive": false,
+            "canMoveChildrenOutOfDrive": false,
+            "canMoveChildrenWithinTeamDrive": false,
+            "canMoveChildrenWithinDrive": false,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveItemOutOfTeamDrive": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinTeamDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canMoveTeamDriveItem": true,
+            "canReadLabels": false,
+            "canReadRevisions": true,
+            "canReadTeamDrive": true,
+            "canReadDrive": true,
+            "canRemoveChildren": false,
+            "canRemoveContentRestriction": false,
+            "canRename": true,
+            "canShare": true,
+            "canTrash": true,
+            "canTrashChildren": false,
+            "canUntrash": true
+          },
+          "permissionIds": [
+            "17805159784734411172",
+            "13539237104375314966",
+            "12096206458616519060"
+          ],
+          "linkShareMetadata": {
+            "securityUpdateEligible": false,
+            "securityUpdateEnabled": true
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "kind": "drive#file",
+          "id": "154db9vIjXsr3nqhIYmue7Oy54fuf_w79",
+          "name": "Contrato-Pases-2026-final-LP.pdf",
+          "mimeType": "application/pdf",
+          "starred": false,
+          "trashed": false,
+          "explicitlyTrashed": false,
+          "version": "3",
+          "webContentLink": "https://drive.google.com/uc?id=154db9vIjXsr3nqhIYmue7Oy54fuf_w79&export=download",
+          "webViewLink": "https://drive.google.com/file/d/154db9vIjXsr3nqhIYmue7Oy54fuf_w79/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/pdf",
+          "hasThumbnail": true,
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNw1p7QwMI981w_PNUUkGl9HgPO_QrfBFaRpnFRTcr3ryixasQWIdSbycOtz4qEuL5Hmx12GN2fL--_0brjJFDtfEPgT6eolpCe2i3_9CnV_w=s220",
+          "thumbnailVersion": "1",
+          "viewedByMe": false,
+          "createdTime": "2025-10-11T01:29:37.666Z",
+          "modifiedTime": "2025-10-10T23:59:51.000Z",
+          "modifiedByMe": false,
+          "teamDriveId": "0AMCva7mZxMVSUk9PVA",
+          "driveId": "0AMCva7mZxMVSUk9PVA",
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "hasAugmentedPermissions": false,
+          "originalFilename": "Contrato-Pases-2026-final-LP.pdf",
+          "fullFileExtension": "pdf",
+          "fileExtension": "pdf",
+          "md5Checksum": "e1cda2cad69792bbaa566e68f974a60a",
+          "sha1Checksum": "415c0831cacd35d4979abb6b8b96b359de0de369",
+          "sha256Checksum": "0d0a6d4c19f6941d60e79b5f5f59b9fec0f573ea2e0cdbae57af3b4b900f4733",
+          "size": "262933",
+          "quotaBytesUsed": "262933",
+          "headRevisionId": "0B0mvhtYJo6UlNGFUV1Bsajhzem9kQjA3c3VGYitoTzBYdW5FPQ",
+          "isAppAuthorized": false,
+          "inheritedPermissionsDisabled": false
+        }
+      },
+      {
+        "json": {
+          "parents": [
+            "1U8M0awzY8-14aCfy7DiYvNEIKi0ECuuM"
+          ],
+          "lastModifyingUser": {
+            "displayName": "cmmoraespedrozo",
+            "kind": "drive#user",
+            "me": false,
+            "permissionId": "13539237104375314966",
+            "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjV0bEWLgrsV-3myIoZXkb8u1T3h7_R4m_7Ge0objFKmuGlsOtv6=s64"
+          },
+          "spaces": [
+            "drive"
+          ],
+          "capabilities": {
+            "canAddChildren": false,
+            "canAddFolderFromAnotherDrive": false,
+            "canChangeCopyRequiresWriterPermission": true,
+            "canChangeItemDownloadRestriction": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canComment": true,
+            "canCopy": true,
+            "canDelete": true,
+            "canDeleteChildren": false,
+            "canDisableInheritedPermissions": false,
+            "canDownload": true,
+            "canEdit": true,
+            "canEnableInheritedPermissions": true,
+            "canListChildren": false,
+            "canModifyContent": true,
+            "canModifyContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyLabels": false,
+            "canMoveChildrenOutOfTeamDrive": false,
+            "canMoveChildrenOutOfDrive": false,
+            "canMoveChildrenWithinTeamDrive": false,
+            "canMoveChildrenWithinDrive": false,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveItemOutOfTeamDrive": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinTeamDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canMoveTeamDriveItem": true,
+            "canReadLabels": false,
+            "canReadRevisions": true,
+            "canReadTeamDrive": true,
+            "canReadDrive": true,
+            "canRemoveChildren": false,
+            "canRemoveContentRestriction": false,
+            "canRename": true,
+            "canShare": true,
+            "canTrash": true,
+            "canTrashChildren": false,
+            "canUntrash": true
+          },
+          "permissionIds": [
+            "17805159784734411172",
+            "13539237104375314966",
+            "12096206458616519060"
+          ],
+          "linkShareMetadata": {
+            "securityUpdateEligible": false,
+            "securityUpdateEnabled": true
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "kind": "drive#file",
+          "id": "1cubRQoTqf_MjWUsCQpJOPOHWq9JOxeqI",
+          "name": "Terminos_y_condiciones_LP_2025.pdf",
+          "mimeType": "application/pdf",
+          "starred": false,
+          "trashed": false,
+          "explicitlyTrashed": false,
+          "version": "3",
+          "webContentLink": "https://drive.google.com/uc?id=1cubRQoTqf_MjWUsCQpJOPOHWq9JOxeqI&export=download",
+          "webViewLink": "https://drive.google.com/file/d/1cubRQoTqf_MjWUsCQpJOPOHWq9JOxeqI/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/pdf",
+          "hasThumbnail": true,
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBPLBESpffD1e3Tm32cTU39NCLfd4lU2YGy7YRNcUuSzT-kNhKraGn67ngFoVNTJaCwKt00i9UgmE0mitQhrz5-TjPAO-5WAb8I5ZZk1DJpJgw=s220",
+          "thumbnailVersion": "1",
+          "viewedByMe": false,
+          "createdTime": "2025-10-11T01:29:37.385Z",
+          "modifiedTime": "2025-10-10T23:59:46.000Z",
+          "modifiedByMe": false,
+          "teamDriveId": "0AMCva7mZxMVSUk9PVA",
+          "driveId": "0AMCva7mZxMVSUk9PVA",
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "hasAugmentedPermissions": false,
+          "originalFilename": "Terminos_y_condiciones_LP_2025.pdf",
+          "fullFileExtension": "pdf",
+          "fileExtension": "pdf",
+          "md5Checksum": "981decd3434bf711afce2a5714e4eb56",
+          "sha1Checksum": "68f84ba01a9b7c9d5d546ff1da8978b4bec9721e",
+          "sha256Checksum": "42bb3b455787ba96614e03c03ec3e2ca7a13ad3803b3ad77932a9632829354ab",
+          "size": "499030",
+          "quotaBytesUsed": "499030",
+          "headRevisionId": "0B0mvhtYJo6UlS0JGYzczUWMxdVE0bW40NTdOcTBIc1lKN3hzPQ",
+          "isAppAuthorized": false,
+          "inheritedPermissionsDisabled": false
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Download New File1": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from XLSX": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from PDF": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from CSV": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from doc": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Extract from PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from doc",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from CSV",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from XLSX",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from doc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set File Type&ID": {
+      "main": [
+        [
+          {
+            "node": "Download New File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Old File Version": {
+      "main": [
+        [
+          {
+            "node": "Set File Type&ID",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "File Updated": {
+      "main": [
+        [
+          {
+            "node": "Delete Old File Version",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "File Created": {
+      "main": [
+        [
+          {
+            "node": "Set File Type&ID",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Token Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7360ba7d-ece0-4e9c-86bf-641b1aa62140",
+  "meta": {
+    "instanceId": "dea0fe42c4fc0a7d4eab96fc208153d329cc0d698330064077ad5d91e5842edc"
+  },
+  "id": "6CdReJdErPnckuxH",
+  "tags": []
+}
