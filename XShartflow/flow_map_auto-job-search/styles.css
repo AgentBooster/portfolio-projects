@@ -267,6 +267,13 @@ p {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    text-align: center;
+}
+
+.timeline-decision__marker .decision-label {
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 .timeline-decision__split {
