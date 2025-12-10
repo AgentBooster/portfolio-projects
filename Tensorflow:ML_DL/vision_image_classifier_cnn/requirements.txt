@@ -1,0 +1,7 @@
+tensorflow-macos==2.15.0
+keras==3.10.0
+gradio==3.50.2
+pillow==10.3.0
+numpy==1.26.4
+huggingface-hub==0.25.2
+tensorflow-datasets==4.9.4

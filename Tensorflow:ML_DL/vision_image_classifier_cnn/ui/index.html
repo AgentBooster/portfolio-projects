@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Demo de Clasificación de Imágenes</title>
+  <title>Clasificador de Razas de Perros</title>
   <link rel="stylesheet" href="static/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.19.0/dist/tf.min.js"></script>
 </head>
 <body>
   <div class="page">
     <div class="card">
-      <h1>Demo de Clasificación de Imágenes</h1>
-      <p class="description">Arrastra una imagen o selecciónala para obtener la predicción del modelo. Checkpoint actual: razas de perro (120 clases).</p>
+      <h1>Clasificador de Razas de Perros</h1>
+      <p class="description">Arrastra una imagen de un perro o selecciónala para obtener la predicción del modelo.</p>
       <input type="file" id="file-input" class="visually-hidden" accept="image/*" aria-label="Seleccionar imagen">
       <label id="drop-zone" class="drop-zone" role="button" tabindex="0" for="file-input" aria-label="Seleccionar o soltar imagen">
         <span id="drop-text">Arrastra tu imagen aquí o haz clic para seleccionar.</span>
@@ -38,7 +38,7 @@
             <thead>
               <tr>
                 <th>Puesto</th>
-                <th>Clase</th>
+                <th>Raza</th>
                 <th>Probabilidad</th>
               </tr>
             </thead>

@@ -1,10 +1,14 @@
-"""Gradio interface for an image classifier demo (checkpoint: dog breeds)."""
+"""Gradio interface for dog breed classification using a pre-trained MobileNetV2."""
 
+import os
 from pathlib import Path
 from typing import List, Sequence, Tuple
 
+os.environ.setdefault("KERAS_BACKEND", "tensorflow")
+
 import numpy as np
 import tensorflow as tf
+import keras
 from PIL import Image
 import gradio as gr
 
@@ -12,7 +16,7 @@ import gradio as gr
 IMG_SIZE = 224
 APP_DIR = Path(__file__).resolve().parent
 MODELS_DIR = APP_DIR.parent / "models"
-MODEL_PATH = MODELS_DIR / "mobilenetv2_model.keras"
+MODEL_PATH = MODELS_DIR / "mobilenetv2_dogs.keras"
 LABELS_PATH = MODELS_DIR / "labels.txt"
 
 
@@ -33,7 +37,7 @@ def _load_labels(path: Path) -> List[str]:
 if not MODEL_PATH.exists():
     raise FileNotFoundError(f"No se encontró el modelo en {MODEL_PATH}.")
 
-MODEL = tf.keras.models.load_model(str(MODEL_PATH))
+MODEL = keras.models.load_model(str(MODEL_PATH))
 LABELS = _load_labels(LABELS_PATH)
 
 
@@ -43,7 +47,7 @@ def _preprocess(image: Image.Image) -> Tuple[np.ndarray, Image.Image]:
     preview_image = rgb_image.copy()
     resized = rgb_image.resize((IMG_SIZE, IMG_SIZE))
     array = np.asarray(resized, dtype=np.float32)
-    preprocessed = tf.keras.applications.mobilenet_v2.preprocess_input(array)
+    preprocessed = keras.applications.mobilenet_v2.preprocess_input(array)
     batched = np.expand_dims(preprocessed, axis=0)
     return batched, preview_image
 
@@ -102,10 +106,9 @@ iface = gr.Interface(
         gr.Textbox(label="Top-1"),
         gr.Textbox(label="Top-5"),
     ],
-    title="Demo de Clasificación de Imágenes",
+    title="Clasificación de Razas de Perros",
     description=(
-        "Carga una imagen para predecir su clase usando MobileNetV2. "
-        "Checkpoint actual: razas de perro (120 clases, Stanford Dogs). "
+        "Carga una imagen de un perro para predecir su raza usando MobileNetV2. "
         "La imagen se convierte a RGB y 224×224 antes de la inferencia."
     ),
 )

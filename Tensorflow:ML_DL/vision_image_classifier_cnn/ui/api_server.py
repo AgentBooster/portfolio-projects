@@ -1,28 +1,32 @@
-"""Simple HTTP server exposing /predict for image classification (checkpoint: dog breeds)."""
+"""Simple HTTP server exposing /predict for dog breed classification."""
 
 from __future__ import annotations
 
 import io
 import json
 import logging
+import os
 import threading
 from http import HTTPStatus
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+os.environ.setdefault("KERAS_BACKEND", "tensorflow")
+
 import numpy as np
 import tensorflow as tf
+import keras
 from PIL import Image
 
 
-LOGGER = logging.getLogger("image_classifier_api")
+LOGGER = logging.getLogger("dog_breed_api")
 logging.basicConfig(level=logging.INFO)
 
 
 BASE_DIR = Path(__file__).resolve().parent
 MODELS_DIR = BASE_DIR.parent / "models"
-MODEL_PATH = MODELS_DIR / "mobilenetv2_model.keras"
+MODEL_PATH = MODELS_DIR / "mobilenetv2_dogs.keras"
 LABELS_PATH = MODELS_DIR / "labels.txt"
 IMG_SIZE = 224
 SERVER_ADDRESS = ("127.0.0.1", 8000)
@@ -40,7 +44,7 @@ if not MODEL_PATH.exists():
     raise FileNotFoundError(f"No se encontró el modelo en {MODEL_PATH}.")
 
 LOGGER.info("Cargando modelo desde %s", MODEL_PATH)
-MODEL = tf.keras.models.load_model(str(MODEL_PATH))
+MODEL = keras.models.load_model(str(MODEL_PATH))
 LOGGER.info("Modelo cargado correctamente.")
 
 LOGGER.info("Leyendo etiquetas desde %s", LABELS_PATH)
@@ -53,7 +57,7 @@ def prepare_image(image_bytes: bytes) -> Tuple[np.ndarray, Image.Image]:
     preview = pil_image.copy()
     resized = pil_image.resize((IMG_SIZE, IMG_SIZE))
     array = np.asarray(resized, dtype=np.float32)
-    preprocessed = tf.keras.applications.mobilenet_v2.preprocess_input(array)
+    preprocessed = keras.applications.mobilenet_v2.preprocess_input(array)
     batched = np.expand_dims(preprocessed, axis=0)
     return batched, preview
 
@@ -76,7 +80,7 @@ def run_prediction(image_bytes: bytes) -> Dict[str, object]:
 
 
 class PredictHandler(BaseHTTPRequestHandler):
-    server_version = "ImageClassifier/1.0"
+    server_version = "DogBreedPredictor/1.0"
 
     def log_message(self, format: str, *args) -> None:  # pylint: disable=redefined-builtin
         LOGGER.info("%s - %s", self.address_string(), format % args)
