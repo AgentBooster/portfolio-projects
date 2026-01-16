@@ -1,0 +1,602 @@
+{
+  "name": "n8n Backup to GitHub (Fixed)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 4
+            }
+          ]
+        }
+      },
+      "id": "c18c5b42-4909-43fc-9b96-77f675fa8669",
+      "name": "Daily Backup",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -368,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      },
+      "id": "e7378cf7-4164-4ea7-b815-88aca35303d2",
+      "name": "Get All Workflows",
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        176
+      ],
+      "credentials": {
+        "n8nApi": {
+          "id": "iS5fVg8F5T2C2VlB",
+          "name": "n8n Account (Agent Booster)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM public.credentials_entity;",
+        "additionalFields": {}
+      },
+      "id": "f0aeed91-3be5-4881-b635-2d7f9ff6febf",
+      "name": "Get Creds from DB",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        416
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "UUf3Jah2kdwGsoPN",
+          "name": "Postgres VP (Servidor VPS n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "value": "vasyl-pavlyuchok",
+          "mode": "list",
+          "cachedResultName": "vasyl-pavlyuchok",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "mode": "list",
+          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+        },
+        "filePath": "workflows"
+      },
+      "id": "f9b66aee-8309-4d0e-aa25-eb174d189596",
+      "name": "List GitHub Files",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        80,
+        176
+      ],
+      "webhookId": "6bebf9e4-3ea2-4dd9-a1e5-f55fbf2fa6a6",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "Rn8cWyb4nNwSSpGZ",
+          "name": "GitHub Account (VP)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "value": "vasyl-pavlyuchok",
+          "mode": "list",
+          "cachedResultName": "vasyl-pavlyuchok",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "mode": "list",
+          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+        },
+        "filePath": "credentials"
+      },
+      "id": "4c3f3d5a-8bd7-4696-9c98-8bef36a50be9",
+      "name": "List GitHub Creds",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        80,
+        416
+      ],
+      "webhookId": "a46c2ede-59c1-4829-8307-6707ee9b4e41",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "Rn8cWyb4nNwSSpGZ",
+          "name": "GitHub Account (VP)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// PREPARAR DATOS Y CRUZAR CON GITHUB - VERSIÓN ROBUSTA\nconst folderName = 'workflows';\nconst dateString = new Date().toISOString().split('T')[0];\n\n// 1. Obtener lista de GitHub (puede estar vacía o con error)\nconst githubFiles = {};\n\ntry {\n  const githubInput = $input.all();\n  \n  if (githubInput && githubInput.length > 0) {\n    for (const item of githubInput) {\n      const data = item.json;\n      \n      // Ignorar si hay error (carpeta no existe)\n      if (data.error || data.message) {\n        console.log('GitHub folder empty or error:', data.message);\n        continue;\n      }\n      \n      // Procesar archivo válido\n      if (data.name && data.sha) {\n        githubFiles[data.name] = data.sha;\n      }\n    }\n  }\n} catch (e) {\n  console.log('Error processing GitHub files, assuming empty folder:', e.message);\n}\n\nconsole.log('Existing GitHub files:', Object.keys(githubFiles).length);\n\n// 2. Obtener workflows\nconst workflows = $('Get All Workflows').all();\n\nif (!workflows || workflows.length === 0) {\n  throw new Error('No workflows found to backup');\n}\n\n// 3. Preparar items para cada workflow\nconst results = [];\n\nfor (const item of workflows) {\n  const wf = item.json;\n  \n  if (!wf.id) {\n    console.log('Skipping workflow without ID');\n    continue;\n  }\n  \n  const fileName = `${wf.id}.json`;\n  const exists = githubFiles.hasOwnProperty(fileName);\n  \n  results.push({\n    json: {\n      path: `${folderName}/${fileName}`,\n      content: JSON.stringify(wf, null, 2),\n      commitMsg: `Backup: ${wf.name || 'Unnamed'} [${dateString}]`,\n      sha: exists ? githubFiles[fileName] : null,\n      operation: exists ? 'update' : 'create',\n      workflowName: wf.name || 'Unnamed',\n      workflowId: wf.id\n    }\n  });\n}\n\nconsole.log(`Prepared ${results.length} workflows: ${results.filter(r => r.json.operation === 'create').length} new, ${results.filter(r => r.json.operation === 'update').length} updates`);\n\nreturn results;"
+      },
+      "id": "63b5bb8a-1f7b-4cab-a663-7ac7d20783ad",
+      "name": "Prepare Workflows",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// PREPARAR DUMP DE CREDENCIALES - VERSIÓN ROBUSTA\nconst folderName = 'credentials';\nconst fileName = 'credentials_dump.json';\nconst dateString = new Date().toISOString().split('T')[0];\n\n// 1. Obtener credenciales\nconst allCreds = $('Get Creds from DB').all().map(item => item.json);\n\nif (!allCreds || allCreds.length === 0) {\n  console.log('No credentials found, creating empty backup');\n}\n\n// 2. Verificar si existe el archivo en GitHub\nlet sha = null;\n\ntry {\n  const githubInput = $input.all();\n  \n  if (githubInput && githubInput.length > 0) {\n    for (const item of githubInput) {\n      const data = item.json;\n      \n      // Ignorar errores\n      if (data.error || data.message) {\n        console.log('GitHub folder empty or error:', data.message);\n        continue;\n      }\n      \n      // Buscar nuestro archivo\n      if (data.name === fileName && data.sha) {\n        sha = data.sha;\n        console.log('Found existing credentials file with SHA:', sha);\n        break;\n      }\n    }\n  }\n} catch (e) {\n  console.log('Error checking GitHub, will create new file:', e.message);\n}\n\nconst operation = sha ? 'update' : 'create';\nconsole.log(`Credentials backup: ${operation} (${allCreds.length} credentials)`);\n\nreturn [{\n  json: {\n    path: `${folderName}/${fileName}`,\n    content: JSON.stringify(allCreds, null, 2),\n    commitMsg: `Backup Credentials [${dateString}] - ${allCreds.length} items`,\n    sha: sha,\n    operation: operation\n  }\n}];"
+      },
+      "id": "ffd6a8de-6237-40f1-9538-4bc2d339bd9d",
+      "name": "Prepare Credentials",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-update",
+              "leftValue": "={{ $json.operation }}",
+              "rightValue": "update",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a4ca63f3-6457-4e58-b6a2-3e14d286be9d",
+      "name": "Workflow Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        512,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-update",
+              "leftValue": "={{ $json.operation }}",
+              "rightValue": "update",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "4af49c9e-afdb-46b6-8c68-88565cedef0a",
+      "name": "Creds Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        512,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "vasyl-pavlyuchok",
+          "mode": "list",
+          "cachedResultName": "vasyl-pavlyuchok",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "mode": "list",
+          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+        },
+        "filePath": "={{ $json.path }}",
+        "fileContent": "={{ $json.content }}",
+        "commitMessage": "={{ $json.commitMsg }}"
+      },
+      "id": "09410a9d-818b-4f9b-a843-9ece5c4497b9",
+      "name": "Update Workflow",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        752,
+        48
+      ],
+      "webhookId": "b3bb1114-3a70-489e-a494-449743d0835c",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "Rn8cWyb4nNwSSpGZ",
+          "name": "GitHub Account (VP)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "vasyl-pavlyuchok",
+          "mode": "list",
+          "cachedResultName": "vasyl-pavlyuchok",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "mode": "list",
+          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+        },
+        "filePath": "={{ $json.path }}",
+        "fileContent": "={{ $json.content }}",
+        "commitMessage": "={{ $json.commitMsg }}"
+      },
+      "id": "1948e308-f554-47c4-a804-53684f41c0d3",
+      "name": "Create Workflow",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        752,
+        208
+      ],
+      "webhookId": "421fc758-c45b-47a0-992a-e35b78264974",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "Rn8cWyb4nNwSSpGZ",
+          "name": "GitHub Account (VP)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "vasyl-pavlyuchok",
+          "mode": "list",
+          "cachedResultName": "vasyl-pavlyuchok",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "mode": "list",
+          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+        },
+        "filePath": "={{ $json.path }}",
+        "fileContent": "={{ $json.content }}",
+        "commitMessage": "={{ $json.commitMsg }}"
+      },
+      "id": "e1a28678-0604-454f-a468-b9924912eaec",
+      "name": "Update Credentials",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        752,
+        368
+      ],
+      "webhookId": "bdf1ba13-d277-429a-9758-e6bfe90d5170",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "Rn8cWyb4nNwSSpGZ",
+          "name": "GitHub Account (VP)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "vasyl-pavlyuchok",
+          "mode": "list",
+          "cachedResultName": "vasyl-pavlyuchok",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "mode": "list",
+          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+        },
+        "filePath": "={{ $json.path }}",
+        "fileContent": "={{ $json.content }}",
+        "commitMessage": "={{ $json.commitMsg }}"
+      },
+      "id": "0cc1934b-c3ff-48cf-806c-150a6d372c15",
+      "name": "Create Credentials",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        752,
+        512
+      ],
+      "webhookId": "528cce71-8c47-4d19-bd19-a0746ec64c73",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "Rn8cWyb4nNwSSpGZ",
+          "name": "GitHub Account (VP)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 🛡️ n8n Backup System (Git-Native)\nAutomated daily backup for Workflows and Credentials, transforming GitHub into a real **Version Control System** for n8n.\n\n### ⚙️ Dual Architecture\n* **Top Branch:** Processes individual JSONs (Logic) and saves each flow individually.\n* **Bottom Branch:** Dumps the Credentials Database (Security).\n\n### ⚠️ Requisito Clave\nPara restaurar las credenciales, necesitarás la variable de entorno:\n`N8N_ENCRYPTION_KEY`\n\n### 🧠 Why is it smart?\n1. **Extreme Efficiency:** No infinite folders (`2026-01-14`...). It overwrites existing files.\n2. **Real History:** Git detects internal changes. If a flow doesn't change, it takes no space. If it changes, GitHub saves the difference (Diff).\n3. **Change Resistant:** Uses **Flow ID** as filename. You can rename your flows in n8n as much as you want; history remains intact.",
+        "height": 551,
+        "width": 505,
+        "color": 2
+      },
+      "id": "c1c3c40a-041e-4305-8812-a9fec36997f0",
+      "name": "Master Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -944,
+        -112
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Hey, I'm Vasyl Pavlyuchok\nI design **AI-powered automation systems** for \nfounders and agencies. I build the systems that\nlet businesses run without you.\n\n### 🚀 What I can help you with\n* **Killing repetitive admin** & manual data entry.\n* **Stopping lead leakage** in your pipelines.\n* **Speeding up client onboarding** workflows.\n* **Eliminating information chaos** across tools.\n\n### Let's stay in touch\n- **LinkedIn:** [Connect with me](https://www.linkedin.com/in/vasyl-pavlyuchok/)  \n- **YouTube:** [Watch my n8n & AI videos](https://www.youtube.com/@vasylpavlyuchok)  \n- **Email:** vasyl@techbooster.io  \n\n*Automate the busywork. Keep your focus on strategy.*",
+        "height": 416,
+        "width": 512,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -944,
+        464
+      ],
+      "typeVersion": 1,
+      "id": "a29a2a95-2ee8-412f-a65b-be091aac76ea",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "![Vasyl Pavlyuchok](https://assets.zyrosite.com/mp86MKQeprTxrnEW/profile-pic-2025_10-Yan0j4jpxeUzzGlm.png)",
+        "height": 176,
+        "width": 160,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        464
+      ],
+      "typeVersion": 1,
+      "id": "38cd9394-b46e-4b08-a188-f673c9e53754",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## 🔐 Line 2: Credentials (DB Dump)\nDirect connection to PostgreSQL (`public.credentials_entity`).\n\n### ⚠️ SECURITY WARNING\nThis `credentials_dump.json` file contains your **ENCRYPTED** API keys.\n\nTo restore this backup on another server, it is **MANDATORY** to have the same:\n`N8N_ENCRYPTION_KEY`\nWithout that key, this file is unreadable.",
+        "height": 267,
+        "width": 774,
+        "color": 7
+      },
+      "id": "1a5c6d14-6600-40f8-a506-33bd8e27b9e7",
+      "name": "Security Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        592
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## ⚡ Line 1: Workflows (Source Code)\nExports business logic.\n\n* **Strategy:** `ID.json` (Immutable Name).\n* **Meta-Data:** Human name and date are injected into the **Commit Message**.\n* **Result:** A clean repository (`workflows/`) where you can see the exact evolution of each node by clicking \"History\" in GitHub.",
+        "height": 218,
+        "width": 759,
+        "color": 3
+      },
+      "id": "1ebb903c-35fe-459d-9b9b-44fee74a9d51",
+      "name": "Workflows Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -80
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily Backup": {
+      "main": [
+        [
+          {
+            "node": "Get All Workflows",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Creds from DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Workflows": {
+      "main": [
+        [
+          {
+            "node": "List GitHub Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Creds from DB": {
+      "main": [
+        [
+          {
+            "node": "List GitHub Creds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List GitHub Files": {
+      "main": [
+        [
+          {
+            "node": "Prepare Workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List GitHub Creds": {
+      "main": [
+        [
+          {
+            "node": "Prepare Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Workflows": {
+      "main": [
+        [
+          {
+            "node": "Workflow Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Credentials": {
+      "main": [
+        [
+          {
+            "node": "Creds Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Exists?": {
+      "main": [
+        [
+          {
+            "node": "Update Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Creds Exists?": {
+      "main": [
+        [
+          {
+            "node": "Update Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "HhrYFRpsXaGLQ4zQ"
+  },
+  "versionId": "007d360a-c35e-40be-b9ab-7f67df5e1161",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dea0fe42c4fc0a7d4eab96fc208153d329cc0d698330064077ad5d91e5842edc"
+  },
+  "id": "f1pkM51vy_LhJURtpu7bh",
+  "tags": []
+}
