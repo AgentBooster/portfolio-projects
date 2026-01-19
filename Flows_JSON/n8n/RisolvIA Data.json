@@ -4,7 +4,7 @@
     {
       "parameters": {
         "inputSource": "jsonExample",
-        "jsonExample": "{\n  \"Nombre Completo\": \"\",\n  \"Correo\": \"\",\n  \"Teléfono\": \"\",\n  \"Lugar\": \"\",\n  \"Resumen de la Consulta\": \"\",\n  \"session_id\": \"\"\n}\n\n"
+        "jsonExample": "{\n  \"Nombre Completo\": \"\",\n  \"Correo\": \"\",\n  \"Tel\u00e9fono\": \"\",\n  \"Lugar\": \"\",\n  \"Resumen de la Consulta\": \"\",\n  \"session_id\": \"\"\n}\n\n"
       },
       "id": "c055762a-8fe7-4141-a639-df2372f30060",
       "typeVersion": 1.1,
@@ -25,7 +25,7 @@
             {
               "id": "98790d1f-5df0-4e4e-9dd2-cfc59f7cb078",
               "name": "Respond",
-              "value": "=Perfecto, se ha enviado correctamente el resumen a nuestro equipo, en la brevedad procederán a analizar su consulta y se pondrán en contacto pronto.\n",
+              "value": "=Perfecto, se ha enviado correctamente el resumen a nuestro equipo, en la brevedad proceder\u00e1n a analizar su consulta y se pondr\u00e1n en contacto pronto.\n",
               "type": "string"
             }
           ]
@@ -60,7 +60,7 @@
             },
             {
               "fieldId": "telefono",
-              "fieldValue": "={{ $json['Teléfono'] }}"
+              "fieldValue": "={{ $json['Tel\u00e9fono'] }}"
             },
             {
               "fieldId": "tipo_consulta",
@@ -103,9 +103,9 @@
     {
       "parameters": {
         "sendTo": "={{ $('Edit Fields1').item.json.fields.email }}",
-        "subject": "={{ $('Edit Fields1').item.json.fields.nombre_completo }}, tu consulta se ha enviado correctamente 😃",
+        "subject": "={{ $('Edit Fields1').item.json.fields.nombre_completo }}, tu consulta se ha enviado correctamente \ud83d\ude03",
         "emailType": "text",
-        "message": "=Se ha enviado el siguiente resumen a nuestro equipo legal:\n\nUbicación: {{ $('Edit Fields1').item.json.fields.ubicacion }}\n\nEmail: {{ $('Edit Fields1').item.json.fields.email }}\n\nTeléfono: {{ $('Edit Fields1').item.json.fields.telefono }}\n\nSituación: {{ $('Edit Fields1').item.json.fields.descripcion_situacion }}\n\nPróximamente, nuestro equipo procederá a analizar tu consulta y se pondrán en contacto contigo pronto.\n",
+        "message": "=Se ha enviado el siguiente resumen a nuestro equipo legal:\n\nUbicaci\u00f3n: {{ $('Edit Fields1').item.json.fields.ubicacion }}\n\nEmail: {{ $('Edit Fields1').item.json.fields.email }}\n\nTel\u00e9fono: {{ $('Edit Fields1').item.json.fields.telefono }}\n\nSituaci\u00f3n: {{ $('Edit Fields1').item.json.fields.descripcion_situacion }}\n\nPr\u00f3ximamente, nuestro equipo proceder\u00e1 a analizar tu consulta y se pondr\u00e1n en contacto contigo pronto.\n",
         "options": {
           "appendAttribution": false
         }
@@ -131,7 +131,7 @@
         "sendTo": "vasyl@risolvia.com",
         "subject": "=Nueva consulta de {{ $json.fields.nombre_completo }} {{ $json.fields.nivel_urgencia }}",
         "emailType": "text",
-        "message": "=Ubicación: {{ $json.fields.ubicacion }}\n\nEmail: {{ $json.fields.email }}\n\nTeléfono: {{ $json.fields.telefono }}\n\nSituación: {{ $json.fields.descripcion_situacion }}\n",
+        "message": "=Ubicaci\u00f3n: {{ $json.fields.ubicacion }}\n\nEmail: {{ $json.fields.email }}\n\nTel\u00e9fono: {{ $json.fields.telefono }}\n\nSituaci\u00f3n: {{ $json.fields.descripcion_situacion }}\n",
         "options": {
           "appendAttribution": false
         }

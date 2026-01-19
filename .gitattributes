@@ -1,0 +1,2 @@
+# Exclude notebooks from GitHub Linguist language stats.
+*.ipynb linguist-detectable=false

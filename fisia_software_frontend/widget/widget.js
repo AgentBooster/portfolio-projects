@@ -961,22 +961,17 @@
     clipIcon.style.height = '24px';
     clipBtn.appendChild(clipIcon);
 
-    /* BEGIN: TEMPORARY FILE UPLOAD DISABLE BLOCK
-       Descripción: Bloquea el botón de subir archivos (clip) y muestra tooltip "Bloqueado".
-       Para reactivar la subida de archivos, elimina este bloque completo. */
+    /* BEGIN: TEMPORARY FILE UPLOAD DISABLE BLOCK */
     (function disableFileUploadTemporarily() {
       const reason = 'Bloqueado';
-      // Forzar aspecto deshabilitado sin usar attribute disabled (queremos recibir eventos para mostrar tooltip)
       clipBtn.style.opacity = '0.5';
       clipBtn.style.cursor = 'not-allowed';
       clipBtn.style.background = 'rgba(148,163,184,0.12)';
 
-      // Tooltip en hover/press
       clipWrapper.onmouseenter = (e) => showTooltip(e, reason);
       clipWrapper.onmouseleave = hideTooltip;
       clipWrapper.onclick = (e) => { e.preventDefault(); e.stopPropagation(); showTooltip(e, reason); setTimeout(hideTooltip, 1200); };
 
-      // Anular acciones del botón
       clipBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); showTooltip({ currentTarget: clipWrapper }, reason); setTimeout(hideTooltip, 1200); };
       clipBtn.onmouseenter = () => { /* no-op */ };
       clipBtn.onmouseleave = () => { clipBtn.style.background = 'rgba(148,163,184,0.12)'; };

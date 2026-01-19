@@ -1,53 +1,57 @@
 # Fisia Software Frontend
 
-Frontend estatico para una clinica de fisioterapia: landing comercial, diseno de panel interno del software, widget conversacional y prompt de agente. El proyecto esta pensado como demo funcional y presentacion de producto.
+Static frontend for a physiotherapy clinic: commercial landing, internal
+software panel design, conversational widget, and agent prompt. The project is
+intended as a functional demo and a product presentation.
 
-## Vision general
+## Overview
 
-Fisia combina una experiencia comercial y un diseno de panel interno para clinicas de fisioterapia. Todo esta resuelto en HTML + Tailwind CDN, con datos de demostracion y comportamiento UI basico en el navegador.
+Fisia combines a commercial experience and an internal panel design for
+physiotherapy clinics. Everything is built with HTML + Tailwind CDN, with demo
+data and basic UI behavior in the browser.
 
-## Lo que incluye
+## What it includes
 
-- Landing comercial con CTA, secciones de valor y testimonios.
-- Diseno de panel interno con dashboard, agenda, pacientes, facturacion, reportes y sesion clinica (SOAP).
-- Widget embebible con webhook y experiencia conversacional.
-- Prompt y logica de agente para reservas y soporte.
-- Datos de demo y flujos guiados para crear paciente, cita y factura.
+- Commercial landing with CTA, value sections, and testimonials.
+- Internal panel design with dashboard, calendar, patients, billing, reports,
+  and clinical session (SOAP).
+- Embeddable widget with webhook and conversational experience.
+- Agent prompt and logic for bookings and support.
+- Demo data and guided flows to create patient, appointment, and invoice.
 
 ## Demos
 
-- Video demo (automatizacion para el sector salud): https://youtu.be/FZiIpD6OlYc?si=eMArHdityJL3Hfsg
-- Abrir para probar el agente: https://agentbooster.github.io/BooAgent/fisia_index.html
+- Video demo (healthcare automation): https://youtu.be/FZiIpD6OlYc?si=eMArHdityJL3Hfsg
+- Open to try the agent: https://agentbooster.github.io/BooAgent/fisia_index.html
 
-## Uso rapido (local)
+## Quick use (local)
 
-1. Landing comercial: abrir `marketing-site/index.html`.
-2. Panel del software: abrir `pages/index.html`.
-3. Widget embebible: abrir `widget/widget-embed-example.html`.
-4. Sesion clinica (SOAP): abrir `pages/session.html`.
+1. Commercial landing: open `marketing-site/index.html`.
+2. Software panel: open `pages/index.html`.
+3. Embeddable widget: open `widget/widget-embed-example.html`.
+4. Clinical session (SOAP): open `pages/session.html`.
 
-## Estructura del proyecto
+## Project structure
 
-- `marketing-site/index.html`: landing page comercial con Tailwind CDN.
-- `pages/index.html`: dashboard principal.
-- `pages/calendar.html`: agenda diaria y semanal.
-- `pages/patient.html`: perfil de paciente con tabs (SOAP, planes, adjuntos, adherencia).
-- `pages/billing.html`: facturacion, filtros y pagos.
-- `pages/reports.html`: analitica, rangos y tablas de adherencia.
-- `pages/session.html`: formulario de sesion clinica (SOAP) + resumen de paciente.
-- `assets/js/app.js`: logica UI, flujos (wizard), modales y persistencia en `localStorage`.
-- `assets/js/mock-data.js`: datos semilla (pacientes, sesiones, facturas, analitica).
-- `assets/js/tailwind-config.js`: tema y tokens de Tailwind.
-- `assets/css/base.css`: estilos base y utilidades.
-- `widget/widget.js`: widget embebible con configuracion (webhook).
-- `widget/widget-embed-example.html`: ejemplo minimo de embed.
-- `Langchain Agent Fisia/fisia-langchain-agent.js`: prompt y logica del agente (reservas/soporte).
-- `Langchain Agent Fisia/n8n/`: workspace de n8n para automatizaciones (ver README interno).
+- `marketing-site/index.html`: commercial landing page with Tailwind CDN.
+- `pages/index.html`: main dashboard.
+- `pages/calendar.html`: daily and weekly calendar.
+- `pages/patient.html`: patient profile with tabs (SOAP, plans, attachments, adherence).
+- `pages/billing.html`: billing, filters, and payments.
+- `pages/reports.html`: analytics, ranges, and adherence tables.
+- `pages/session.html`: clinical session form (SOAP) + patient summary.
+- `assets/js/app.js`: UI logic, flows (wizard), modals, and persistence in `localStorage`.
+- `assets/js/mock-data.js`: seed data (patients, sessions, invoices, analytics).
+- `assets/js/tailwind-config.js`: Tailwind theme and tokens.
+- `assets/css/base.css`: base styles and utilities.
+- `widget/widget.js`: embeddable widget with configuration (webhook).
+- `widget/widget-embed-example.html`: minimal embed example.
+- `langchain-n8n-agent-fisia/fisia-langchain-n8n-agent.js`: agent prompt and logic (bookings/support), used inside the LangChain node in n8n. Template flow: `Flows_JSON/n8n/Use Cases - Health Clinics.json`.
 
-## Tecnologias
+## Technologies
 
 - HTML5 + Tailwind CDN
-- JavaScript vanilla
-- LocalStorage para estado y demo
-- LangChain (prompt del agente)
-- n8n (workflow automation, incluido como workspace)
+- Vanilla JavaScript
+- LocalStorage for state and demo
+- LangChain (agent prompt)
+- n8n (workflow automation, included as workspace)

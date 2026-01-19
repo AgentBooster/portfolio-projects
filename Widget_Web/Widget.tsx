@@ -1,61 +1,39 @@
-// Pega aquí tu código React del widget
 import React, { useState, useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// --- INICIO DEL CÓDIGO NECESARIO PARA EL SONIDO ---
 
-// Esta es la única función que necesitas.
-// No requiere archivos externos ni librerías adicionales.
 const playNotificationSound = () => {
     try {
-        // Crea o reutiliza el contexto de audio del navegador.
-        // Es como encender el sistema de sonido del navegador.
         const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
         const audioCtx = new AudioContextClass();
 
-        // Si el audio estaba pausado por el navegador, lo reanuda.
         if (audioCtx.state === 'suspended') {
             audioCtx.resume();
         }
         
-        // 1. Crea un oscilador: es la fuente que genera la onda de sonido.
         const oscillator = audioCtx.createOscillator();
         
-        // 2. Crea un nodo de ganancia: controla el volumen del sonido.
         const gainNode = audioCtx.createGain();
         
-        // 3. Conecta el oscilador al control de volumen, y el volumen a los altavoces.
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
         
-        // 4. Configura el sonido:
-        // 'sine' es un tono puro y limpio, como el de un diapasón.
         oscillator.type = 'sine'; 
-        // 880 Hz es la frecuencia del tono (una nota La/A alta). Puedes cambiar este número para hacerlo más grave o agudo.
         oscillator.frequency.setValueAtTime(888, audioCtx.currentTime); 
         
-        // 5. Configura el volumen para que suene como un "blip":
-        // Empieza con un volumen bajo (0.1 de 1.0).
         gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        // Reduce el volumen a casi cero muy rápidamente (en 0.4 segundos) para crear el efecto de "apagado".
         gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.4);
         
-        // 6. ¡Reproduce el sonido!
-        // Inicia el sonido ahora.
         oscillator.start(audioCtx.currentTime);
-        // Detiene el sonido después de 0.4 segundos.
         oscillator.stop(audioCtx.currentTime + 0.4);
 
     } catch (e) {
-        // Muestra un error en la consola si el navegador no puede reproducir el audio.
         console.error("Error al reproducir el sonido de notificación:", e);
     }
 };
 
-// --- FIN DEL CÓDIGO NECESARIO PARA EL SONIDO ---
 
 
-// Componente para los íconos SVG.
 const Icon = ({ name, className = '' }: { name: string; className?: string }) => {
   const icons: Record<string, JSX.Element> = {
     home: <><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></>,
@@ -90,41 +68,35 @@ const Icon = ({ name, className = '' }: { name: string; className?: string }) =>
   );
 };
 
-// Componente para renderizar Markdown de forma segura
 const SimpleMarkdown = ({ text }: { text: string }) => {
   const parseMarkdown = (rawText) => {
     if (!rawText) return '';
     
-    // 1. Sanitizar para prevenir XSS
     let sanitizedText = rawText
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-    // Helper para procesar elementos de formato inline (negrita, cursiva, enlaces)
     const processInlines = (inlineText) => {
       return inlineText
-        .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline font-semibold">$1</a>') // Enlaces
-        .replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>') // Negrita
-        .replace(/\*([^\*]+)\*/g, '<em>$1</em>'); // Cursiva
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline font-semibold">$1</a>')
+        .replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*([^\*]+)\*/g, '<em>$1</em>');
     };
 
-    // Dividir el texto en bloques separados por una o más líneas en blanco
     const blocks = sanitizedText.split(/(\n\s*\n)+/);
 
     const html = blocks.map(block => {
-      if (!block.trim()) return block; // Preservar bloques de espacios en blanco
+      if (!block.trim()) return block;
 
-      // Verificar si el bloque es una lista no ordenada (empieza con '* ')
       if (/^(?:\*\s.*(?:\n|$))+/.test(block)) {
         const items = block.trim().split('\n');
         const listItems = items
-          .map(item => `<li>${processInlines(item.substring(2))}</li>`) // Quita '* ' y procesa inlines
+          .map(item => `<li>${processInlines(item.substring(2))}</li>`)
           .join('');
         return `<ul class="list-disc list-inside pl-4">${listItems}</ul>`;
       }
 
-      // Si no es una lista, es un párrafo. Procesar inlines.
       return processInlines(block);
     }).join('');
 
@@ -137,10 +109,8 @@ const SimpleMarkdown = ({ text }: { text: string }) => {
 };
 
 
-// Vistas separadas para mayor claridad
 const HomeView = ({ setActiveView, agentProfiles }: { setActiveView: (view: string) => void; agentProfiles: Record<string, { name: string; avatar: string }> }) => (
   <div className="h-full flex flex-col relative bg-transparent">
-    {/* Removed solid background gradient */}
     <div className="relative z-10 h-full overflow-y-auto">
       <header className="p-4 flex items-center justify-between text-slate-100">
         <div className="flex items-center gap-2">
@@ -302,7 +272,6 @@ const ChatView = ({ messages, onSendMessage, setActiveView, isMuted, toggleMute,
               </button>
           </div>
           
-          {/* This SVG is a wave decoration, changing its color for the new theme */}
           <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none rotate-180">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-5 text-black/10"><path fill="currentColor" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path></svg>
           </div>
@@ -357,13 +326,12 @@ const FileUploadView = ({ setActiveView, onSendFile }: { setActiveView: (view: s
     const MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 1024 * 1024;
 
     useEffect(() => {
-        // Limpia el object URL para evitar memory leaks cuando el componente se desmonta o el previewUrl cambia.
         return () => { if (previewUrl) URL.revokeObjectURL(previewUrl); };
     }, [previewUrl]);
 
     const handleFileSelect = (selectedFile) => {
-        setError(''); // Resetea el error en cada nueva selección
-        if (previewUrl) URL.revokeObjectURL(previewUrl); // Limpia el preview anterior
+        setError('');
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
 
         if (!selectedFile) return;
 
@@ -382,12 +350,11 @@ const FileUploadView = ({ setActiveView, onSendFile }: { setActiveView: (view: s
             return;
         }
 
-        // Si todas las validaciones pasan
         setFile(selectedFile);
         if (selectedFile.type.startsWith('image/')) {
             setPreviewUrl(URL.createObjectURL(selectedFile));
         } else {
-            setPreviewUrl(null); // No hay preview visual para PDF
+            setPreviewUrl(null);
         }
     };
     
@@ -490,13 +457,10 @@ const ArticlesView = ({ setActiveView }: { setActiveView: (view: string) => void
     />
 );
 
-// --- INICIO DE LA LÓGICA DEL WIDGET PRINCIPAL (CON WEBHOOK) ---
 
-// Helper para convertir un archivo a Base64
 const fileToBase64 = (file) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    // Extrae solo la data Base64, quitando el prefijo "data:mime/type;base64,"
     reader.onload = () => {
         if (typeof reader.result === 'string') {
             resolve(reader.result.split(',')[1]);
@@ -507,7 +471,6 @@ const fileToBase64 = (file) => new Promise((resolve, reject) => {
     reader.onerror = error => reject(error);
 });
 
-// Helper para generar un ID de mensaje único y compatible
 const generateMessageId = () => {
     return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 };
@@ -522,7 +485,7 @@ const ChatWidget = () => {
   const [assignedAgent, setAssignedAgent] = useState(null);
   const [userId, setUserId] = useState(null);
   const [isBotReplying, setIsBotReplying] = useState(false);
-  const [isChatInitialized, setIsChatInitialized] = useState(false); // Nuevo estado
+  const [isChatInitialized, setIsChatInitialized] = useState(false);
   const [tooltip, setTooltip] = useState({ visible: false, text: '', top: 0, left: 0 });
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(!isOpen);
   const isMobile = useIsMobile();
@@ -542,7 +505,6 @@ const ChatWidget = () => {
     if (!agentName) { const agents = ['Ara', 'Eve']; agentName = agents[Math.floor(Math.random() * agents.length)]; localStorage.setItem('chatwidget_assigned_agent', agentName); }
     setAssignedAgent(AGENT_PROFILES[agentName]);
 
-    // Cleanup: desbloquear scroll al desmontar el componente
     return () => {
       if (isMobile) {
         document.body.style.overflow = '';
@@ -552,29 +514,24 @@ const ChatWidget = () => {
     };
   }, [isMobile]);
 
-  // Efecto para marcar el chat como inicializado
   useEffect(() => {
     if (activeView === 'chat' && !isChatInitialized) {
       setIsChatInitialized(true);
     }
   }, [activeView, isChatInitialized]);
 
-  // Efecto para la asignación del agente y mensaje de bienvenida, ahora independiente de la vista activa
   useEffect(() => {
-    // Si el chat nunca se ha abierto, no hagas nada
     if (!isChatInitialized) return;
 
     let agentTimer;
     let welcomeTimer;
 
-    // Asignar agente si aún no se ha hecho
     if (agent.name === 'Altavia' && assignedAgent) {
       agentTimer = setTimeout(() => {
         setAgent(assignedAgent);
       }, 2000);
     }
     
-    // Enviar mensaje de bienvenida una vez que el agente está asignado
     if (agent.name !== 'Altavia' && messages.length === 0) {
         setIsTyping(true);
         const welcomeText = '¡Hola! Somos Altavia. Deja tu consulta y te respondemos a la brevedad.';
@@ -582,7 +539,6 @@ const ChatWidget = () => {
         welcomeTimer = setTimeout(() => {
             setIsTyping(false);
             setMessages(prev => {
-                // Previene mensajes duplicados si el efecto se re-ejecuta
                 if (prev.length === 0) {
                     const botTimestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                     const initialMessage = { id: Date.now(), text: welcomeText, sender: 'bot', timestamp: botTimestamp };
@@ -594,7 +550,6 @@ const ChatWidget = () => {
         }, 5000);
     }
 
-    // Función de limpieza para los timers
     return () => {
       clearTimeout(agentTimer);
       clearTimeout(welcomeTimer);
@@ -605,7 +560,6 @@ const ChatWidget = () => {
     setIsOpen(prev => {
       const newIsOpen = !prev;
       
-      // Bloquear/desbloquear scroll en móvil
       if (isMobile) {
         if (newIsOpen) {
           document.body.style.overflow = 'hidden';
@@ -741,7 +695,6 @@ const ChatWidget = () => {
             </div>
         )}
 
-      {/* Welcome Message - aparece cuando el widget está cerrado */}
       {!isOpen && showWelcomeMessage && (
         <div className="mb-4 mr-2 bg-white rounded-2xl shadow-2xl border border-slate-200 p-4 max-w-[280px] animate-[pop_.15s_ease-out] relative">
           <button
@@ -766,7 +719,6 @@ const ChatWidget = () => {
             ? 'fixed inset-0 w-full h-full rounded-none m-0' 
             : 'md:w-[420px] w-[calc(100vw-2rem)] max-w-[460px] h-[560px] rounded-2xl'
         }`}>
-          {/* Botón de cerrar solo en móvil - semicírculo ovalado en centro superior */}
           {isMobile && (
             <button
               onClick={toggleChat}
@@ -787,7 +739,6 @@ const ChatWidget = () => {
           )}
         </div>
       )}
-      {/* Botón flotante solo visible cuando no está en móvil o cuando el widget está cerrado */}
       {(!isMobile || !isOpen) && (
         <button onClick={toggleChat} type="button" className="w-14 h-14 rounded-full shadow-lg bg-sky-500/50 hover:bg-sky-500/80 backdrop-blur-md border border-white/20 text-white grid place-items-center transition-transform hover:scale-110 focus:outline-none" aria-expanded={isOpen}>
           <span className="sr-only">Abrir chat</span>

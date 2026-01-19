@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Breed Classifier</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.19.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <h1>Dog Breed Classifier</h1>
+      <p class="description">Drag a dog image or select it to get the model prediction.</p>
+      <input type="file" id="file-input" class="visually-hidden" accept="image/*" aria-label="Select image">
+      <label id="drop-zone" class="drop-zone" role="button" tabindex="0" for="file-input" aria-label="Select or drop image">
+        <span id="drop-text">Drag your image here or click to select.</span>
+      </label>
+      <div class="preview-wrapper">
+        <img id="preview-image" alt="Preview" hidden>
+      </div>
+      <div class="controls">
+        <button id="predict-button" type="button">Run inference</button>
+        <button id="copy-button" type="button" disabled>Copy results</button>
+      </div>
+      <div id="progress" class="progress hidden" role="status" aria-live="polite">
+        <div class="progress-bar"></div>
+      </div>
+      <div id="status" class="status" role="alert"></div>
+      <div id="results-container" class="results hidden" aria-live="polite">
+        <div class="top-one">
+          <h2>Top-1</h2>
+          <p id="top1" class="result-text"></p>
+        </div>
+        <div class="top-five">
+          <h2>Top-5</h2>
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Breed</th>
+                <th>Probability</th>
+              </tr>
+            </thead>
+            <tbody id="top5-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="static/app.js"></script>
+</body>
+</html>

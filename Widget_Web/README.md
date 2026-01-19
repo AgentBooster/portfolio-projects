@@ -1,13 +1,13 @@
 # Widget-Web
 
-Widget conversacional embebible con dos variantes: React y vanilla JS. Pensado para soporte, captacion y automatizacion con webhook.
+Embeddable conversational widget with two variants: React and vanilla JS. Built for support, lead capture, and webhook automation.
 
-## Inicio rapido
+## Quick start
 
-- Abre `widget-embed.html` en el navegador.
-- La demo carga `widget.js` y la configuracion de `DEFAULT_CONFIG`.
+- Open `widget-embed.html` in the browser.
+- The demo loads `widget.js` and the `DEFAULT_CONFIG` setup.
 
-## Configuracion basica (widget.js)
+## Basic configuration (widget.js)
 
 - `company_name`
 - `welcome_message`
@@ -15,8 +15,8 @@ Widget conversacional embebible con dos variantes: React y vanilla JS. Pensado p
 - `webhook_url`
 - `agents` (nombre y avatar)
 
-## Archivos clave
+## Key files
 
-- `Widget.tsx`: version React (requiere `useIsMobile`).
-- `widget.js`: version embebible vanilla JS.
-- `widget-embed.html`: demo HTML para embed.
+- `Widget.tsx`: React version (requires `useIsMobile`).
+- `widget.js`: embeddable vanilla JS version.
+- `widget-embed.html`: HTML demo for embedding.
