@@ -1,38 +1,36 @@
 # Python_Automation
 
-Coleccion de proyectos de automatizacion con Python, desde prototipos rapidos
-hasta soluciones mas completas con interfaces y agentes. Este espacio esta
-pensado para experimentar, validar ideas y luego convertirlas en herramientas
-usables.
+Collection of automation projects built with Python, from quick prototypes to
+more complete solutions with interfaces and agents. This space is meant for
+experimentation, validation, and turning ideas into usable tools.
 
-## Lo esencial
+## Essentials
 
-- Automatizaciones para tareas repetitivas y flujos operativos.
-- Agentes y pipelines de investigacion con LLMs.
-- Demos con UI ligera para validar resultados.
+- Automations for repetitive tasks and operational flows.
+- Agents and research pipelines with LLMs.
+- Demos with lightweight UI to validate results.
 
-## Vista general
+## Overview
 
 ```
-Idea -> Notebook / Experimento -> Script -> Demo / UI
+Idea -> Notebook / Experiment -> Script -> Demo / UI
 ```
 
-## Estructura tipica
+## Typical structure
 
-- `*/README.md`: guia de uso y dependencias de cada proyecto.
-- `*/src/`: codigo principal y modulos reutilizables.
-- `*/notebooks/`: exploraciones y pruebas rapidas.
-- `*/ui/` o `*/assets/`: demos y recursos visuales cuando aplica.
-- `*/pyproject.toml` o `*/requirements.txt`: dependencias.
+- `*/README.md`: usage guide and dependencies for each project.
+- `*/src/`: main code and reusable modules.
+- `*/notebooks/`: explorations and quick tests.
+- `*/ui/` or `*/assets/`: demos and visual resources when applicable.
+- `*/pyproject.toml` or `*/requirements.txt`: dependencies.
 
-## Como navegar
+## How to navigate
 
-1. Entra al directorio que te interese.
-2. Lee su `README.md` para entender el objetivo y los pasos.
-3. Decide si ejecutas notebooks, scripts o demo.
+1. Enter the directory you are interested in.
+2. Read its `README.md` to understand the goal and steps.
+3. Decide whether to run notebooks, scripts, or the demo.
 
-## Nota
+## Note
 
-Algunos proyectos incluyen modelos o artefactos listos para usar. Si buscas
-resultados propios, puedes reentrenar o duplicar el proyecto y ajustar sus
-parametros.
+Some projects include ready-to-use models or artifacts. If you want your own
+results, retrain or duplicate the project and adjust parameters.
