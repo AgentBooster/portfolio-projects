@@ -2,3 +2,12 @@
 venv_tf/
 .venv/
 venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+node_modules/
+dist/
+build/
+.env
+.env.*
