@@ -3,7 +3,8 @@
 Embeddable chat widget used on the Boo company site. This folder contains the
 standalone JavaScript file and a minimal integration note.
 
-Try it live: https://agentbooster.ai
+Try it live in our web app: https://agentbooster.ai
+You can also test an alternate style here: https://risolvia.com
 
 ## Contents
 - `boowidget.js`: widget script (paste the full code here).
