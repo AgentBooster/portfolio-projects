@@ -1,1 +1,0 @@
-print("Entorno local OK")

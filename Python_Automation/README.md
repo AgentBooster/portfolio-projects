@@ -1,19 +1,19 @@
 # Python_Automation
 
 Collection of automation projects built with Python, from quick prototypes to
-more complete solutions with interfaces and agents. This space is meant for
+more complete solutions with scripts and agents. This space is meant for
 experimentation, validation, and turning ideas into usable tools.
 
 ## Essentials
 
 - Automations for repetitive tasks and operational flows.
 - Agents and research pipelines with LLMs.
-- Demos with lightweight UI to validate results.
+- Notebooks and scripts for quick validation.
 
 ## Overview
 
 ```
-Idea -> Notebook / Experiment -> Script -> Demo / UI
+Idea -> Notebook / Experiment -> Script -> Tool
 ```
 
 ## Typical structure
@@ -21,7 +21,6 @@ Idea -> Notebook / Experiment -> Script -> Demo / UI
 - `*/README.md`: usage guide and dependencies for each project.
 - `*/src/`: main code and reusable modules.
 - `*/notebooks/`: explorations and quick tests.
-- `*/ui/` or `*/assets/`: demos and visual resources when applicable.
 - `*/pyproject.toml` or `*/requirements.txt`: dependencies.
 
 ## How to navigate
