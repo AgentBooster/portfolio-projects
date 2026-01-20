@@ -4,7 +4,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "agent-boo-manychat-wp",
+        "path": "REDACTED_WEBHOOK_PATH",
         "options": {}
       },
       "id": "54b242a0-5e30-4f7e-a758-396fc7810e71",
@@ -15,7 +15,7 @@
         -688,
         400
       ],
-      "webhookId": "e7f4ef1d-4165-41ed-a0fb-d3ed7a8eeb00"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {},
@@ -76,7 +76,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer 3583830:f576f118a15bb0b337f2b218a92f113c"
+              "value": "Bearer REDACTED_TOKEN"
             }
           ]
         },
@@ -262,7 +262,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer 3583830:f576f118a15bb0b337f2b218a92f113c"
+              "value": "Bearer REDACTED_TOKEN"
             }
           ]
         },
@@ -293,7 +293,7 @@
       ],
       "id": "e3a8d5ee-39e7-4eed-b65d-c6d922d47c3b",
       "name": "Wait",
-      "webhookId": "de731665-a6bd-49c3-a98c-dccdc1a93647"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {},
@@ -305,7 +305,7 @@
       ],
       "id": "a3e82c1b-7725-41fc-892b-9a62e1731f34",
       "name": "Wait1",
-      "webhookId": "de731665-a6bd-49c3-a98c-dccdc1a93647"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {
@@ -320,7 +320,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer 3583830:f576f118a15bb0b337f2b218a92f113c"
+              "value": "Bearer REDACTED_TOKEN"
             }
           ]
         },
@@ -411,7 +411,7 @@
     },
     {
       "parameters": {
-        "sendTo": "vasyl@agentbooster.ai",
+        "sendTo": "REDACTED_EMAIL",
         "subject": "ERROR LA PARVA",
         "emailType": "text",
         "message": "Hubo un error en el flujo de La Parva en los nodos principales",
@@ -427,7 +427,7 @@
       ],
       "id": "a2afbd11-215d-4ac0-9a70-d2c4e9c37665",
       "name": "Send a message",
-      "webhookId": "1b04f990-8893-4447-9d21-b4226b41f7b9",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
           "id": "c2dTdKlzqAgWqWaK",
@@ -885,7 +885,7 @@
       ],
       "id": "43325847-dc41-41aa-b9cf-c18aaf47006e",
       "name": "Wait2",
-      "webhookId": "de731665-a6bd-49c3-a98c-dccdc1a93647"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {
@@ -900,7 +900,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer 3583830:f576f118a15bb0b337f2b218a92f113c"
+              "value": "Bearer REDACTED_TOKEN"
             }
           ]
         },
@@ -959,7 +959,7 @@
       "parameters": {
         "descriptionType": "manual",
         "toolDescription": "Usa esta herramienta cuando el usuario necesite hablar con un humano",
-        "sendTo": "vasyl@agentbooster.ai",
+        "sendTo": "REDACTED_EMAIL",
         "subject": "HABLAR CON HUMANO",
         "emailType": "text",
         "message": "={{ $('Webhook (Entrada desde la IG)').item.json.headers.name }} solicita hablar con un humano.\n\n{{ $json.message_imput }}",
@@ -975,7 +975,7 @@
       ],
       "id": "b20d0580-2136-45bb-86e0-9017a5d48273",
       "name": "Send a message in Gmail1",
-      "webhookId": "f3eb1f40-219f-4cef-80ee-1959d66c53f8",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
           "id": "c2dTdKlzqAgWqWaK",
@@ -992,22 +992,22 @@
             "host": "n8n.agentbooster.ai",
             "user-agent": "ManyChat",
             "content-length": "0",
-            "contact_id": "803640917",
+            "contact_id": "REDACTED_CONTACT_ID",
             "content-type": "application/json; charset=utf-8",
-            "last_imput": "https://manybot-files.s3.eu-central-1.amazonaws.com/3583830/wa/2025/10/01/original_18d1cb3e97926858fd030c3af19ddeea.pdf",
-            "name": "Christian",
-            "x-forwarded-for": "3.75.206.75",
+            "last_imput": "REDACTED_FILE_URL",
+            "name": "REDACTED_NAME",
+            "x-forwarded-for": "REDACTED_IP",
             "x-forwarded-host": "n8n.agentbooster.ai",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "ee2c90bd8269",
-            "x-real-ip": "3.75.206.75",
+            "x-real-ip": "REDACTED_IP",
             "accept-encoding": "gzip"
           },
           "params": {},
           "query": {},
           "body": {},
-          "webhookUrl": "https://n8n.agentbooster.ai/webhook/agent-boo-manychat-wp",
+          "webhookUrl": "REDACTED_WEBHOOK_URL",
           "executionMode": "production"
         }
       }

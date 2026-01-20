@@ -22,7 +22,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "agent-boo-manychat",
+        "path": "REDACTED_WEBHOOK_PATH",
         "options": {}
       },
       "id": "20fd2b4e-6fdd-49c4-b785-fa74ebdda511",
@@ -33,7 +33,7 @@
         -656,
         144
       ],
-      "webhookId": "e7f4ef1d-4165-41ed-a0fb-d3ed7a8eeb00"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {
@@ -94,9 +94,9 @@
         "resource": "calendar",
         "calendar": {
           "__rl": true,
-          "value": "vasyl@agentbooster.ai",
+          "value": "REDACTED_EMAIL",
           "mode": "list",
-          "cachedResultName": "vasyl@agentbooster.ai"
+          "cachedResultName": "REDACTED_EMAIL"
         },
         "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start_Time', ``, 'string') }}",
         "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End_Time', ``, 'string') }}",
@@ -123,9 +123,9 @@
         "toolDescription": "Utiliza esta herramienta cuando necesites crear un evento en el calendario.",
         "calendar": {
           "__rl": true,
-          "value": "vasyl@agentbooster.ai",
+          "value": "REDACTED_EMAIL",
           "mode": "list",
-          "cachedResultName": "vasyl@agentbooster.ai"
+          "cachedResultName": "REDACTED_EMAIL"
         },
         "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
         "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
@@ -157,9 +157,9 @@
         "operation": "delete",
         "calendar": {
           "__rl": true,
-          "value": "vasyl@agentbooster.ai",
+          "value": "REDACTED_EMAIL",
           "mode": "list",
-          "cachedResultName": "vasyl@agentbooster.ai"
+          "cachedResultName": "REDACTED_EMAIL"
         },
         "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
         "options": {}
@@ -186,9 +186,9 @@
         "operation": "update",
         "calendar": {
           "__rl": true,
-          "value": "vasyl@agentbooster.ai",
+          "value": "REDACTED_EMAIL",
           "mode": "list",
-          "cachedResultName": "vasyl@agentbooster.ai"
+          "cachedResultName": "REDACTED_EMAIL"
         },
         "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
         "updateFields": {}
@@ -226,7 +226,7 @@
       ],
       "id": "ba18111a-a5c2-4d03-ad0a-fd8270d606f2",
       "name": "Send a message in Gmail",
-      "webhookId": "7c40994b-783f-48d0-9065-40f1f7597546",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
           "id": "c2dTdKlzqAgWqWaK",
@@ -262,7 +262,7 @@
           "parameters": [
             {
               "name": "key",
-              "value": "AIzaSyAr5MFVKxMDr1EdB9XB71Di7YtKq1pNMRo"
+              "value": "REDACTED_API_KEY"
             },
             {
               "name": "cx",
@@ -333,7 +333,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer 3583830:f576f118a15bb0b337f2b218a92f113c"
+              "value": "Bearer REDACTED_TOKEN"
             }
           ]
         },
@@ -524,7 +524,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer 3583830:f576f118a15bb0b337f2b218a92f113c"
+              "value": "Bearer REDACTED_TOKEN"
             }
           ]
         },
@@ -555,7 +555,7 @@
       ],
       "id": "6b92ec77-07c6-4e45-ac5f-f007e6055d3c",
       "name": "Wait",
-      "webhookId": "de731665-a6bd-49c3-a98c-dccdc1a93647"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {},
@@ -567,7 +567,7 @@
       ],
       "id": "08a4607d-770c-4190-9523-624c4ca6f3a4",
       "name": "Wait1",
-      "webhookId": "de731665-a6bd-49c3-a98c-dccdc1a93647"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {
@@ -582,7 +582,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer 3583830:f576f118a15bb0b337f2b218a92f113c"
+              "value": "Bearer REDACTED_TOKEN"
             }
           ]
         },
@@ -673,7 +673,7 @@
     },
     {
       "parameters": {
-        "sendTo": "vasyl@agentbooster.ai",
+        "sendTo": "REDACTED_EMAIL",
         "subject": "ERROR LA PARVA",
         "emailType": "text",
         "message": "Hubo un error en el flujo de La Parva en los nodos principales",
@@ -689,7 +689,7 @@
       ],
       "id": "4a770e30-01f1-4352-97b5-b9d294dc7493",
       "name": "Send a message",
-      "webhookId": "1b04f990-8893-4447-9d21-b4226b41f7b9",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
           "id": "c2dTdKlzqAgWqWaK",
@@ -843,7 +843,7 @@
     },
     {
       "parameters": {
-        "content": "# Demostraci\u00f3n\n\n## https://drive.google.com/drive/folders/1s8T1EUK-nkqO0o7kCZTxvHzg7rW_tQmk?usp=drive_link",
+        "content": "# Demostraci\u00f3n\n\n## REDACTED_DRIVE_FOLDER_URL",
         "height": 224,
         "width": 704
       },

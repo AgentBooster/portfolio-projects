@@ -24,7 +24,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "agent-boo-web-982925e5232096r01r012r126327te73",
+        "path": "REDACTED_WEBHOOK_PATH",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -36,7 +36,7 @@
         -1888,
         224
       ],
-      "webhookId": "e7f4ef1d-4165-41ed-a0fb-d3ed7a8eeb00"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {
@@ -451,7 +451,7 @@
       ],
       "id": "49384b4c-5065-4a3b-9726-9fa98ec659c6",
       "name": "Send a message in Gmail to User",
-      "webhookId": "7c40994b-783f-48d0-9065-40f1f7597546",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
           "id": "c2dTdKlzqAgWqWaK",
@@ -479,7 +479,7 @@
       ],
       "id": "95fdd821-b397-47a2-8d61-b82b32845184",
       "name": "Send a message in Gmail to Support",
-      "webhookId": "f3eb1f40-219f-4cef-80ee-1959d66c53f8",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
           "id": "c2dTdKlzqAgWqWaK",
@@ -496,7 +496,7 @@
           "parameters": [
             {
               "name": "key",
-              "value": "AIzaSyAr5MFVKxMDr1EdB9XB71Di7YtKq1pNMRo"
+              "value": "REDACTED_API_KEY"
             },
             {
               "name": "cx",
@@ -1036,7 +1036,7 @@
       ],
       "id": "af653d16-06fa-447d-abb5-e90cd1309e09",
       "name": "Send a text message8",
-      "webhookId": "7bc372e1-c23d-474d-abf2-14e65bec0700",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "telegramApi": {
           "id": "8w61dIAh3fFRODEs",
@@ -1076,7 +1076,7 @@
       ],
       "id": "c4135989-8507-4958-aeb8-b69c49f9f0c7",
       "name": "Send a text message",
-      "webhookId": "7bc372e1-c23d-474d-abf2-14e65bec0700",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "telegramApi": {
           "id": "8w61dIAh3fFRODEs",
@@ -1248,7 +1248,7 @@
       ],
       "id": "a059c794-fca8-473d-aeaa-670e9fa8c9d8",
       "name": "Send a text message1",
-      "webhookId": "7bc372e1-c23d-474d-abf2-14e65bec0700",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "telegramApi": {
           "id": "8w61dIAh3fFRODEs",

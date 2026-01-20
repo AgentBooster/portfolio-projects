@@ -975,7 +975,7 @@
       clipBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); showTooltip({ currentTarget: clipWrapper }, reason); setTimeout(hideTooltip, 1200); };
       clipBtn.onmouseenter = () => { /* no-op */ };
       clipBtn.onmouseleave = () => { clipBtn.style.background = 'rgba(148,163,184,0.12)'; };
-      clipBtn.disabled = false; // asegurar que emite eventos para tooltip
+      clipBtn.disabled = false;
     })();
     /* END: TEMPORARY FILE UPLOAD DISABLE BLOCK */
 

@@ -24,15 +24,15 @@
             },
             {
               "name": "refresh_token",
-              "value": "1000.8cd1f3a3ad71b49f773948d2dcb24141.7f3ac29b45117cdd8add7aef8871e6e3"
+              "value": "REDACTED_REFRESH_TOKEN"
             },
             {
               "name": "client_id",
-              "value": "1000.U46VG7Y1RO1OFVU188CP5LPBRKXH2Q"
+              "value": "REDACTED_CLIENT_ID"
             },
             {
               "name": "client_secret",
-              "value": "aca23f0f847bb97ae6d5eacd0283afac6910c23ea9"
+              "value": "REDACTED_CLIENT_SECRET"
             },
             {
               "name": "redirect_uri",
@@ -80,7 +80,7 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1ohDZmpgh0ZFvuJobC1lHh7BUjQ5C8UnSpvQRftPybOs/edit?gid=0#gid=0",
+          "value": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID/edit?gid=0#gid=0",
           "mode": "url"
         },
         "sheetName": {
@@ -88,7 +88,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1D_CWzGecQvXCfItKPnd5eR3T94gB2Ru9H5epBGu5lNU/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -186,15 +186,15 @@
             },
             {
               "name": "code",
-              "value": "1000.e19895dc030587464449d476ebaf1f08.2ce41322af02de33f1b87ac7e1b31014"
+              "value": "REDACTED_AUTH_CODE"
             },
             {
               "name": "client_id",
-              "value": "1000.U46VG7Y1RO1OFVU188CP5LPBRKXH2Q"
+              "value": "REDACTED_CLIENT_ID"
             },
             {
               "name": "client_secret",
-              "value": "aca23f0f847bb97ae6d5eacd0283afac6910c23ea9"
+              "value": "REDACTED_CLIENT_SECRET"
             },
             {
               "name": "redirect_uri",

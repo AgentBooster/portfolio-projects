@@ -42,7 +42,7 @@
       ],
       "id": "998f89dc-65c0-43bb-a305-55d09c0f7e48",
       "name": "arXiv AI News",
-      "webhookId": "5ed459fd-4c91-47f4-a7f0-2a6e0dd6e805",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "discordWebhookApi": {
           "id": "BaGTVtWhdLgFGGrL",
@@ -296,7 +296,7 @@
     },
     {
       "parameters": {
-        "chatId": "=-1003277954309",
+        "chatId": "=REDACTED_CHAT_ID",
         "text": "=<b>{{ $('Register to Notion Database').item.json.property_title }}</b>\n\n<b>{{ $('Register to Notion Database').item.json.property_published.start }}</b>\n\n<b>{{ $('Register to Notion Database').item.json.property_authors }}</b>\n\n<em>ABSTRACT (short):</em>\n{{ $('Edit Fields for Notion (incl. pdf)').item.json.abstract_clean }}\n\n<b>Links</b>\n\u2022 arXiv: {{ $json.url || $json.arxiv_id || '' }}\n\u2022 Complete paper (pdf): {{ $json.property_url_pdf || '' }}\n\u2022 Deep Summary (Notion): {{ $('Register to Notion Database').item.json.url }}\n",
         "additionalFields": {
           "appendAttribution": false,
@@ -311,7 +311,7 @@
       ],
       "id": "4d49dd0a-6dab-4376-83c4-83e5c4266cbf",
       "name": "Send a text message",
-      "webhookId": "a378df9b-5cfb-416e-bf4c-77d857db4650",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "telegramApi": {
           "id": "Jq0dgMUvaY669VzB",
@@ -459,7 +459,7 @@
           "value": "2992729c-bda2-8008-950c-f617082228a1",
           "mode": "list",
           "cachedResultName": "ARXIV",
-          "cachedResultUrl": "https://www.notion.so/2992729cbda28008950cf617082228a1"
+          "cachedResultUrl": "https://www.notion.so/REDACTED_NOTION_PAGE"
         },
         "title": "={{ $json.title }}",
         "propertiesUi": {
@@ -829,7 +829,7 @@
       ],
       "id": "40e912e7-aa45-420f-a8d7-5039c16b037b",
       "name": "Delay between paper summaries",
-      "webhookId": "30b9bb72-11cc-4626-ab76-ef424aff4bfd"
+      "webhookId": "REDACTED_WEBHOOK_ID"
     },
     {
       "parameters": {},

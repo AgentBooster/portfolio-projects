@@ -227,7 +227,7 @@
       ],
       "id": "5d87a978-9c55-476d-8ff0-cae4d1f77e7b",
       "name": "Send a text message",
-      "webhookId": "24c745e2-3e16-438e-af72-3d58e1cae60a",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "retryOnFail": true,
       "waitBetweenTries": 5000,
       "maxTries": 2,

@@ -118,7 +118,7 @@
       ],
       "id": "468b95a3-da7f-4892-b1e0-b0a6cb875beb",
       "name": "Send a message (Al Usuario)",
-      "webhookId": "8e52bc78-5c0e-40d7-baf5-4cc964140365",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
           "id": "c2dTdKlzqAgWqWaK",
@@ -128,7 +128,7 @@
     },
     {
       "parameters": {
-        "sendTo": "vasyl@risolvia.com",
+        "sendTo": "REDACTED_EMAIL",
         "subject": "=Nueva consulta de {{ $json.fields.nombre_completo }} {{ $json.fields.nivel_urgencia }}",
         "emailType": "text",
         "message": "=Ubicaci\u00f3n: {{ $json.fields.ubicacion }}\n\nEmail: {{ $json.fields.email }}\n\nTel\u00e9fono: {{ $json.fields.telefono }}\n\nSituaci\u00f3n: {{ $json.fields.descripcion_situacion }}\n",
@@ -144,7 +144,7 @@
       ],
       "id": "67a2c210-e1b3-4978-b914-21ce171eeecb",
       "name": "Send a message (Aviso Propio)",
-      "webhookId": "8e52bc78-5c0e-40d7-baf5-4cc964140365",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
           "id": "c2dTdKlzqAgWqWaK",
@@ -155,7 +155,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "risolvia-supabase-to-airtable",
+        "path": "REDACTED_WEBHOOK_PATH",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
@@ -166,7 +166,7 @@
       ],
       "id": "7ea24aa9-0db6-4402-bcd9-aa05a1431c2a",
       "name": "Webhook Forms",
-      "webhookId": "4b40bdaf-0d4f-4260-82b9-82b54bf0f107",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "alwaysOutputData": false
     },
     {
@@ -174,17 +174,17 @@
         "operation": "create",
         "base": {
           "__rl": true,
-          "value": "appqdPLvSkHGvt01V",
+          "value": "REDACTED_AIRTABLE_BASE_ID",
           "mode": "list",
           "cachedResultName": "User Submissions",
-          "cachedResultUrl": "https://airtable.com/appqdPLvSkHGvt01V"
+          "cachedResultUrl": "https://airtable.com/REDACTED_AIRTABLE_BASE_ID"
         },
         "table": {
           "__rl": true,
-          "value": "tblaZ7uLJAM86Mqbb",
+          "value": "REDACTED_AIRTABLE_TABLE_ID",
           "mode": "list",
           "cachedResultName": "Base de Risolvia (Supabase)",
-          "cachedResultUrl": "https://airtable.com/appqdPLvSkHGvt01V/tblaZ7uLJAM86Mqbb"
+          "cachedResultUrl": "https://airtable.com/REDACTED_AIRTABLE_BASE_ID/REDACTED_AIRTABLE_TABLE_ID"
         },
         "columns": {
           "mappingMode": "defineBelow",

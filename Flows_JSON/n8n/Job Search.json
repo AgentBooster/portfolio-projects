@@ -6,7 +6,7 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit?usp=drive_link",
+          "value": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit?usp=drive_link",
           "mode": "url"
         },
         "sheetName": {
@@ -14,7 +14,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Result",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -277,7 +277,7 @@
     },
     {
       "parameters": {
-        "content": "Read search filter consiste of keywords, location, experience level, remot, job type and easy apply from google sheet.\n\nYou can download [this Template](https://docs.google.com/spreadsheets/d/1mtKVxj_z_QCLGXMx0mJVihWSgS41SzHfU1Rv4r_mRY0) and copy in your personal space.",
+        "content": "Read search filter consiste of keywords, location, experience level, remot, job type and easy apply from google sheet.\n\nYou can download [this Template](https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_TEMPLATE) and copy in your personal space.",
         "height": 300,
         "width": 400,
         "color": 4
@@ -403,7 +403,7 @@
     },
     {
       "parameters": {
-        "content": "Add new job with score in google sheet.\n\nYou can download [this Template](https://docs.google.com/spreadsheets/d/1mtKVxj_z_QCLGXMx0mJVihWSgS41SzHfU1Rv4r_mRY0) and copy in your personal space.",
+        "content": "Add new job with score in google sheet.\n\nYou can download [this Template](https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_TEMPLATE) and copy in your personal space.",
         "height": 316,
         "width": 260,
         "color": 4
@@ -536,7 +536,7 @@
               "role": "system"
             },
             {
-              "content": "=Aqu\u00ed est\u00e1n los detalles de la oferta de trabajo:\nT\u00edtulo: {{ $('RSS Read1').item.json.title }}\nDescripci\u00f3n: {{ $('OpenAI').item.json.message.content.job_description }}\nNombre: {{ $('OpenAI').item.json.message.content.company_name }}\nUbicaci\u00f3n: {{ $('OpenAI').item.json.message.content.location }}\n\nAqu\u00ed est\u00e1 el conjunto de habilidades del candidato:\n# Nombre y Cargo\n\n**CHRISTIAN MORAES**\n**Junior Data - AI & Automation Developer**\n\n# Perfil\n\nDesarrollador de automatizaci\u00f3n enfocado en IA y bases de datos para empresas. He trabajado con marcas de distintos rubros, con experiencia en campa\u00f1as de marketing y ventas; en CRM, desarrollo full-stack y bases de datos. \u00c9tica de trabajo exigente, adaptabilidad y pensamiento cr\u00edtico. Valoro la experiencia pr\u00e1ctica y los valores de la empresa.\n**born 07/04/2005 - UY**\n\n# Contacto\n\n* **+598 98 690 873** \u2014 WhatsApp: [https://wa.me/59898690873](https://wa.me/59898690873)\n* **[cmmoraespedrozo@gmail.com](mailto:cmmoraespedrozo@gmail.com)**\n* **Christian (Marcos) Moraes Pedrozo** \u2014 LinkedIn: [https://www.linkedin.com/in/christian-moraes-pedrozo-24702a307/](https://www.linkedin.com/in/christian-moraes-pedrozo-24702a307/)\n* **Montevideo, Uruguay**\n\n# Educaci\u00f3n\n\n* **B.Eng. in Artificial Intelligence & Data Science: AI and Data Science** \u2014 **Univ. Cat\u00f3lica del Uy. (UCU)** \u2014 **03/2026** \u2014 **Montevideo, Uruguay**\n* **Diploma Program (provider-stated 60 ECTS): Artificial Intelligence** \u2014 **Learning Heroes** \u2014 **01/2025** \u2014 **Andorra la Vella (Online)**\n\n# Idiomas\n\n* **Ingl\u00e9s** \u2014 **50%**\n* **Espa\u00f1ol** \u2014 **100%**\n* **Portugu\u00e9s** \u2014 **95%**\n\n# Experiencia\n\n## Agent Booster \u2014 **COO - Co-Founder** \u2014 **Dub\u00e1i - Remoto** \u2014 **March 2025**\n\n* Automatizaci\u00f3n de procesos con n8n y Python; desarrollo full-stack y bases de datos\n* Modelos de Machine Learning con TensorFlow y Python\n* Agentes-LLM con Python y LangChain, prompt engineering, tool use y function calling\n* RAG con embeddings y bases vectoriales en PostgreSQL con pgvector y RLS\n* Integraciones con APIs/webhooks/MCP y CRM (Salesforce, HubSpot, Zoho)\n* Despliegue/hosting de microapps, componentes con JavaScript y Docker\n* An\u00e1lisis modelo GPT, Claude, Gemini y Grok; y generaci\u00f3n de contenido audiovisual IA\n* Consultor en automatizaci\u00f3n y Gen-AI\n\n## Risolvia \u2014 **Project - Co-Founder** \u2014 **Espa\u00f1a - Remoto** \u2014 **July 2025**\n\n* Desarrollo front-end, back-end y del agente IA con n8n para legaltech\n* RAG, embeddings y base vectorial (pgvector en PostgreSQL/Supabase)\n* GDPR (consentimiento), reCAPTCHA v3/css y hardening\n* Investigaci\u00f3n y cumplimiento de c\u00f3digo uruguayo y espa\u00f1ol\n\n## MyEcomProject LLC \u2014 **CTO** \u2014 **Santiago, Chile** (Remote / clientes en Chile) \u2014 **April 2024 \u2013 October 2025**\n\n* Dise\u00f1o y gesti\u00f3n de campa\u00f1as publicitarias para diversos clientes en Meta, Google y TikTok (presupuestos, segmentaci\u00f3n, A/B testing)\n* Tracking y etiquetado (UTM, eventos de conversi\u00f3n) con reportes y KPI\n* Copywriting y direcci\u00f3n de embudos de venta (landing, ofertas, storytelling)\n* Dise\u00f1o de workflows de adquisici\u00f3n y nurturing (email/CRM)\n* Integraciones web\u2013CRM y sincronizaci\u00f3n de leads (formularios, webhooks/APIs)\n* Ventas, cierre de llamadas/presencial, manejo de objeciones y psicolog\u00eda del consumidor\n\n# Habilidades\n\n## Technical Skills\n\n* Automatizaci\u00f3n, Agentes y Gen-AI\n* Machine Learning\n* Integraciones y APIs/MCP\n* Bases de datos\n* Desarrollo full-stack (microapps)\n* CRM y Anal\u00edtica (dashboards)\n\n## Soft Skills\n\n* Comunicaci\u00f3n\n* Negociaci\u00f3n\n* Adaptabilidad\n* Resoluci\u00f3n de problemas\n* Trabajo en equipo\n* Liderazgo\n\n---\n\n#Carta de presentaci\u00f3n (plantilla general a completar)\n[Ciudad], {{ $now.toLocal().format('yyyy-MM-dd') }}\n[Nombre del/a destinatario/a / deja vac\u00edo si no hay]\n [Empresa]\n [Ciudad, Pa\u00eds]\n [Correo de la Empresa/deja vac\u00edo si no hay] \u00b7 [Tel\u00e9fono de la Empresa/deja vac\u00edo si no hay]\nAsunto: Candidatura a [Puesto] (Ref. [N\u00famero])\nA la atenci\u00f3n del departamento de Recursos Humanos:\nMe postulo para el puesto de [Puesto] en [Empresa]. Soy Christian Moraes (Montevideo, Uruguay), actualmente cursando una formaci\u00f3n espa\u00f1ola que se actualiza constantemente en el sector de la IA, e iniciando Ingenier\u00eda en Ciencia de Datos e Inteligencia Artificial, poseo experiencia pr\u00e1ctica en automatizaci\u00f3n, machine learning y agentes de IA.\nEn proyectos recientes (AgentBooster) implement\u00e9 automatizaci\u00f3n de procesos (n8n/Python/MachineLearning/LangChain/pgvector), integraciones con APIs/CRM (Salesforce, HubSpot, Zoho), y desarrollo full-stack/bases de datos.\nEstoy abierto a roles de iniciaci\u00f3n (por ejemplo, Customer Support (Technical), Junior Data Analyst, Operations Assistant) para conocer el negocio en profundidad, aprender de los procesos internos, obtener experiencia y, cuando sea oportuno seg\u00fan las prioridades del equipo, adicionalmente con el tiempo podr\u00eda apoyar en identificar y proponer mejoras de automatizaci\u00f3n/ML que aumenten la eficiencia. Esta oportunidad tambi\u00e9n me ayudar\u00e1 a cubrir los costes de mis estudios mientras crezco en un entorno profesional.\nComo habilidades blandas destaco comunicaci\u00f3n, negociaci\u00f3n, trabajo en equipo, liderazgo y adaptabilidad. Adem\u00e1s, tengo amputaci\u00f3n de pierna derecha: no realizo cargas pesadas con las manos porque utilizo bastones canadienses, pero cuento con buena movilidad y excelente condici\u00f3n f\u00edsica; no requiero ajustes para trabajo de oficina o remoto.\nAdjunto mi CV (PDF con enlaces activos). Quedo a disposici\u00f3n para una entrevista y, si lo consideran, una prueba pr\u00e1ctica. Disponibilidad inmediata y flexibilidad horaria (preferentemente h\u00edbrido/presencial).\nAgradezco su tiempo y consideraci\u00f3n.\nAtentamente,\n Christian Moraes\nLinkedIn: Christian (Marcos) Moraes Pedrozo\n Email: cmmoraespedrozo@gmail.com \u00b7 Tel.: +598 98 690 873"
+              "content": "=Aqu\u00ed est\u00e1n los detalles de la oferta de trabajo:\nT\u00edtulo: {{ $('RSS Read1').item.json.title }}\nDescripci\u00f3n: {{ $('OpenAI').item.json.message.content.job_description }}\nNombre: {{ $('OpenAI').item.json.message.content.company_name }}\nUbicaci\u00f3n: {{ $('OpenAI').item.json.message.content.location }}\n\nAqu\u00ed est\u00e1 el conjunto de habilidades del candidato:\n# Nombre y Cargo\n\n**CHRISTIAN MORAES**\n**Junior Data - AI & Automation Developer**\n\n# Perfil\n\nDesarrollador de automatizaci\u00f3n enfocado en IA y bases de datos para empresas. He trabajado con marcas de distintos rubros, con experiencia en campa\u00f1as de marketing y ventas; en CRM, desarrollo full-stack y bases de datos. \u00c9tica de trabajo exigente, adaptabilidad y pensamiento cr\u00edtico. Valoro la experiencia pr\u00e1ctica y los valores de la empresa.\n**born REDACTED_DOB - UY**\n\n# Contacto\n\n* **REDACTED_PHONE** \u2014 WhatsApp: [https://wa.me/REDACTED_PHONE](https://wa.me/REDACTED_PHONE)\n* **[REDACTED_EMAIL](mailto:REDACTED_EMAIL)**\n* **Christian (Marcos) Moraes Pedrozo** \u2014 LinkedIn: [REDACTED_LINKEDIN_URL](REDACTED_LINKEDIN_URL)\n* **Montevideo, Uruguay**\n\n# Educaci\u00f3n\n\n* **B.Eng. in Artificial Intelligence & Data Science: AI and Data Science** \u2014 **Univ. Cat\u00f3lica del Uy. (UCU)** \u2014 **03/2026** \u2014 **Montevideo, Uruguay**\n* **Diploma Program (provider-stated 60 ECTS): Artificial Intelligence** \u2014 **Learning Heroes** \u2014 **01/2025** \u2014 **Andorra la Vella (Online)**\n\n# Idiomas\n\n* **Ingl\u00e9s** \u2014 **50%**\n* **Espa\u00f1ol** \u2014 **100%**\n* **Portugu\u00e9s** \u2014 **95%**\n\n# Experiencia\n\n## Agent Booster \u2014 **COO - Co-Founder** \u2014 **Dub\u00e1i - Remoto** \u2014 **March 2025**\n\n* Automatizaci\u00f3n de procesos con n8n y Python; desarrollo full-stack y bases de datos\n* Modelos de Machine Learning con TensorFlow y Python\n* Agentes-LLM con Python y LangChain, prompt engineering, tool use y function calling\n* RAG con embeddings y bases vectoriales en PostgreSQL con pgvector y RLS\n* Integraciones con APIs/webhooks/MCP y CRM (Salesforce, HubSpot, Zoho)\n* Despliegue/hosting de microapps, componentes con JavaScript y Docker\n* An\u00e1lisis modelo GPT, Claude, Gemini y Grok; y generaci\u00f3n de contenido audiovisual IA\n* Consultor en automatizaci\u00f3n y Gen-AI\n\n## Risolvia \u2014 **Project - Co-Founder** \u2014 **Espa\u00f1a - Remoto** \u2014 **July 2025**\n\n* Desarrollo front-end, back-end y del agente IA con n8n para legaltech\n* RAG, embeddings y base vectorial (pgvector en PostgreSQL/Supabase)\n* GDPR (consentimiento), reCAPTCHA v3/css y hardening\n* Investigaci\u00f3n y cumplimiento de c\u00f3digo uruguayo y espa\u00f1ol\n\n## MyEcomProject LLC \u2014 **CTO** \u2014 **Santiago, Chile** (Remote / clientes en Chile) \u2014 **April 2024 \u2013 October 2025**\n\n* Dise\u00f1o y gesti\u00f3n de campa\u00f1as publicitarias para diversos clientes en Meta, Google y TikTok (presupuestos, segmentaci\u00f3n, A/B testing)\n* Tracking y etiquetado (UTM, eventos de conversi\u00f3n) con reportes y KPI\n* Copywriting y direcci\u00f3n de embudos de venta (landing, ofertas, storytelling)\n* Dise\u00f1o de workflows de adquisici\u00f3n y nurturing (email/CRM)\n* Integraciones web\u2013CRM y sincronizaci\u00f3n de leads (formularios, webhooks/APIs)\n* Ventas, cierre de llamadas/presencial, manejo de objeciones y psicolog\u00eda del consumidor\n\n# Habilidades\n\n## Technical Skills\n\n* Automatizaci\u00f3n, Agentes y Gen-AI\n* Machine Learning\n* Integraciones y APIs/MCP\n* Bases de datos\n* Desarrollo full-stack (microapps)\n* CRM y Anal\u00edtica (dashboards)\n\n## Soft Skills\n\n* Comunicaci\u00f3n\n* Negociaci\u00f3n\n* Adaptabilidad\n* Resoluci\u00f3n de problemas\n* Trabajo en equipo\n* Liderazgo\n\n---\n\n#Carta de presentaci\u00f3n (plantilla general a completar)\n[Ciudad], {{ $now.toLocal().format('yyyy-MM-dd') }}\n[Nombre del/a destinatario/a / deja vac\u00edo si no hay]\n [Empresa]\n [Ciudad, Pa\u00eds]\n [Correo de la Empresa/deja vac\u00edo si no hay] \u00b7 [Tel\u00e9fono de la Empresa/deja vac\u00edo si no hay]\nAsunto: Candidatura a [Puesto] (Ref. [N\u00famero])\nA la atenci\u00f3n del departamento de Recursos Humanos:\nMe postulo para el puesto de [Puesto] en [Empresa]. Soy Christian Moraes (Montevideo, Uruguay), actualmente cursando una formaci\u00f3n espa\u00f1ola que se actualiza constantemente en el sector de la IA, e iniciando Ingenier\u00eda en Ciencia de Datos e Inteligencia Artificial, poseo experiencia pr\u00e1ctica en automatizaci\u00f3n, machine learning y agentes de IA.\nEn proyectos recientes (AgentBooster) implement\u00e9 automatizaci\u00f3n de procesos (n8n/Python/MachineLearning/LangChain/pgvector), integraciones con APIs/CRM (Salesforce, HubSpot, Zoho), y desarrollo full-stack/bases de datos.\nEstoy abierto a roles de iniciaci\u00f3n (por ejemplo, Customer Support (Technical), Junior Data Analyst, Operations Assistant) para conocer el negocio en profundidad, aprender de los procesos internos, obtener experiencia y, cuando sea oportuno seg\u00fan las prioridades del equipo, adicionalmente con el tiempo podr\u00eda apoyar en identificar y proponer mejoras de automatizaci\u00f3n/ML que aumenten la eficiencia. Esta oportunidad tambi\u00e9n me ayudar\u00e1 a cubrir los costes de mis estudios mientras crezco en un entorno profesional.\nComo habilidades blandas destaco comunicaci\u00f3n, negociaci\u00f3n, trabajo en equipo, liderazgo y adaptabilidad. Adem\u00e1s, tengo amputaci\u00f3n de pierna derecha: no realizo cargas pesadas con las manos porque utilizo bastones canadienses, pero cuento con buena movilidad y excelente condici\u00f3n f\u00edsica; no requiero ajustes para trabajo de oficina o remoto.\nAdjunto mi CV (PDF con enlaces activos). Quedo a disposici\u00f3n para una entrevista y, si lo consideran, una prueba pr\u00e1ctica. Disponibilidad inmediata y flexibilidad horaria (preferentemente h\u00edbrido/presencial).\nAgradezco su tiempo y consideraci\u00f3n.\nAtentamente,\n Christian Moraes\nLinkedIn: Christian (Marcos) Moraes Pedrozo\n Email: REDACTED_EMAIL \u00b7 Tel.: REDACTED_PHONE"
             },
             {
               "content": "Por favor devuelve los datos en JSON con la siguiente estructura:\n{\n\"cover_letter\": \"\"\n}",
@@ -635,7 +635,7 @@
     },
     {
       "parameters": {
-        "content": "## Video\n* https://youtu.be/dYNFqM84pSI?si=X0P-25nXgT9hPvem\n\n* Google Sheet:\nhttps://docs.google.com/spreadsheets/d/1eyeda4g5YNjR80tayNwZihv-_O7GY8jEGeHki7cCdAY/copy\n\n* Software Required For This Build:\n- n8n \u2192 jonocatliff.com/n8n\n- chatGPT \u2192 jonocatliff.com/chatgpt\n- Google Sheets \u2192 jonocatliff.com/google-sheets\n",
+        "content": "## Video\n* https://youtu.be/dYNFqM84pSI?si=X0P-25nXgT9hPvem\n\n* Google Sheet:\nhttps://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_SUMMARY/copy\n\n* Software Required For This Build:\n- n8n \u2192 jonocatliff.com/n8n\n- chatGPT \u2192 jonocatliff.com/chatgpt\n- Google Sheets \u2192 jonocatliff.com/google-sheets\n",
         "height": 288,
         "width": 640
       },
@@ -771,7 +771,7 @@
     },
     {
       "parameters": {
-        "sendTo": "cmmoraespedrozo@gmail.com",
+        "sendTo": "REDACTED_EMAIL",
         "subject": "\u00a1Nuevos trabajos para esta semana!",
         "emailType": "text",
         "message": "={{ $json.message.content }}",
@@ -784,7 +784,7 @@
         -3008,
         2288
       ],
-      "webhookId": "d3d1135b-2633-4826-b54c-7311445b94e6",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "typeVersion": 2.1,
       "credentials": {
         "gmailOAuth2": {
@@ -803,7 +803,7 @@
           "parameters": [
             {
               "name": "key",
-              "value": "AIzaSyAr5MFVKxMDr1EdB9XB71Di7YtKq1pNMRo"
+              "value": "REDACTED_API_KEY"
             },
             {
               "name": "cx",
@@ -859,7 +859,7 @@
         "messages": {
           "values": [
             {
-              "content": "=Hola, eres un asistente \u00fatil para la b\u00fasqueda de empleo. Lees mi curr\u00edculum, luego analizas el curr\u00edculum proporcionado y la descripci\u00f3n del puesto y entregas un puntaje de compatibilidad con el empleo (de 0 a 100), adem\u00e1s del enlace para aplicar.\n\nPara ello debes buscar ofertas de empleo relacionadas con datos, inteligencia artificial y automatizaci\u00f3n (nivel junior, entry level, associate, mid-senior level, remoto, h\u00edbrido, presencial; en Montevideo, Uruguay, a medio tiempo (preferiblemente) o tiempo completo), contarlas y devolver solo las ofertas de empleo estructuradas que sigan el formato especificado utilizando \u00fanicamente la informaci\u00f3n proporcionada sin agregar informaci\u00f3n externa.\n\nEres un especialista en an\u00e1lisis y b\u00fasqueda de ofertas de trabajo. Tu tarea es:\n\nHacer la b\u00fasqueda de vacantes laborales relacionadas a; datos inteligencia artificial automatizaci\u00f3n junior remoto o en Montevideo, Uruguay. Preferiblemente a tiempo parcial si encuentras.\n\nContar cu\u00e1ntas ofertas de trabajo individuales se incluyen en la entrada para listar y oprdenar cada una. Cada oferta es un objeto separado con su propio t\u00edtulo, URL, empresa, ubicaci\u00f3n, descripci\u00f3n y otros metadatos.\n\nLuego, para cada oferta de trabajo, extraer y formatear:\n\nT\u00edtulo del puesto\n\nPuntuaci\u00f3n\n\nURL\n\nFecha de publicaci\u00f3n (usa el formato ISO: YYYY-MM-DD, si est\u00e1 disponible)\n\nUn resumen de 2\u20133 oraciones de la descripci\u00f3n del puesto\n\n1\u20132 requisitos o puntos destacados\n\nNombre de la empresa\n\nDescripci\u00f3n de la empresa (si se proporciona)\n\nSitio web de la empresa (si est\u00e1 disponible)\n\nUbicaci\u00f3n (si se proporciona)\n\nNivel de Experiencia\n\nTipo de trabajo (tiempo completo o parcial) y (remoto, h\u00edbrido o presencial)\n\nEtc.\n\nSolo formatea lo que encuentres expl\u00edcitamente en la entrada para tener todo el contexto listo, ordenado y el enlace para aplicar correcto.\n\nNo incluyas datos inventados ni asumidos. No proporciones URL no funcionales, ni ofertas caducadas bajo ninguna circunstancia, es decir, nunca proporciones ofertas caducadas.\n\nTambi\u00e9n al final preguntas si el usuario desea crear una carta de presentaci\u00f3n basada en mi curr\u00edculum, estructura de carta y en la descripci\u00f3n del puesto. Eso para las empresas cuya puntuaci\u00f3n sea mayor a 50. Para eso debe proporcionar el ejemplo de carta.\n\nEjemplo de busquedas relevantes (Evita Linkedin Jobs) en:\n\nComputotrabajo: https://uy.computrabajo.com\nBuscoJobs: https://www.buscojobs.com.uy\nUruguayConcursa: https://www.uruguayconcursa.gub.uy/Portal/servlet/com.si.recsel.inicio\n\nBairesDev Jobs: https://applicants.bairesdev.com/login\nBuscoJobs:https://www.buscojobs.com.uy\tGlobant\thttps://career.globant.com\nEndava: https://www.endava.com/careers/jobs\nAccenture: https://www.accenture.com/us-en/careers/jobsearch\nOtras empresas relevantes en su apartado de jobs o careers.\n\nMi curriculum (contexto):\n\nNombre y Cargo\nCHRISTIAN MORAES\n Junior Data - AI & Automation Developer\nPerfil\nDesarrollador de automatizaci\u00f3n enfocado en IA y bases de datos para empresas. He trabajado con marcas de distintos rubros, con experiencia en campa\u00f1as de marketing y ventas; en CRM, desarrollo full-stack y bases de datos. \u00c9tica de trabajo exigente, adaptabilidad y pensamiento cr\u00edtico. Valoro la experiencia pr\u00e1ctica y los valores de la empresa.\n born 07/04/2005 - UY\nContacto\n+598 98 690 873 \u2014 WhatsApp: https://wa.me/59898690873\n\n\ncmmoraespedrozo@gmail.com\n\n\nChristian (Marcos) Moraes Pedrozo \u2014 LinkedIn: https://www.linkedin.com/in/christian-moraes-pedrozo-24702a307/\n\n\nMontevideo, Uruguay\n\n\nEducaci\u00f3n\nB.Eng. in Artificial Intelligence & Data Science: AI and Data Science \u2014 Univ. Cat\u00f3lica del Uy. (UCU) \u2014 03/2026 \u2014 Montevideo, Uruguay\n\n\nDiploma Program (provider-stated 60 ECTS): Artificial Intelligence \u2014 Learning Heroes \u2014 01/2025 \u2014 Andorra la Vella (Online)\n\n\nIdiomas\nIngl\u00e9s \u2014 50%\n\n\nEspa\u00f1ol \u2014 100%\n\n\nPortugu\u00e9s \u2014 95%\n\n\nExperiencia\nAgent Booster \u2014 COO - Co-Founder \u2014 Dub\u00e1i - Remoto \u2014 March 2025\nAutomatizaci\u00f3n de procesos con n8n y Python; desarrollo full-stack y bases de datos\n\n\nModelos de Machine Learning con TensorFlow y Python\n\n\nAgentes-LLM con Python y LangChain, prompt engineering, tool use y function calling\n\n\nRAG con embeddings y bases vectoriales en PostgreSQL con pgvector y RLS\n\n\nIntegraciones con APIs/webhooks/MCP y CRM (Salesforce, HubSpot, Zoho)\n\n\nDespliegue/hosting de microapps, componentes con JavaScript y Docker\n\n\nAn\u00e1lisis modelo GPT, Claude, Gemini y Grok; y generaci\u00f3n de contenido audiovisual IA\n\n\nConsultor en automatizaci\u00f3n y Gen-AI\n\n\nRisolvia \u2014 Project - Co-Founder \u2014 Espa\u00f1a - Remoto \u2014 July 2025\nDesarrollo front-end, back-end y del agente IA con n8n para legaltech\n\n\nRAG, embeddings y base vectorial (pgvector en PostgreSQL/Supabase)\n\n\nGDPR (consentimiento), reCAPTCHA v3/css y hardening\n\n\nInvestigaci\u00f3n y cumplimiento de c\u00f3digo uruguayo y espa\u00f1ol\n\n\nMyEcomProject LLC \u2014 CTO \u2014 Santiago, Chile (Remote / clientes en Chile) \u2014 April 2024 \u2013 October 2025\nDise\u00f1o y gesti\u00f3n de campa\u00f1as publicitarias para diversos clientes en Meta, Google y TikTok (presupuestos, segmentaci\u00f3n, A/B testing)\n\n\nTracking y etiquetado (UTM, eventos de conversi\u00f3n) con reportes y KPI\n\n\nCopywriting y direcci\u00f3n de embudos de venta (landing, ofertas, storytelling)\n\n\nDise\u00f1o de workflows de adquisici\u00f3n y nurturing (email/CRM)\n\n\nIntegraciones web\u2013CRM y sincronizaci\u00f3n de leads (formularios, webhooks/APIs)\n\n\nVentas, cierre de llamadas/presencial, manejo de objeciones y psicolog\u00eda del consumidor\n\n\nHabilidades\nTechnical Skills\nAutomatizaci\u00f3n, Agentes y Gen-AI\n\n\nMachine Learning\n\n\nIntegraciones y APIs/MCP\n\n\nBases de datos\n\n\nDesarrollo full-stack (microapps)\n\n\nCRM y Anal\u00edtica (dashboards)\n\n\nSoft Skills\nComunicaci\u00f3n\n\n\nNegociaci\u00f3n\n\n\nAdaptabilidad\n\n\nResoluci\u00f3n de problemas\n\n\nTrabajo en equipo\n\n\nLiderazgo"
+              "content": "=Hola, eres un asistente \u00fatil para la b\u00fasqueda de empleo. Lees mi curr\u00edculum, luego analizas el curr\u00edculum proporcionado y la descripci\u00f3n del puesto y entregas un puntaje de compatibilidad con el empleo (de 0 a 100), adem\u00e1s del enlace para aplicar.\n\nPara ello debes buscar ofertas de empleo relacionadas con datos, inteligencia artificial y automatizaci\u00f3n (nivel junior, entry level, associate, mid-senior level, remoto, h\u00edbrido, presencial; en Montevideo, Uruguay, a medio tiempo (preferiblemente) o tiempo completo), contarlas y devolver solo las ofertas de empleo estructuradas que sigan el formato especificado utilizando \u00fanicamente la informaci\u00f3n proporcionada sin agregar informaci\u00f3n externa.\n\nEres un especialista en an\u00e1lisis y b\u00fasqueda de ofertas de trabajo. Tu tarea es:\n\nHacer la b\u00fasqueda de vacantes laborales relacionadas a; datos inteligencia artificial automatizaci\u00f3n junior remoto o en Montevideo, Uruguay. Preferiblemente a tiempo parcial si encuentras.\n\nContar cu\u00e1ntas ofertas de trabajo individuales se incluyen en la entrada para listar y oprdenar cada una. Cada oferta es un objeto separado con su propio t\u00edtulo, URL, empresa, ubicaci\u00f3n, descripci\u00f3n y otros metadatos.\n\nLuego, para cada oferta de trabajo, extraer y formatear:\n\nT\u00edtulo del puesto\n\nPuntuaci\u00f3n\n\nURL\n\nFecha de publicaci\u00f3n (usa el formato ISO: YYYY-MM-DD, si est\u00e1 disponible)\n\nUn resumen de 2\u20133 oraciones de la descripci\u00f3n del puesto\n\n1\u20132 requisitos o puntos destacados\n\nNombre de la empresa\n\nDescripci\u00f3n de la empresa (si se proporciona)\n\nSitio web de la empresa (si est\u00e1 disponible)\n\nUbicaci\u00f3n (si se proporciona)\n\nNivel de Experiencia\n\nTipo de trabajo (tiempo completo o parcial) y (remoto, h\u00edbrido o presencial)\n\nEtc.\n\nSolo formatea lo que encuentres expl\u00edcitamente en la entrada para tener todo el contexto listo, ordenado y el enlace para aplicar correcto.\n\nNo incluyas datos inventados ni asumidos. No proporciones URL no funcionales, ni ofertas caducadas bajo ninguna circunstancia, es decir, nunca proporciones ofertas caducadas.\n\nTambi\u00e9n al final preguntas si el usuario desea crear una carta de presentaci\u00f3n basada en mi curr\u00edculum, estructura de carta y en la descripci\u00f3n del puesto. Eso para las empresas cuya puntuaci\u00f3n sea mayor a 50. Para eso debe proporcionar el ejemplo de carta.\n\nEjemplo de busquedas relevantes (Evita Linkedin Jobs) en:\n\nComputotrabajo: https://uy.computrabajo.com\nBuscoJobs: https://www.buscojobs.com.uy\nUruguayConcursa: https://www.uruguayconcursa.gub.uy/Portal/servlet/com.si.recsel.inicio\n\nBairesDev Jobs: https://applicants.bairesdev.com/login\nBuscoJobs:https://www.buscojobs.com.uy\tGlobant\thttps://career.globant.com\nEndava: https://www.endava.com/careers/jobs\nAccenture: https://www.accenture.com/us-en/careers/jobsearch\nOtras empresas relevantes en su apartado de jobs o careers.\n\nMi curriculum (contexto):\n\nNombre y Cargo\nCHRISTIAN MORAES\n Junior Data - AI & Automation Developer\nPerfil\nDesarrollador de automatizaci\u00f3n enfocado en IA y bases de datos para empresas. He trabajado con marcas de distintos rubros, con experiencia en campa\u00f1as de marketing y ventas; en CRM, desarrollo full-stack y bases de datos. \u00c9tica de trabajo exigente, adaptabilidad y pensamiento cr\u00edtico. Valoro la experiencia pr\u00e1ctica y los valores de la empresa.\n born REDACTED_DOB - UY\nContacto\nREDACTED_PHONE \u2014 WhatsApp: https://wa.me/REDACTED_PHONE\n\n\nREDACTED_EMAIL\n\n\nChristian (Marcos) Moraes Pedrozo \u2014 LinkedIn: REDACTED_LINKEDIN_URL\n\n\nMontevideo, Uruguay\n\n\nEducaci\u00f3n\nB.Eng. in Artificial Intelligence & Data Science: AI and Data Science \u2014 Univ. Cat\u00f3lica del Uy. (UCU) \u2014 03/2026 \u2014 Montevideo, Uruguay\n\n\nDiploma Program (provider-stated 60 ECTS): Artificial Intelligence \u2014 Learning Heroes \u2014 01/2025 \u2014 Andorra la Vella (Online)\n\n\nIdiomas\nIngl\u00e9s \u2014 50%\n\n\nEspa\u00f1ol \u2014 100%\n\n\nPortugu\u00e9s \u2014 95%\n\n\nExperiencia\nAgent Booster \u2014 COO - Co-Founder \u2014 Dub\u00e1i - Remoto \u2014 March 2025\nAutomatizaci\u00f3n de procesos con n8n y Python; desarrollo full-stack y bases de datos\n\n\nModelos de Machine Learning con TensorFlow y Python\n\n\nAgentes-LLM con Python y LangChain, prompt engineering, tool use y function calling\n\n\nRAG con embeddings y bases vectoriales en PostgreSQL con pgvector y RLS\n\n\nIntegraciones con APIs/webhooks/MCP y CRM (Salesforce, HubSpot, Zoho)\n\n\nDespliegue/hosting de microapps, componentes con JavaScript y Docker\n\n\nAn\u00e1lisis modelo GPT, Claude, Gemini y Grok; y generaci\u00f3n de contenido audiovisual IA\n\n\nConsultor en automatizaci\u00f3n y Gen-AI\n\n\nRisolvia \u2014 Project - Co-Founder \u2014 Espa\u00f1a - Remoto \u2014 July 2025\nDesarrollo front-end, back-end y del agente IA con n8n para legaltech\n\n\nRAG, embeddings y base vectorial (pgvector en PostgreSQL/Supabase)\n\n\nGDPR (consentimiento), reCAPTCHA v3/css y hardening\n\n\nInvestigaci\u00f3n y cumplimiento de c\u00f3digo uruguayo y espa\u00f1ol\n\n\nMyEcomProject LLC \u2014 CTO \u2014 Santiago, Chile (Remote / clientes en Chile) \u2014 April 2024 \u2013 October 2025\nDise\u00f1o y gesti\u00f3n de campa\u00f1as publicitarias para diversos clientes en Meta, Google y TikTok (presupuestos, segmentaci\u00f3n, A/B testing)\n\n\nTracking y etiquetado (UTM, eventos de conversi\u00f3n) con reportes y KPI\n\n\nCopywriting y direcci\u00f3n de embudos de venta (landing, ofertas, storytelling)\n\n\nDise\u00f1o de workflows de adquisici\u00f3n y nurturing (email/CRM)\n\n\nIntegraciones web\u2013CRM y sincronizaci\u00f3n de leads (formularios, webhooks/APIs)\n\n\nVentas, cierre de llamadas/presencial, manejo de objeciones y psicolog\u00eda del consumidor\n\n\nHabilidades\nTechnical Skills\nAutomatizaci\u00f3n, Agentes y Gen-AI\n\n\nMachine Learning\n\n\nIntegraciones y APIs/MCP\n\n\nBases de datos\n\n\nDesarrollo full-stack (microapps)\n\n\nCRM y Anal\u00edtica (dashboards)\n\n\nSoft Skills\nComunicaci\u00f3n\n\n\nNegociaci\u00f3n\n\n\nAdaptabilidad\n\n\nResoluci\u00f3n de problemas\n\n\nTrabajo en equipo\n\n\nLiderazgo"
             }
           ]
         },
@@ -886,10 +886,10 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "1kzMPh_-Sv9gniyTHKpuBz8BEw3ADjS_p",
+          "value": "REDACTED_FILE_ID_1",
           "mode": "list",
           "cachedResultName": "Blue and White Modern Professional Resume.pdf",
-          "cachedResultUrl": "https://drive.google.com/file/d/1kzMPh_-Sv9gniyTHKpuBz8BEw3ADjS_p/view?usp=drivesdk"
+          "cachedResultUrl": "https://drive.google.com/file/d/REDACTED_FILE_ID_1/view?usp=drivesdk"
         },
         "options": {}
       },
@@ -942,7 +942,7 @@
     {
       "parameters": {
         "operation": "get",
-        "documentURL": "=https://docs.google.com/document/d/1vydceCfSmh6yoq5F_WxHnunfjjWc-CURgbPT_i8NiaY/edit?usp=sharing"
+        "documentURL": "=https://docs.google.com/document/d/REDACTED_DOC_ID/edit?usp=sharing"
       },
       "type": "n8n-nodes-base.googleDocs",
       "typeVersion": 2,
@@ -1044,7 +1044,7 @@
               "role": "system"
             },
             {
-              "content": "=Estoy buscando trabajo. Tu tarea es personalizar una carta proporcionado usando una descripci\u00f3n de puesto proporcionada.\n\n# Aqu\u00ed est\u00e1 la descripci\u00f3n del puesto:\n\n{{ $('Run an Actor and get dataset').item.json.descriptionText }}\n\n--\n\n# Aqu\u00ed est\u00e1 mi estructura de carta:\n\n[Ciudad], {{ $now.toLocal().format('yyyy-MM-dd') }}\n\n[Nombre del/a destinatario/a]\n [Empresa]\n [Ciudad, Pa\u00eds]\n [Correo] \u00b7 [Tel\u00e9fono]\n\nAsunto: Candidatura a [Puesto] (Ref. [N\u00famero])\n\nA la atenci\u00f3n del departamento de Recursos Humanos:\n\nMe postulo para el puesto de [Puesto] en [Empresa]. Soy Christian Moraes (Montevideo, Uruguay), actualmente cursando una formaci\u00f3n espa\u00f1ola que se actualiza constantemente en el sector de la IA, e iniciando Ingenier\u00eda en Ciencia de Datos e Inteligencia Artificial, poseo experiencia pr\u00e1ctica en automatizaci\u00f3n, machine learning y agentes de IA.\n\nEn proyectos recientes (AgentBooster) implement\u00e9 automatizaci\u00f3n de procesos (n8n/Python/MachineLearning/LangChain/pgvector), integraciones con APIs/CRM (Salesforce, HubSpot, Zoho), y desarrollo full-stack/bases de datos.\n\nEstoy abierto a roles de iniciaci\u00f3n (por ejemplo, Customer Support (Technical), Junior Data Analyst, Operations Assistant) para conocer el negocio en profundidad, aprender de los procesos internos, obtener experiencia y, cuando sea oportuno seg\u00fan las prioridades del equipo, adicionalmente con el tiempo podr\u00eda apoyar en identificar y proponer mejoras de automatizaci\u00f3n/ML que aumenten la eficiencia. Esta oportunidad tambi\u00e9n me ayudar\u00e1 a cubrir los costes de mis estudios mientras crezco en un entorno profesional.\n\nComo habilidades blandas destaco comunicaci\u00f3n, negociaci\u00f3n, trabajo en equipo, liderazgo y adaptabilidad. Adem\u00e1s, tengo amputaci\u00f3n de pierna derecha: no realizo cargas pesadas con las manos porque utilizo bastones canadienses, pero cuento con buena movilidad y excelente condici\u00f3n f\u00edsica; no requiero ajustes para trabajo de oficina o remoto.\n\nAdjunto mi CV (PDF con enlaces activos). Quedo a disposici\u00f3n para una entrevista y, si lo consideran, una prueba pr\u00e1ctica. Disponibilidad inmediata y flexibilidad horaria (preferentemente h\u00edbrido/presencial).\n\nAgradezco su tiempo y consideraci\u00f3n.\n\nAtentamente,\n Christian Moraes\n\nLinkedIn: Christian (Marcos) Moraes Pedrozo\n Email: cmmoraespedrozo@gmail.com \u00b7 Tel.: +598 98 690 873\n\n---\n\nResponde \u00fanicamente con la carta personalizada y actualizada\u2014nada m\u00e1s.\n\nEsta carta se a\u00f1adir\u00e1 a un Google Doc, as\u00ed que escr\u00edbelo en formato HTML para que pueda copiar/pegar f\u00e1cilmente."
+              "content": "=Estoy buscando trabajo. Tu tarea es personalizar una carta proporcionado usando una descripci\u00f3n de puesto proporcionada.\n\n# Aqu\u00ed est\u00e1 la descripci\u00f3n del puesto:\n\n{{ $('Run an Actor and get dataset').item.json.descriptionText }}\n\n--\n\n# Aqu\u00ed est\u00e1 mi estructura de carta:\n\n[Ciudad], {{ $now.toLocal().format('yyyy-MM-dd') }}\n\n[Nombre del/a destinatario/a]\n [Empresa]\n [Ciudad, Pa\u00eds]\n [Correo] \u00b7 [Tel\u00e9fono]\n\nAsunto: Candidatura a [Puesto] (Ref. [N\u00famero])\n\nA la atenci\u00f3n del departamento de Recursos Humanos:\n\nMe postulo para el puesto de [Puesto] en [Empresa]. Soy Christian Moraes (Montevideo, Uruguay), actualmente cursando una formaci\u00f3n espa\u00f1ola que se actualiza constantemente en el sector de la IA, e iniciando Ingenier\u00eda en Ciencia de Datos e Inteligencia Artificial, poseo experiencia pr\u00e1ctica en automatizaci\u00f3n, machine learning y agentes de IA.\n\nEn proyectos recientes (AgentBooster) implement\u00e9 automatizaci\u00f3n de procesos (n8n/Python/MachineLearning/LangChain/pgvector), integraciones con APIs/CRM (Salesforce, HubSpot, Zoho), y desarrollo full-stack/bases de datos.\n\nEstoy abierto a roles de iniciaci\u00f3n (por ejemplo, Customer Support (Technical), Junior Data Analyst, Operations Assistant) para conocer el negocio en profundidad, aprender de los procesos internos, obtener experiencia y, cuando sea oportuno seg\u00fan las prioridades del equipo, adicionalmente con el tiempo podr\u00eda apoyar en identificar y proponer mejoras de automatizaci\u00f3n/ML que aumenten la eficiencia. Esta oportunidad tambi\u00e9n me ayudar\u00e1 a cubrir los costes de mis estudios mientras crezco en un entorno profesional.\n\nComo habilidades blandas destaco comunicaci\u00f3n, negociaci\u00f3n, trabajo en equipo, liderazgo y adaptabilidad. Adem\u00e1s, tengo amputaci\u00f3n de pierna derecha: no realizo cargas pesadas con las manos porque utilizo bastones canadienses, pero cuento con buena movilidad y excelente condici\u00f3n f\u00edsica; no requiero ajustes para trabajo de oficina o remoto.\n\nAdjunto mi CV (PDF con enlaces activos). Quedo a disposici\u00f3n para una entrevista y, si lo consideran, una prueba pr\u00e1ctica. Disponibilidad inmediata y flexibilidad horaria (preferentemente h\u00edbrido/presencial).\n\nAgradezco su tiempo y consideraci\u00f3n.\n\nAtentamente,\n Christian Moraes\n\nLinkedIn: Christian (Marcos) Moraes Pedrozo\n Email: REDACTED_EMAIL \u00b7 Tel.: REDACTED_PHONE\n\n---\n\nResponde \u00fanicamente con la carta personalizada y actualizada\u2014nada m\u00e1s.\n\nEsta carta se a\u00f1adir\u00e1 a un Google Doc, as\u00ed que escr\u00edbelo en formato HTML para que pueda copiar/pegar f\u00e1cilmente."
             }
           ]
         },
@@ -1086,7 +1086,7 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1LHwNKgrp4ZJYv1janMYJGUkYUCLAilOuft-JBV-dmCw/edit?gid=0#gid=0",
+          "value": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_LOG/edit?gid=0#gid=0",
           "mode": "url"
         },
         "sheetName": {
@@ -1094,7 +1094,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1LHwNKgrp4ZJYv1janMYJGUkYUCLAilOuft-JBV-dmCw/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_LOG/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -1258,7 +1258,7 @@
     },
     {
       "parameters": {
-        "content": "https://docs.google.com/spreadsheets/d/1LHwNKgrp4ZJYv1janMYJGUkYUCLAilOuft-JBV-dmCw/edit?usp=sharing",
+        "content": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_LOG/edit?usp=sharing",
         "height": 80,
         "width": 352
       },
@@ -1273,7 +1273,7 @@
     },
     {
       "parameters": {
-        "content": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit?usp=sharing",
+        "content": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit?usp=sharing",
         "height": 80,
         "width": 352
       },
@@ -1288,7 +1288,7 @@
     },
     {
       "parameters": {
-        "content": "https://docs.google.com/spreadsheets/d/1A4QuXFvCNzZRQFxinADo5IAwvMA9k2jUmFZ7gpse4t0/edit?usp=sharing",
+        "content": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_ALT/edit?usp=sharing",
         "height": 80,
         "width": 352
       },
@@ -1344,7 +1344,7 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit?usp=sharing",
+          "value": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit?usp=sharing",
           "mode": "url"
         },
         "sheetName": {
@@ -1352,7 +1352,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Result",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -1556,7 +1556,7 @@
               "role": "system"
             },
             {
-              "content": "=Aqu\u00ed est\u00e1n los detalles de la oferta de trabajo:\n{{ $('HTTP Request1').item.json.data }}\n\nAqu\u00ed est\u00e1 el conjunto de habilidades del candidato:\n# Nombre y Cargo\n\n**CHRISTIAN MORAES**\n**Junior Data - AI & Automation Developer**\n\n# Perfil\n\nDesarrollador de automatizaci\u00f3n enfocado en IA y bases de datos para empresas. He trabajado con marcas de distintos rubros, con experiencia en campa\u00f1as de marketing y ventas; en CRM, desarrollo full-stack y bases de datos. \u00c9tica de trabajo exigente, adaptabilidad y pensamiento cr\u00edtico. Valoro la experiencia pr\u00e1ctica y los valores de la empresa.\n**born 07/04/2005 - UY**\n\n# Contacto\n\n* **+598 98 690 873** \u2014 WhatsApp: [https://wa.me/59898690873](https://wa.me/59898690873)\n* **[cmmoraespedrozo@gmail.com](mailto:cmmoraespedrozo@gmail.com)**\n* **Christian (Marcos) Moraes Pedrozo** \u2014 LinkedIn: [https://www.linkedin.com/in/christian-moraes-pedrozo-24702a307/](https://www.linkedin.com/in/christian-moraes-pedrozo-24702a307/)\n* **Montevideo, Uruguay**\n\n# Educaci\u00f3n\n\n* **B.Eng. in Artificial Intelligence & Data Science: AI and Data Science** \u2014 **Univ. Cat\u00f3lica del Uy. (UCU)** \u2014 **03/2026** \u2014 **Montevideo, Uruguay**\n* **Diploma Program (provider-stated 60 ECTS): Artificial Intelligence** \u2014 **Learning Heroes** \u2014 **01/2025** \u2014 **Andorra la Vella (Online)**\n\n# Idiomas\n\n* **Ingl\u00e9s** \u2014 **50%**\n* **Espa\u00f1ol** \u2014 **100%**\n* **Portugu\u00e9s** \u2014 **95%**\n\n# Experiencia\n\n## Agent Booster \u2014 **COO - Co-Founder** \u2014 **Dub\u00e1i - Remoto** \u2014 **March 2025**\n\n* Automatizaci\u00f3n de procesos con n8n y Python; desarrollo full-stack y bases de datos\n* Modelos de Machine Learning con TensorFlow y Python\n* Agentes-LLM con Python y LangChain, prompt engineering, tool use y function calling\n* RAG con embeddings y bases vectoriales en PostgreSQL con pgvector y RLS\n* Integraciones con APIs/webhooks/MCP y CRM (Salesforce, HubSpot, Zoho)\n* Despliegue/hosting de microapps, componentes con JavaScript y Docker\n* An\u00e1lisis modelo GPT, Claude, Gemini y Grok; y generaci\u00f3n de contenido audiovisual IA\n* Consultor en automatizaci\u00f3n y Gen-AI\n\n## Risolvia \u2014 **Project - Co-Founder** \u2014 **Espa\u00f1a - Remoto** \u2014 **July 2025**\n\n* Desarrollo front-end, back-end y del agente IA con n8n para legaltech\n* RAG, embeddings y base vectorial (pgvector en PostgreSQL/Supabase)\n* GDPR (consentimiento), reCAPTCHA v3/css y hardening\n* Investigaci\u00f3n y cumplimiento de c\u00f3digo uruguayo y espa\u00f1ol\n\n## MyEcomProject LLC \u2014 **CTO** \u2014 **Santiago, Chile** (Remote / clientes en Chile) \u2014 **April 2024 \u2013 October 2025**\n\n* Dise\u00f1o y gesti\u00f3n de campa\u00f1as publicitarias para diversos clientes en Meta, Google y TikTok (presupuestos, segmentaci\u00f3n, A/B testing)\n* Tracking y etiquetado (UTM, eventos de conversi\u00f3n) con reportes y KPI\n* Copywriting y direcci\u00f3n de embudos de venta (landing, ofertas, storytelling)\n* Dise\u00f1o de workflows de adquisici\u00f3n y nurturing (email/CRM)\n* Integraciones web\u2013CRM y sincronizaci\u00f3n de leads (formularios, webhooks/APIs)\n* Ventas, cierre de llamadas/presencial, manejo de objeciones y psicolog\u00eda del consumidor\n\n# Habilidades\n\n## Technical Skills\n\n* Automatizaci\u00f3n, Agentes y Gen-AI\n* Machine Learning\n* Integraciones y APIs/MCP\n* Bases de datos\n* Desarrollo full-stack (microapps)\n* CRM y Anal\u00edtica (dashboards)\n\n## Soft Skills\n\n* Comunicaci\u00f3n\n* Negociaci\u00f3n\n* Adaptabilidad\n* Resoluci\u00f3n de problemas\n* Trabajo en equipo\n* Liderazgo\n"
+              "content": "=Aqu\u00ed est\u00e1n los detalles de la oferta de trabajo:\n{{ $('HTTP Request1').item.json.data }}\n\nAqu\u00ed est\u00e1 el conjunto de habilidades del candidato:\n# Nombre y Cargo\n\n**CHRISTIAN MORAES**\n**Junior Data - AI & Automation Developer**\n\n# Perfil\n\nDesarrollador de automatizaci\u00f3n enfocado en IA y bases de datos para empresas. He trabajado con marcas de distintos rubros, con experiencia en campa\u00f1as de marketing y ventas; en CRM, desarrollo full-stack y bases de datos. \u00c9tica de trabajo exigente, adaptabilidad y pensamiento cr\u00edtico. Valoro la experiencia pr\u00e1ctica y los valores de la empresa.\n**born REDACTED_DOB - UY**\n\n# Contacto\n\n* **REDACTED_PHONE** \u2014 WhatsApp: [https://wa.me/REDACTED_PHONE](https://wa.me/REDACTED_PHONE)\n* **[REDACTED_EMAIL](mailto:REDACTED_EMAIL)**\n* **Christian (Marcos) Moraes Pedrozo** \u2014 LinkedIn: [REDACTED_LINKEDIN_URL](REDACTED_LINKEDIN_URL)\n* **Montevideo, Uruguay**\n\n# Educaci\u00f3n\n\n* **B.Eng. in Artificial Intelligence & Data Science: AI and Data Science** \u2014 **Univ. Cat\u00f3lica del Uy. (UCU)** \u2014 **03/2026** \u2014 **Montevideo, Uruguay**\n* **Diploma Program (provider-stated 60 ECTS): Artificial Intelligence** \u2014 **Learning Heroes** \u2014 **01/2025** \u2014 **Andorra la Vella (Online)**\n\n# Idiomas\n\n* **Ingl\u00e9s** \u2014 **50%**\n* **Espa\u00f1ol** \u2014 **100%**\n* **Portugu\u00e9s** \u2014 **95%**\n\n# Experiencia\n\n## Agent Booster \u2014 **COO - Co-Founder** \u2014 **Dub\u00e1i - Remoto** \u2014 **March 2025**\n\n* Automatizaci\u00f3n de procesos con n8n y Python; desarrollo full-stack y bases de datos\n* Modelos de Machine Learning con TensorFlow y Python\n* Agentes-LLM con Python y LangChain, prompt engineering, tool use y function calling\n* RAG con embeddings y bases vectoriales en PostgreSQL con pgvector y RLS\n* Integraciones con APIs/webhooks/MCP y CRM (Salesforce, HubSpot, Zoho)\n* Despliegue/hosting de microapps, componentes con JavaScript y Docker\n* An\u00e1lisis modelo GPT, Claude, Gemini y Grok; y generaci\u00f3n de contenido audiovisual IA\n* Consultor en automatizaci\u00f3n y Gen-AI\n\n## Risolvia \u2014 **Project - Co-Founder** \u2014 **Espa\u00f1a - Remoto** \u2014 **July 2025**\n\n* Desarrollo front-end, back-end y del agente IA con n8n para legaltech\n* RAG, embeddings y base vectorial (pgvector en PostgreSQL/Supabase)\n* GDPR (consentimiento), reCAPTCHA v3/css y hardening\n* Investigaci\u00f3n y cumplimiento de c\u00f3digo uruguayo y espa\u00f1ol\n\n## MyEcomProject LLC \u2014 **CTO** \u2014 **Santiago, Chile** (Remote / clientes en Chile) \u2014 **April 2024 \u2013 October 2025**\n\n* Dise\u00f1o y gesti\u00f3n de campa\u00f1as publicitarias para diversos clientes en Meta, Google y TikTok (presupuestos, segmentaci\u00f3n, A/B testing)\n* Tracking y etiquetado (UTM, eventos de conversi\u00f3n) con reportes y KPI\n* Copywriting y direcci\u00f3n de embudos de venta (landing, ofertas, storytelling)\n* Dise\u00f1o de workflows de adquisici\u00f3n y nurturing (email/CRM)\n* Integraciones web\u2013CRM y sincronizaci\u00f3n de leads (formularios, webhooks/APIs)\n* Ventas, cierre de llamadas/presencial, manejo de objeciones y psicolog\u00eda del consumidor\n\n# Habilidades\n\n## Technical Skills\n\n* Automatizaci\u00f3n, Agentes y Gen-AI\n* Machine Learning\n* Integraciones y APIs/MCP\n* Bases de datos\n* Desarrollo full-stack (microapps)\n* CRM y Anal\u00edtica (dashboards)\n\n## Soft Skills\n\n* Comunicaci\u00f3n\n* Negociaci\u00f3n\n* Adaptabilidad\n* Resoluci\u00f3n de problemas\n* Trabajo en equipo\n* Liderazgo\n"
             },
             {
               "content": "Por favor devuelve los datos en JSON con la siguiente estructura:\n{\n\"score\": \"\"\n}",
@@ -1628,7 +1628,7 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "1KMPVtpa4EfvTPipq0b86UbCKXxk9rfCi",
+          "value": "REDACTED_FILE_ID_2",
           "mode": "list"
         },
         "options": {}
@@ -1668,7 +1668,7 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit?usp=drive_link",
+          "value": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit?usp=drive_link",
           "mode": "url"
         },
         "sheetName": {
@@ -1676,7 +1676,7 @@
           "value": 1038962310,
           "mode": "list",
           "cachedResultName": "Filter",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit#gid=1038962310"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit#gid=1038962310"
         },
         "options": {}
       },
@@ -1763,7 +1763,7 @@
         -2512,
         2480
       ],
-      "webhookId": "c9cb4878-ae4d-4b8e-bd37-5395011f7761",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "typeVersion": 1.1,
       "disabled": true
     },
@@ -1947,7 +1947,7 @@
     },
     {
       "parameters": {
-        "chatId": "-1003275800181",
+        "chatId": "REDACTED_TELEGRAM_CHAT_ID",
         "text": "=Title: {{ $('Modify Job Attributes1').item.json.title }}\nCompany: {{ $('Modify Job Attributes1').item.json.company }}\nLocation: {{ $('Modify Job Attributes1').item.json.location }}\nJob Score: {{ $('Parse AI Output1').item.json.score }}\nApply: {{ $('Modify Job Attributes1').item.json.applyLink }}",
         "additionalFields": {
           "appendAttribution": false
@@ -1960,7 +1960,7 @@
         -352,
         2784
       ],
-      "webhookId": "17b9ebe8-c8d4-4bd9-ad20-45842ddc2c00",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "typeVersion": 1.2,
       "credentials": {
         "telegramApi": {
@@ -1975,7 +1975,7 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1A4QuXFvCNzZRQFxinADo5IAwvMA9k2jUmFZ7gpse4t0/edit?usp=drive_link",
+          "value": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_ALT/edit?usp=drive_link",
           "mode": "url"
         },
         "sheetName": {
@@ -1983,7 +1983,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1A4QuXFvCNzZRQFxinADo5IAwvMA9k2jUmFZ7gpse4t0/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_ALT/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -2177,7 +2177,7 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit?usp=drive_link",
+          "value": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit?usp=drive_link",
           "mode": "url"
         },
         "sheetName": {
@@ -2185,7 +2185,7 @@
           "value": 1038962310,
           "mode": "list",
           "cachedResultName": "Filter",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit#gid=1038962310"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit#gid=1038962310"
         },
         "options": {}
       },
@@ -2225,7 +2225,7 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "=1KMPVtpa4EfvTPipq0b86UbCKXxk9rfCi",
+          "value": "=REDACTED_FILE_ID_2",
           "mode": "id"
         },
         "options": {}
@@ -2256,7 +2256,7 @@
         -2608,
         272
       ],
-      "webhookId": "12409f66-fbe7-48bd-b9d7-68449f197264",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "typeVersion": 1.1
     },
     {
@@ -2274,10 +2274,10 @@
     },
     {
       "parameters": {
-        "sendTo": "cmmoraespedrozo@gmail.com",
+        "sendTo": "REDACTED_EMAIL",
         "subject": "\u00a1WEEKLY JOBS READY!",
         "emailType": "text",
-        "message": "=Resumen y Cartas: [https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit?usp=sharing]",
+        "message": "=Resumen y Cartas: [https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit?usp=sharing]",
         "options": {
           "appendAttribution": false
         }
@@ -2290,7 +2290,7 @@
       ],
       "id": "6445f5b3-afca-48e9-b1af-fb813a06e14a",
       "name": "Send a message",
-      "webhookId": "bc759fde-ea89-4fff-b126-bdffdc2b1ce1",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "retryOnFail": true,
       "waitBetweenTries": 5000,
       "credentials": {
@@ -2474,7 +2474,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Eres un bot inteligente perfecto para crear cartas de presentaci\u00f3n para un trabajo. Por favor, toma el curr\u00edculum y la estructura de la carta; y crea una carta de presentaci\u00f3n personalizada para el puesto. Por favor devuelve la carta sin aclaraciones, solo la carta lista.\n\n\nAqu\u00ed est\u00e1n los detalles de la oferta de trabajo:\nT\u00edtulo: {{ $('Modify Job Attributes').item.json.Title }}\nDescripci\u00f3n: {{ $('Modify Job Attributes').item.json.Description }}\nEmpresa: {{ $('Modify Job Attributes').item.json.Company }}\nUbicaci\u00f3n: {{ $('Modify Job Attributes').item.json.Location }}\nJob ID: {{ $('Modify Job Attributes').item.json['Job ID'] }}\n\nAqu\u00ed est\u00e1 el conjunto de habilidades del candidato:\n# Nombre y Cargo\n\n**CHRISTIAN MORAES**\n**Junior Data - AI & Automation Developer**\n\n# Perfil\n\nDesarrollador de automatizaci\u00f3n enfocado en IA y bases de datos para empresas. He trabajado con marcas de distintos rubros, con experiencia en campa\u00f1as de marketing y ventas; en CRM, desarrollo full-stack y bases de datos. \u00c9tica de trabajo exigente, adaptabilidad y pensamiento cr\u00edtico. Valoro la experiencia pr\u00e1ctica y los valores de la empresa.\n**born 07/04/2005 - UY**\n\n# Contacto\n\n* **+598 98 690 873** \u2014 WhatsApp: [https://wa.me/59898690873](https://wa.me/59898690873)\n* **[cmmoraespedrozo@gmail.com](mailto:cmmoraespedrozo@gmail.com)**\n* **Christian (Marcos) Moraes Pedrozo** \u2014 LinkedIn: [https://www.linkedin.com/in/christian-moraes-pedrozo-24702a307/](https://www.linkedin.com/in/christian-moraes-pedrozo-24702a307/)\n* **Montevideo, Uruguay**\n\n# Educaci\u00f3n\n\n* **B.Eng. in Artificial Intelligence & Data Science: AI and Data Science** \u2014 **Univ. Cat\u00f3lica del Uy. (UCU)** \u2014 **03/2026** \u2014 **Montevideo, Uruguay**\n* **Diploma Program (provider-stated 60 ECTS): Artificial Intelligence** \u2014 **Learning Heroes** \u2014 **01/2025** \u2014 **Andorra la Vella (Online)**\n\n# Idiomas\n\n* **Ingl\u00e9s** \u2014 **50%**\n* **Espa\u00f1ol** \u2014 **100%**\n* **Portugu\u00e9s** \u2014 **95%**\n\n# Experiencia\n\n## Agent Booster \u2014 **COO - Co-Founder** \u2014 **Dub\u00e1i - Remoto** \u2014 **March 2025**\n\n* Automatizaci\u00f3n de procesos con n8n y Python; desarrollo full-stack y bases de datos\n* Modelos de Machine Learning con TensorFlow y Python\n* Agentes-LLM con Python y LangChain, prompt engineering, tool use y function calling\n* RAG con embeddings y bases vectoriales en PostgreSQL con pgvector y RLS\n* Integraciones con APIs/webhooks/MCP y CRM (Salesforce, HubSpot, Zoho)\n* Despliegue/hosting de microapps, componentes con JavaScript y Docker\n* An\u00e1lisis modelo GPT, Claude, Gemini y Grok; y generaci\u00f3n de contenido audiovisual IA\n* Consultor en automatizaci\u00f3n y Gen-AI\n\n## Risolvia \u2014 **Project - Co-Founder** \u2014 **Espa\u00f1a - Remoto** \u2014 **July 2025**\n\n* Desarrollo front-end, back-end y del agente IA con n8n para legaltech\n* RAG, embeddings y base vectorial (pgvector en PostgreSQL/Supabase)\n* GDPR (consentimiento), reCAPTCHA v3/css y hardening\n* Investigaci\u00f3n y cumplimiento de c\u00f3digo uruguayo y espa\u00f1ol\n\n## MyEcomProject LLC \u2014 **CTO** \u2014 **Santiago, Chile** (Remote / clientes en Chile) \u2014 **April 2024 \u2013 October 2025**\n\n* Dise\u00f1o y gesti\u00f3n de campa\u00f1as publicitarias para diversos clientes en Meta, Google y TikTok (presupuestos, segmentaci\u00f3n, A/B testing)\n* Tracking y etiquetado (UTM, eventos de conversi\u00f3n) con reportes y KPI\n* Copywriting y direcci\u00f3n de embudos de venta (landing, ofertas, storytelling)\n* Dise\u00f1o de workflows de adquisici\u00f3n y nurturing (email/CRM)\n* Integraciones web\u2013CRM y sincronizaci\u00f3n de leads (formularios, webhooks/APIs)\n* Ventas, cierre de llamadas/presencial, manejo de objeciones y psicolog\u00eda del consumidor\n\n# Habilidades\n\n## Technical Skills\n\n* Automatizaci\u00f3n, Agentes y Gen-AI\n* Machine Learning\n* Integraciones y APIs/MCP\n* Bases de datos\n* Desarrollo full-stack (microapps)\n* CRM y Anal\u00edtica (dashboards)\n\n## Soft Skills\n\n* Comunicaci\u00f3n\n* Negociaci\u00f3n\n* Adaptabilidad\n* Resoluci\u00f3n de problemas\n* Trabajo en equipo\n* Liderazgo\n\n---\n\n#Carta de presentaci\u00f3n (plantilla general a completar menteniendo el tono y enfoque)\n\n[Ciudad], {{ $now.toLocal().format('yyyy-MM-dd') }}\n\n[Nombre del/a destinatario/a / deja vac\u00edo si no hay]\n [Empresa]\n [Ciudad, Pa\u00eds]\n [Correo de la Empresa/deja vac\u00edo si no hay] \u00b7 [Tel\u00e9fono de la Empresa/deja vac\u00edo si no hay]\n\nAsunto: Candidatura a [Puesto] (Ref. [N\u00famero])\n\nA la atenci\u00f3n del departamento de Recursos Humanos:\n\nMe postulo para el puesto de [Puesto] en [Empresa]. Soy Christian Moraes (Montevideo, Uruguay), y me encuentro actualmente en una continua formaci\u00f3n en Inteligencia Artificial proporcionada por un espa\u00f1ol que colabora con Open AI, e iniciando una carrera de Ingenier\u00eda en Ciencia de Datos e Inteligencia Artificial, poseo experiencia pr\u00e1ctica en automatizaci\u00f3n, machine learning y agentes de IA.\n\nEn proyectos recientes (AgentBooster) implement\u00e9 automatizaci\u00f3n de procesos (n8n/Python/MachineLearning/LangChain/pgvector), integraciones con APIs/CRM (Salesforce, HubSpot, Zoho), y desarrollo full-stack/bases de datos.\n\nEstoy abierto a roles de iniciaci\u00f3n (por ejemplo, Customer Support (Technical), Junior Data Analyst, Operations Assistant) para conocer el negocio en profundidad, aprender de los procesos internos, obtener experiencia y, cuando sea oportuno seg\u00fan las prioridades del equipo, adicionalmente con el tiempo podr\u00eda apoyar en identificar y proponer mejoras de automatizaci\u00f3n/ML que aumenten la eficiencia. Esta oportunidad tambi\u00e9n me ayudar\u00e1 a cubrir los costes de mis estudios mientras crezco en un entorno profesional.\n\nComo habilidades blandas destaco comunicaci\u00f3n, negociaci\u00f3n, trabajo en equipo, liderazgo y adaptabilidad. Adem\u00e1s, tengo amputaci\u00f3n de pierna derecha: no realizo cargas pesadas con las manos porque utilizo bastones canadienses, pero cuento con buena movilidad y excelente condici\u00f3n f\u00edsica; no requiero ajustes para trabajo de oficina o remoto.\n\nAdjunto mi CV (PDF con enlaces activos). Quedo a disposici\u00f3n para una entrevista y, si lo consideran, una prueba pr\u00e1ctica. Disponibilidad inmediata y flexibilidad horaria (preferentemente h\u00edbrido/presencial).\n\nAgradezco su tiempo y consideraci\u00f3n.\n\nAtentamente,\nChristian Moraes\n\nLinkedIn: Christian (Marcos) Moraes Pedrozo\nEmail: cmmoraespedrozo@gmail.com \u00b7 Tel.: +598 98 690 873",
+        "text": "=Eres un bot inteligente perfecto para crear cartas de presentaci\u00f3n para un trabajo. Por favor, toma el curr\u00edculum y la estructura de la carta; y crea una carta de presentaci\u00f3n personalizada para el puesto. Por favor devuelve la carta sin aclaraciones, solo la carta lista.\n\n\nAqu\u00ed est\u00e1n los detalles de la oferta de trabajo:\nT\u00edtulo: {{ $('Modify Job Attributes').item.json.Title }}\nDescripci\u00f3n: {{ $('Modify Job Attributes').item.json.Description }}\nEmpresa: {{ $('Modify Job Attributes').item.json.Company }}\nUbicaci\u00f3n: {{ $('Modify Job Attributes').item.json.Location }}\nJob ID: {{ $('Modify Job Attributes').item.json['Job ID'] }}\n\nAqu\u00ed est\u00e1 el conjunto de habilidades del candidato:\n# Nombre y Cargo\n\n**CHRISTIAN MORAES**\n**Junior Data - AI & Automation Developer**\n\n# Perfil\n\nDesarrollador de automatizaci\u00f3n enfocado en IA y bases de datos para empresas. He trabajado con marcas de distintos rubros, con experiencia en campa\u00f1as de marketing y ventas; en CRM, desarrollo full-stack y bases de datos. \u00c9tica de trabajo exigente, adaptabilidad y pensamiento cr\u00edtico. Valoro la experiencia pr\u00e1ctica y los valores de la empresa.\n**born REDACTED_DOB - UY**\n\n# Contacto\n\n* **REDACTED_PHONE** \u2014 WhatsApp: [https://wa.me/REDACTED_PHONE](https://wa.me/REDACTED_PHONE)\n* **[REDACTED_EMAIL](mailto:REDACTED_EMAIL)**\n* **Christian (Marcos) Moraes Pedrozo** \u2014 LinkedIn: [REDACTED_LINKEDIN_URL](REDACTED_LINKEDIN_URL)\n* **Montevideo, Uruguay**\n\n# Educaci\u00f3n\n\n* **B.Eng. in Artificial Intelligence & Data Science: AI and Data Science** \u2014 **Univ. Cat\u00f3lica del Uy. (UCU)** \u2014 **03/2026** \u2014 **Montevideo, Uruguay**\n* **Diploma Program (provider-stated 60 ECTS): Artificial Intelligence** \u2014 **Learning Heroes** \u2014 **01/2025** \u2014 **Andorra la Vella (Online)**\n\n# Idiomas\n\n* **Ingl\u00e9s** \u2014 **50%**\n* **Espa\u00f1ol** \u2014 **100%**\n* **Portugu\u00e9s** \u2014 **95%**\n\n# Experiencia\n\n## Agent Booster \u2014 **COO - Co-Founder** \u2014 **Dub\u00e1i - Remoto** \u2014 **March 2025**\n\n* Automatizaci\u00f3n de procesos con n8n y Python; desarrollo full-stack y bases de datos\n* Modelos de Machine Learning con TensorFlow y Python\n* Agentes-LLM con Python y LangChain, prompt engineering, tool use y function calling\n* RAG con embeddings y bases vectoriales en PostgreSQL con pgvector y RLS\n* Integraciones con APIs/webhooks/MCP y CRM (Salesforce, HubSpot, Zoho)\n* Despliegue/hosting de microapps, componentes con JavaScript y Docker\n* An\u00e1lisis modelo GPT, Claude, Gemini y Grok; y generaci\u00f3n de contenido audiovisual IA\n* Consultor en automatizaci\u00f3n y Gen-AI\n\n## Risolvia \u2014 **Project - Co-Founder** \u2014 **Espa\u00f1a - Remoto** \u2014 **July 2025**\n\n* Desarrollo front-end, back-end y del agente IA con n8n para legaltech\n* RAG, embeddings y base vectorial (pgvector en PostgreSQL/Supabase)\n* GDPR (consentimiento), reCAPTCHA v3/css y hardening\n* Investigaci\u00f3n y cumplimiento de c\u00f3digo uruguayo y espa\u00f1ol\n\n## MyEcomProject LLC \u2014 **CTO** \u2014 **Santiago, Chile** (Remote / clientes en Chile) \u2014 **April 2024 \u2013 October 2025**\n\n* Dise\u00f1o y gesti\u00f3n de campa\u00f1as publicitarias para diversos clientes en Meta, Google y TikTok (presupuestos, segmentaci\u00f3n, A/B testing)\n* Tracking y etiquetado (UTM, eventos de conversi\u00f3n) con reportes y KPI\n* Copywriting y direcci\u00f3n de embudos de venta (landing, ofertas, storytelling)\n* Dise\u00f1o de workflows de adquisici\u00f3n y nurturing (email/CRM)\n* Integraciones web\u2013CRM y sincronizaci\u00f3n de leads (formularios, webhooks/APIs)\n* Ventas, cierre de llamadas/presencial, manejo de objeciones y psicolog\u00eda del consumidor\n\n# Habilidades\n\n## Technical Skills\n\n* Automatizaci\u00f3n, Agentes y Gen-AI\n* Machine Learning\n* Integraciones y APIs/MCP\n* Bases de datos\n* Desarrollo full-stack (microapps)\n* CRM y Anal\u00edtica (dashboards)\n\n## Soft Skills\n\n* Comunicaci\u00f3n\n* Negociaci\u00f3n\n* Adaptabilidad\n* Resoluci\u00f3n de problemas\n* Trabajo en equipo\n* Liderazgo\n\n---\n\n#Carta de presentaci\u00f3n (plantilla general a completar menteniendo el tono y enfoque)\n\n[Ciudad], {{ $now.toLocal().format('yyyy-MM-dd') }}\n\n[Nombre del/a destinatario/a / deja vac\u00edo si no hay]\n [Empresa]\n [Ciudad, Pa\u00eds]\n [Correo de la Empresa/deja vac\u00edo si no hay] \u00b7 [Tel\u00e9fono de la Empresa/deja vac\u00edo si no hay]\n\nAsunto: Candidatura a [Puesto] (Ref. [N\u00famero])\n\nA la atenci\u00f3n del departamento de Recursos Humanos:\n\nMe postulo para el puesto de [Puesto] en [Empresa]. Soy Christian Moraes (Montevideo, Uruguay), y me encuentro actualmente en una continua formaci\u00f3n en Inteligencia Artificial proporcionada por un espa\u00f1ol que colabora con Open AI, e iniciando una carrera de Ingenier\u00eda en Ciencia de Datos e Inteligencia Artificial, poseo experiencia pr\u00e1ctica en automatizaci\u00f3n, machine learning y agentes de IA.\n\nEn proyectos recientes (AgentBooster) implement\u00e9 automatizaci\u00f3n de procesos (n8n/Python/MachineLearning/LangChain/pgvector), integraciones con APIs/CRM (Salesforce, HubSpot, Zoho), y desarrollo full-stack/bases de datos.\n\nEstoy abierto a roles de iniciaci\u00f3n (por ejemplo, Customer Support (Technical), Junior Data Analyst, Operations Assistant) para conocer el negocio en profundidad, aprender de los procesos internos, obtener experiencia y, cuando sea oportuno seg\u00fan las prioridades del equipo, adicionalmente con el tiempo podr\u00eda apoyar en identificar y proponer mejoras de automatizaci\u00f3n/ML que aumenten la eficiencia. Esta oportunidad tambi\u00e9n me ayudar\u00e1 a cubrir los costes de mis estudios mientras crezco en un entorno profesional.\n\nComo habilidades blandas destaco comunicaci\u00f3n, negociaci\u00f3n, trabajo en equipo, liderazgo y adaptabilidad. Adem\u00e1s, tengo amputaci\u00f3n de pierna derecha: no realizo cargas pesadas con las manos porque utilizo bastones canadienses, pero cuento con buena movilidad y excelente condici\u00f3n f\u00edsica; no requiero ajustes para trabajo de oficina o remoto.\n\nAdjunto mi CV (PDF con enlaces activos). Quedo a disposici\u00f3n para una entrevista y, si lo consideran, una prueba pr\u00e1ctica. Disponibilidad inmediata y flexibilidad horaria (preferentemente h\u00edbrido/presencial).\n\nAgradezco su tiempo y consideraci\u00f3n.\n\nAtentamente,\nChristian Moraes\n\nLinkedIn: Christian (Marcos) Moraes Pedrozo\nEmail: REDACTED_EMAIL \u00b7 Tel.: REDACTED_PHONE",
         "needsFallback": true,
         "options": {}
       },
@@ -2542,8 +2542,8 @@
     },
     {
       "parameters": {
-        "chatId": "-1003275800181",
-        "text": "=Title: {{ $('Modify Job Attributes').item.json.Title }}\nCompany: {{ $('Modify Job Attributes').item.json.Company }}\nLocation: {{ $('Modify Job Attributes').item.json.Location }}\nJob Score: {{ $('Parse AI Output').item.json.match_score }}\nApply: {{ $('Modify Job Attributes').item.json['Apply Link'] }}\nCarta: [https://docs.google.com/spreadsheets/d/1caSG4An9_nNMgvKVT7zHQ4jOlAp4y0koW0tX-BRjmcM/edit?usp=sharing]",
+        "chatId": "REDACTED_TELEGRAM_CHAT_ID",
+        "text": "=Title: {{ $('Modify Job Attributes').item.json.Title }}\nCompany: {{ $('Modify Job Attributes').item.json.Company }}\nLocation: {{ $('Modify Job Attributes').item.json.Location }}\nJob Score: {{ $('Parse AI Output').item.json.match_score }}\nApply: {{ $('Modify Job Attributes').item.json['Apply Link'] }}\nCarta: [https://docs.google.com/spreadsheets/d/REDACTED_SHEET_ID_MAIN/edit?usp=sharing]",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -2556,7 +2556,7 @@
       ],
       "id": "d7b4c403-535f-45cb-9751-d159db08a467",
       "name": "Send a text message",
-      "webhookId": "6e2d5a68-f318-425c-90d8-2fb24d98cfe9",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "retryOnFail": true,
       "credentials": {
         "telegramApi": {

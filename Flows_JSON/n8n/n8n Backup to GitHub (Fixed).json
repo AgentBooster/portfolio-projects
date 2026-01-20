@@ -68,17 +68,17 @@
         "operation": "list",
         "owner": {
           "__rl": true,
-          "value": "vasyl-pavlyuchok",
+          "value": "YOUR_GITHUB_USER",
           "mode": "list",
-          "cachedResultName": "vasyl-pavlyuchok",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+          "cachedResultName": "YOUR_GITHUB_USER",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER"
         },
         "repository": {
           "__rl": true,
-          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "value": "YOUR_REPO_NAME",
           "mode": "list",
-          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+          "cachedResultName": "YOUR_REPO_NAME",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER/YOUR_REPO_NAME"
         },
         "filePath": "workflows"
       },
@@ -90,7 +90,7 @@
         80,
         176
       ],
-      "webhookId": "6bebf9e4-3ea2-4dd9-a1e5-f55fbf2fa6a6",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "githubOAuth2Api": {
           "id": "Rn8cWyb4nNwSSpGZ",
@@ -106,17 +106,17 @@
         "operation": "list",
         "owner": {
           "__rl": true,
-          "value": "vasyl-pavlyuchok",
+          "value": "YOUR_GITHUB_USER",
           "mode": "list",
-          "cachedResultName": "vasyl-pavlyuchok",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+          "cachedResultName": "YOUR_GITHUB_USER",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER"
         },
         "repository": {
           "__rl": true,
-          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "value": "YOUR_REPO_NAME",
           "mode": "list",
-          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+          "cachedResultName": "YOUR_REPO_NAME",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER/YOUR_REPO_NAME"
         },
         "filePath": "credentials"
       },
@@ -128,7 +128,7 @@
         80,
         416
       ],
-      "webhookId": "a46c2ede-59c1-4829-8307-6707ee9b4e41",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "githubOAuth2Api": {
           "id": "Rn8cWyb4nNwSSpGZ",
@@ -234,17 +234,17 @@
         "operation": "edit",
         "owner": {
           "__rl": true,
-          "value": "vasyl-pavlyuchok",
+          "value": "YOUR_GITHUB_USER",
           "mode": "list",
-          "cachedResultName": "vasyl-pavlyuchok",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+          "cachedResultName": "YOUR_GITHUB_USER",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER"
         },
         "repository": {
           "__rl": true,
-          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "value": "YOUR_REPO_NAME",
           "mode": "list",
-          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+          "cachedResultName": "YOUR_REPO_NAME",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER/YOUR_REPO_NAME"
         },
         "filePath": "={{ $json.path }}",
         "fileContent": "={{ $json.content }}",
@@ -258,7 +258,7 @@
         752,
         48
       ],
-      "webhookId": "b3bb1114-3a70-489e-a494-449743d0835c",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "githubOAuth2Api": {
           "id": "Rn8cWyb4nNwSSpGZ",
@@ -272,17 +272,17 @@
         "resource": "file",
         "owner": {
           "__rl": true,
-          "value": "vasyl-pavlyuchok",
+          "value": "YOUR_GITHUB_USER",
           "mode": "list",
-          "cachedResultName": "vasyl-pavlyuchok",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+          "cachedResultName": "YOUR_GITHUB_USER",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER"
         },
         "repository": {
           "__rl": true,
-          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "value": "YOUR_REPO_NAME",
           "mode": "list",
-          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+          "cachedResultName": "YOUR_REPO_NAME",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER/YOUR_REPO_NAME"
         },
         "filePath": "={{ $json.path }}",
         "fileContent": "={{ $json.content }}",
@@ -296,7 +296,7 @@
         752,
         208
       ],
-      "webhookId": "421fc758-c45b-47a0-992a-e35b78264974",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "githubOAuth2Api": {
           "id": "Rn8cWyb4nNwSSpGZ",
@@ -311,17 +311,17 @@
         "operation": "edit",
         "owner": {
           "__rl": true,
-          "value": "vasyl-pavlyuchok",
+          "value": "YOUR_GITHUB_USER",
           "mode": "list",
-          "cachedResultName": "vasyl-pavlyuchok",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+          "cachedResultName": "YOUR_GITHUB_USER",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER"
         },
         "repository": {
           "__rl": true,
-          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "value": "YOUR_REPO_NAME",
           "mode": "list",
-          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+          "cachedResultName": "YOUR_REPO_NAME",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER/YOUR_REPO_NAME"
         },
         "filePath": "={{ $json.path }}",
         "fileContent": "={{ $json.content }}",
@@ -335,7 +335,7 @@
         752,
         368
       ],
-      "webhookId": "bdf1ba13-d277-429a-9758-e6bfe90d5170",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "githubOAuth2Api": {
           "id": "Rn8cWyb4nNwSSpGZ",
@@ -349,17 +349,17 @@
         "resource": "file",
         "owner": {
           "__rl": true,
-          "value": "vasyl-pavlyuchok",
+          "value": "YOUR_GITHUB_USER",
           "mode": "list",
-          "cachedResultName": "vasyl-pavlyuchok",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok"
+          "cachedResultName": "YOUR_GITHUB_USER",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER"
         },
         "repository": {
           "__rl": true,
-          "value": "github-n8n-ab-workflows-backup-postgresql-2026",
+          "value": "YOUR_REPO_NAME",
           "mode": "list",
-          "cachedResultName": "github-n8n-ab-workflows-backup-postgresql-2026",
-          "cachedResultUrl": "https://github.com/vasyl-pavlyuchok/github-n8n-ab-workflows-backup-postgresql-2026"
+          "cachedResultName": "YOUR_REPO_NAME",
+          "cachedResultUrl": "https://github.com/YOUR_GITHUB_USER/YOUR_REPO_NAME"
         },
         "filePath": "={{ $json.path }}",
         "fileContent": "={{ $json.content }}",
@@ -373,7 +373,7 @@
         752,
         512
       ],
-      "webhookId": "528cce71-8c47-4d19-bd19-a0746ec64c73",
+      "webhookId": "REDACTED_WEBHOOK_ID",
       "credentials": {
         "githubOAuth2Api": {
           "id": "Rn8cWyb4nNwSSpGZ",
@@ -399,7 +399,7 @@
     },
     {
       "parameters": {
-        "content": "## Hey, I'm Vasyl Pavlyuchok\nI design **AI-powered automation systems** for \nfounders and agencies. I build the systems that\nlet businesses run without you.\n\n### \ud83d\ude80 What I can help you with\n* **Killing repetitive admin** & manual data entry.\n* **Stopping lead leakage** in your pipelines.\n* **Speeding up client onboarding** workflows.\n* **Eliminating information chaos** across tools.\n\n### Let's stay in touch\n- **LinkedIn:** [Connect with me](https://www.linkedin.com/in/vasyl-pavlyuchok/)  \n- **YouTube:** [Watch my n8n & AI videos](https://www.youtube.com/@vasylpavlyuchok)  \n- **Email:** vasyl@techbooster.io  \n\n*Automate the busywork. Keep your focus on strategy.*",
+        "content": "## Hey, I'm YOUR_NAME\nI design **AI-powered automation systems**.\n\n### \ud83d\ude80 What I can help you with\n* **Killing repetitive admin** & manual data entry.\n* **Stopping lead leakage** in your pipelines.\n* **Speeding up client onboarding** workflows.\n* **Eliminating information chaos** across tools.\n\n### Let's stay in touch\n- **LinkedIn:** [Connect with me](https://www.linkedin.com/)\n- **Email:** your_email@example.com\n\n*Automate the busywork. Keep your focus on strategy.*",
         "height": 416,
         "width": 512,
         "color": 4
