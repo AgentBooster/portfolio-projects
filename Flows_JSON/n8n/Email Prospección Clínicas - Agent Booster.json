@@ -1,0 +1,4805 @@
+{
+  "name": "Email Prospección Clínicas - Agent Booster",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "id": "0cc81e65-d965-4d6c-b6a3-7afe6151fc73",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        -5936,
+        96
+      ],
+      "typeVersion": 1.1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Query",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "={{ true }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "437820ec-d1a7-477f-b6e7-b84754f81fba",
+      "name": "Read Pending Queries",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -5728,
+        -112
+      ],
+      "typeVersion": 4.2,
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets (Agent Booster)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "Run actor and get dataset",
+        "actorSource": "store",
+        "actorId": {
+          "__rl": true,
+          "value": "nwua9Gu5YrADL7ZDj",
+          "mode": "list",
+          "cachedResultName": "Google Maps Scraper (compass/crawler-google-places)",
+          "cachedResultUrl": "https://console.apify.com/actors/nwua9Gu5YrADL7ZDj/input"
+        },
+        "customBody": "={\n    \"includeWebResults\": false,\n    \"locationQuery\": \"{{ $json.Location }}\", \n    \"maxCrawledPlacesPerSearch\": 5,\n    \"maxImages\": 0,\n    \"maximumLeadsEnrichmentRecords\": 0,\n    \"scrapeContacts\": false,\n    \"scrapeDirectories\": false,\n    \"scrapeImageAuthors\": false,\n    \"scrapePlaceDetailPage\": false,\n    \"scrapeReviewsPersonalData\": false,\n    \"scrapeTableReservationProvider\": false,\n    \"searchStringsArray\": [\n        \"{{ $json.Query }}\"\n    ],\n    \"skipClosedPlaces\": false\n}",
+        "timeout": {}
+      },
+      "type": "@apify/n8n-nodes-apify.apify",
+      "typeVersion": 1,
+      "position": [
+        -5520,
+        -112
+      ],
+      "id": "d2ae5f04-414c-4845-a75d-b5faf4fff310",
+      "name": "Run an Actor and get dataset",
+      "credentials": {
+        "apifyApi": {
+          "id": "z3oroqE8oKLve5kU",
+          "name": "Chris Apify API (alternativo)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A",
+          "mode": "list",
+          "cachedResultName": "Search Leads - Google Maps Scraper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1948906848,
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit#gid=1948906848"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "placeId",
+              "lookupValue": "={{ $json.placeId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -4864,
+        -96
+      ],
+      "id": "f03984b5-b30f-41db-ac4d-7330a67cc61b",
+      "name": "Get row(s) in sheet",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets (Agent Booster)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bc31e96c-fe36-4ad3-b448-23866da497bb",
+              "leftValue": "={{ $json.placeId }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4512,
+        -96
+      ],
+      "id": "b1d7678e-a196-4bc9-a836-509a939b0bef",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1948906848,
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit#gid=1948906848"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "placeId": "={{ $('Batch Processing Logic').item.json.placeId }}",
+            "searchString": "={{ $('Batch Processing Logic').item.json.searchString }}",
+            "status": "false",
+            "scraped_At": "={{ $('Batch Processing Logic').item.json.scrapedAt }}",
+            "state": "={{ $('Batch Processing Logic').item.json.state }}",
+            "address": "={{ $('Batch Processing Logic').item.json.address }}",
+            "city": "={{ $('Batch Processing Logic').item.json.city }}",
+            "temporarilyClosed": "={{ $('Batch Processing Logic').item.json.temporarilyClosed }}",
+            "permanentlyClosed": "={{ $('Batch Processing Logic').item.json.permanentlyClosed }}",
+            "categoryName": "={{ $('Batch Processing Logic').item.json.categoryName }}",
+            "title": "={{ $('Batch Processing Logic').item.json.title }}",
+            "countryCode": "={{ $('Batch Processing Logic').item.json.countryCode }}",
+            "google_maps_url": "={{ $('Batch Processing Logic').item.json.url }}",
+            "phone": "='{{ $('Batch Processing Logic').item.json[\"phone\"] }}",
+            "website": "={{ $('Batch Processing Logic').item.json[\"website\"] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "searchString",
+              "displayName": "searchString",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "state",
+              "displayName": "state",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_limpio",
+              "displayName": "nombre_limpio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "categoryName",
+              "displayName": "categoryName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email_principal",
+              "displayName": "email_principal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "emails",
+              "displayName": "emails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_responsable",
+              "displayName": "nombre_responsable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "telefono_movil",
+              "displayName": "telefono_movil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "whatsapp",
+              "displayName": "whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "google_maps_url",
+              "displayName": "google_maps_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "facebook",
+              "displayName": "facebook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "instagram",
+              "displayName": "instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "twitter",
+              "displayName": "twitter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "contactado",
+              "displayName": "contactado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "error email (no found)",
+              "displayName": "error email (no found)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "descartado",
+              "displayName": "descartado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_contacto",
+              "displayName": "fecha_contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "countryCode",
+              "displayName": "countryCode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "placeId",
+              "displayName": "placeId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "scraped_At",
+              "displayName": "scraped_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "permanentlyClosed",
+              "displayName": "permanentlyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "temporarilyClosed",
+              "displayName": "temporarilyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "98ec498b-9da6-4af5-8bdb-64acbcf337a0",
+      "name": "Save Business Data",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -4128,
+        -32
+      ],
+      "typeVersion": 4.6,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets (Agent Booster)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "4bda953d-4b3a-494f-9b52-02e438437b36",
+      "name": "Batch Processing Logic",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        -5072,
+        -112
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "167b34cf-a60e-41ba-b4ae-3258c54f7c8a",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "f0c6809a-2d7a-46dc-b57b-a4245842e288",
+              "name": "categoryName",
+              "value": "={{ $json.categoryName }}",
+              "type": "string"
+            },
+            {
+              "id": "c8989e81-5049-420a-8473-3cd9444953dc",
+              "name": "address",
+              "value": "={{ $json.address }}",
+              "type": "string"
+            },
+            {
+              "id": "ce6e871f-2705-4e0b-8e6d-ec669b5f3006",
+              "name": "searchString",
+              "value": "={{ $json.searchString }}",
+              "type": "string"
+            },
+            {
+              "id": "3a22be09-1b67-4e9f-846d-2701431199e8",
+              "name": "phone",
+              "value": "={{ $json.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "f38ba393-4f53-4d14-a962-67bbd116b100",
+              "name": "website",
+              "value": "={{ $json.website }}",
+              "type": "string"
+            },
+            {
+              "id": "a0fe84d6-5bfb-4b5d-9c5e-c00b22cb9dd4",
+              "name": "placeId",
+              "value": "={{ $json.placeId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3696,
+        -112
+      ],
+      "id": "9a18f6d7-5516-474e-8a17-fe1d65fde145",
+      "name": "Edit Fields",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.website }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "es-ES,es;q=0.9,en;q=0.8"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "redirect": {
+            "redirect": {
+              "maxRedirects": 5
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "id": "0ee62d2f-c10e-43af-bcf0-8765c8101e7e",
+      "name": "Visitar Web Clinica",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -3504,
+        -112
+      ],
+      "typeVersion": 4.2,
+      "alwaysOutputData": true,
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "check-necesita-ia",
+              "leftValue": "={{ $json.necesita_ia }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "check-tiene-html",
+              "leftValue": "={{ $json.htmlContent }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "778967b4-6454-4dba-a823-9b5d4026a690",
+      "name": "Necesita IA?",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -3056,
+        48
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "[GROQ_API_URL]",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Eres un experto en limpieza de datos. Devuelve JSON.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": `Analiza esto:\nTITULO MAPS: ${$json.title}\nWEB: ${$json.website}\nHTML: ${$json.htmlContent ? $json.htmlContent.substring(0, 8000) : ''}\n\nOBJETIVO:\nGenera un JSON con campo 'nombre_limpio' OBLIGATORIO.\n1. Contrasta Titulo vs Web.\n2. Elimina S.L., ciudades, etc.\n3. Si dudas, usa el Titulo Maps limpio.\n\nFORMATO JSON:\n{\n  \"email_principal\": \"...\",\n  \"emails\": \"...\",\n  \"nombre_responsable\": \"...\",\n  \"telefono_movil\": \"...\",\n  \"linkedin\": \"...\",\n  \"facebook\": \"...\",\n  \"instagram\": \"...\",\n  \"nombre_limpio\": \"...\"\n}`\n    }\n  ],\n  \"response_format\": {\n    \"type\": \"json_object\"\n  },\n  \"temperature\": 0.1\n}\n}}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "411d0f1d-c3b3-4425-b273-5678cef8b5f7",
+      "name": "Groq - Buscar Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -2832,
+        -144
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "SyYCC0i2AmbppoPf",
+          "name": "Groq Free Key (Agent Booster acc.)"
+        }
+      },
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const groqResponse = $input.first().json;\n// Recuperamos los datos del nodo anterior\n// IMPORTANTE: Asegúrate de que el nodo anterior se llama \"Necesita IA?\" \n// Si da error, cambia $('Necesita IA?') por $input.first().pairedItem.item.json\nlet prevData = {};\ntry {\n   prevData = $('Necesita IA?').first().json;\n} catch(e) {\n   // Fallback por si acaso\n   prevData = { title: \"Sin Título\" }; \n}\n\nlet datosIA = {};\n\ntry {\n  const content = groqResponse.choices?.[0]?.message?.content || '{}';\n  // Limpieza de seguridad por si la IA mete markdown\n  const jsonString = content.replace(/```json\\n?|```/g, '').trim();\n  datosIA = JSON.parse(jsonString);\n} catch (e) {\n  // Si falla el parseo, datosIA se queda vacío\n}\n\n// 1. GESTIÓN DEL NOMBRE LIMPIO (La Joya de la Corona) 👑\n// Si la IA nos dio el nombre, lo usamos. Si no, usamos el título original de Maps.\nlet nombreFinal = datosIA.nombre_limpio || prevData.title;\n\n// Limpieza extra por si acaso devuelve \"null\" string\nif (!nombreFinal || nombreFinal === 'null') {\n    nombreFinal = prevData.title;\n}\n\n// 2. Gestión del Email\nlet emailIA = null;\nif (datosIA.email_principal && datosIA.email_principal !== 'null' && datosIA.email_principal.includes('@')) {\n   emailIA = datosIA.email_principal.toLowerCase().trim();\n}\n\nreturn {\n  ...prevData,\n  \n  // AQUÍ GUARDAMOS EL TESORO\n  nombre_limpio: nombreFinal,\n\n  // Resto de datos actualizados\n  email_principal: emailIA || prevData.email_principal,\n  emails: datosIA.emails || prevData.emails,\n  nombre_responsable: datosIA.nombre_responsable || prevData.nombre_responsable,\n  telefono_movil: datosIA.telefono_movil || null,\n  linkedin: datosIA.linkedin || prevData.linkedin,\n  facebook: datosIA.facebook || prevData.facebook,\n  instagram: datosIA.instagram || prevData.instagram,\n  \n  fuente_email: emailIA ? 'IA (Groq)' : 'Regex',\n  necesita_ia: false\n};"
+      },
+      "id": "f11d0f9b-811f-4292-84a1-7b9a4b08d00d",
+      "name": "Parsear Respuesta Groq",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -2640,
+        -144
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "id": "21235610-209e-41a5-8b35-c21e7c3de15a",
+      "name": "Merge Resultados",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        -2448,
+        48
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1948906848,
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit#gid=1948906848"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "true",
+            "website": "={{ $json.website }}",
+            "email_principal": "={{ $json.email_principal }}",
+            "emails": "={{ $json.emails }}",
+            "linkedin": "={{ $json.linkedin }}",
+            "facebook": "={{ $json.facebook }}",
+            "instagram": "={{ $json.instagram }}",
+            "twitter": "={{ $json.twitter }}",
+            "nombre_responsable": "={{ $json.nombre_responsable }}",
+            "telefono_movil": "={{ $json.telefono_movil }}",
+            "placeId": "={{ $json.placeId }}",
+            "nombre_limpio": "={{ $json.nombre_limpio }}"
+          },
+          "matchingColumns": [
+            "placeId"
+          ],
+          "schema": [
+            {
+              "id": "searchString",
+              "displayName": "searchString",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "state",
+              "displayName": "state",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_limpio",
+              "displayName": "nombre_limpio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "categoryName",
+              "displayName": "categoryName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email_principal",
+              "displayName": "email_principal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "emails",
+              "displayName": "emails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_responsable",
+              "displayName": "nombre_responsable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "telefono_movil",
+              "displayName": "telefono_movil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "whatsapp",
+              "displayName": "whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "google_maps_url",
+              "displayName": "google_maps_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "facebook",
+              "displayName": "facebook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "instagram",
+              "displayName": "instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "twitter",
+              "displayName": "twitter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "contactado",
+              "displayName": "contactado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "error email (no found)",
+              "displayName": "error email (no found)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "descartado",
+              "displayName": "descartado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_contacto",
+              "displayName": "fecha_contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "countryCode",
+              "displayName": "countryCode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "placeId",
+              "displayName": "placeId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "scraped_At",
+              "displayName": "scraped_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "permanentlyClosed",
+              "displayName": "permanentlyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "temporarilyClosed",
+              "displayName": "temporarilyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "b1d534f8-e885-4eed-80ef-29a3301ef36a",
+      "name": "Mark as Processed",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -2256,
+        48
+      ],
+      "typeVersion": 4.6,
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets (Agent Booster)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "amount": "={{ Math.floor(Math.random() * 3) + 2 }}"
+      },
+      "id": "ef95f632-0537-4ee7-8a49-fe7045aa00c2",
+      "name": "Wait Anti-Bloqueo",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        -2064,
+        48
+      ],
+      "typeVersion": 1.1,
+      "webhookId": "dd5f981d-cde5-48d9-af69-e8744bde29a6"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst seen = new Map();\nconst uniqueItems = [];\n\nfor (const item of items) {\n  // CAMBIO AQUÍ: Usamos placeId en lugar de address\n  // Si por casualidad placeId no existe, usamos la URL o el título como plan B para no perderlo\n  const uniqueKey = item.json.placeId || item.json.searchPageUrl || item.json.title;\n  \n  if (uniqueKey && !seen.has(uniqueKey)) {\n    seen.set(uniqueKey, true);\n    uniqueItems.push(item);\n  }\n}\n\nreturn uniqueItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -5312,
+        -112
+      ],
+      "id": "3487cd53-ebcb-4b38-be3c-3ef592c7030f",
+      "name": "Duplicate Filter"
+    },
+    {
+      "parameters": {
+        "amount": 1.2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -4320,
+        -160
+      ],
+      "id": "d03523fe-69f1-419a-afe2-0d77cc05b72f",
+      "name": "Wait",
+      "webhookId": "7822e59a-3370-40bf-afaf-ea5afe91133d"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1948906848,
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit#gid=1948906848"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "Sin Web"
+          },
+          "matchingColumns": [
+            "placeId"
+          ],
+          "schema": [
+            {
+              "id": "searchString",
+              "displayName": "searchString",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "state",
+              "displayName": "state",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "nombre_limpio",
+              "displayName": "nombre_limpio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "categoryName",
+              "displayName": "categoryName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email_principal",
+              "displayName": "email_principal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "emails",
+              "displayName": "emails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "nombre_responsable",
+              "displayName": "nombre_responsable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "telefono_movil",
+              "displayName": "telefono_movil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "whatsapp",
+              "displayName": "whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "google_maps_url",
+              "displayName": "google_maps_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "facebook",
+              "displayName": "facebook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "instagram",
+              "displayName": "instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "twitter",
+              "displayName": "twitter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "contactado",
+              "displayName": "contactado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "error email (no found)",
+              "displayName": "error email (no found)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "descartado",
+              "displayName": "descartado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_contacto",
+              "displayName": "fecha_contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "countryCode",
+              "displayName": "countryCode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "placeId",
+              "displayName": "placeId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "scraped_At",
+              "displayName": "scraped_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "permanentlyClosed",
+              "displayName": "permanentlyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "temporarilyClosed",
+              "displayName": "temporarilyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a0f849a9-f69e-4962-81a8-0294b649fc74",
+      "name": "Status sin web",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -3440,
+        400
+      ],
+      "typeVersion": 4.6,
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets (Agent Booster)"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## SCRAPING CON APIFY\n\n### ATENCION -> En este nodo se ajusta la cantidad de resultados que queremos buscar.\n\nACTUALMENTE: `200 RESULTADOS` ",
+        "height": 784,
+        "width": 192,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -5568,
+        -592
+      ],
+      "typeVersion": 1,
+      "id": "b9e93ae2-fb8a-41f9-bfce-513fd1ea9288",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "27936df4-52b6-4d15-b4ff-55b6b32b45ee",
+              "leftValue": "={{ $json.website }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "e7184875-0abf-44b6-a724-094a11dd4216",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "false",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -3920,
+        -32
+      ],
+      "id": "fc1cdc31-81aa-4aea-a17c-48d134b268fb",
+      "name": "Filter Businesses with Websites"
+    },
+    {
+      "parameters": {
+        "content": "## LISTA DE CLINICAS DESCARTADAS\n**Clínicas sin página web",
+        "height": 96,
+        "width": 1680,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4992,
+        416
+      ],
+      "typeVersion": 1,
+      "id": "2b94dc53-a136-4068-8f4f-6cc9d8fcfb71",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## PRIMERA SEGMENTACION -> NUTRICION POR GOOGLE MAPS \n\n### Analisis bruto",
+        "height": 544,
+        "width": 1216,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4976,
+        -400
+      ],
+      "typeVersion": 1,
+      "id": "9dd1c40d-d413-4e76-a238-0f5d537c2805",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## SEGUNDA SEGMENTACION -> NUTRICION ANALIZANDO LAS PAGINAS WEB \n\n### Se procede a analizar las paginas web (dump)",
+        "height": 688,
+        "width": 1856,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3728,
+        -400
+      ],
+      "typeVersion": 1,
+      "id": "0f9436d9-3513-4c8a-bfae-af931a59bf85",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## ANALISIS REFORZADO CON IA\n### Si la segmentacion simple no funciona, se usa la IA",
+        "height": 320,
+        "width": 416,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2896,
+        -288
+      ],
+      "typeVersion": 1,
+      "id": "d2cc94e5-f9c0-43a4-9951-e2c5c1bf471a",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "amount": "={{ Math.floor(Math.random() * 3) + 2 }}"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -4688,
+        -96
+      ],
+      "id": "998f1a01-51a1-4b6f-ad39-8ebb1e374d7f",
+      "name": "Wait Flex",
+      "webhookId": "7822e59a-3370-40bf-afaf-ea5afe91133d"
+    },
+    {
+      "parameters": {
+        "content": "# 🏛️ FORENSIC AUDIT REPORT\n**Auditor:** 🛡️ n8n Workflow Audit Expert\n**Date:** January 20, 2026\n**Subject:** Cazador Ibérico - Prospección Clínicas España\n**Status:** 🟡 **REFACTOR**\n\n## 1. 🔍 \"Smoke & Mirrors\" Deconstruction\n\n- **🧠 The Brain:** Uses a **Hybrid Extraction Engine**. Fast Regex first, escalating to **Groq (Llama 3)** only when necessary. This is a cost-effective architecture.\n- **⚠️ The Invisible Problem:**\n    - **Latency:** The workflow updates Google Sheets **inside the loop**, causing massive slowdowns (15-25 mins per 200 leads).\n    - **Data Truncation:** The AI only sees the first 15,000 characters of HTML. Contact info hidden in the footer of large sites will be **missed**.\n\n## 2. ⚖️ Technical & Business Valuation\n\n- **💰 Commercial Potential: 9/10** (High-value automated lead gen asset).\n- **🏗️ Technical Robustness: 7/10** (Good error handling, but fragile scaling due to Sheet API limits).\n\n## 3. 🚨 Critical Findings\n\n### 🔴 CRITICAL: GDPR & PII Exposure\n- **Node:** `Extract Contact Information`\n- **Problem:** Explicitly targeting personal mobile phones (`6xx...`) and names (`nombre_responsable`) in Spain without consent poses a significant **GDPR risk**.\n- **Solution:** Consult legal counsel. Restrict scraping to generic company contacts (`info@`) to reduce liability.\n\n### 🟠 WARNING: The \"Footer\" Blind Spot\n- **Node:** `Groq - Buscar Email`\n- **Problem:** `$json.htmlContent.substring(0, 15000)` cuts off the website before the footer, where contact info usually lives.\n- **Solution:** Strip `<script>` and `<style>` tags in the Code Node **before** sending to AI to maximize context within the token limit.\n\n### 🟠 WARNING: API Bottleneck\n- **Node:** `Save Business Data`\n- **Problem:** Writing row-by-row to Google Sheets triggers rate limits and slows execution.\n- **Solution:** Accept the slowness for stability, or refactor to write in batches of 10.\n\n## 4. 💡 Verdict: 🟡 REFACTOR\n*\"A strong hunter logic that needs better legal armor and data hygiene.\"*",
+        "height": 1180,
+        "width": 700,
+        "color": 2
+      },
+      "id": "107cb3e8-ad67-49f5-bc8b-834c62929fd0",
+      "name": "Sentinel Report",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -6800,
+        -496
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extracción mejorada de contactos - Clínicas España\nconst item = $input.first();\nconst batchItem = $('Edit Fields').first().json;\n\n// Obtener HTML\nconst html = item.json.data || item.json.body || '';\n\n// Si no hay HTML, devolver con error\nif (!html || html.length < 100) {\n  return {\n    placeId: batchItem.placeId, // <--- ¡AÑADIDO! IMPORTANTE\n    website: batchItem.website,\n    title: batchItem.title,\n    address: batchItem.address,\n    phone: batchItem.phone,\n    categoryName: batchItem.categoryName,\n    emails: \"None\",\n    email_principal: \"None\",\n    linkedin: \"None\",\n    facebook: \"None\",\n    instagram: \"None\",\n    twitter: \"None\",\n    nombre_responsable: \"None\",\n    htmlContent: \"\",\n    necesita_ia: true,\n    error: \"No se pudo acceder a la web\"\n  };\n}\n\n// Limpiar HTML\nconst textContent = html\n  .replace(/<script[^>]*>[\\s\\S]*?<\\/script>/gi, '')\n  .replace(/<style[^>]*>[\\s\\S]*?<\\/style>/gi, '')\n  .replace(/<!--[\\s\\S]*?-->/g, '');\n\nconst result = {\n  placeId: batchItem.placeId, // <--- ¡AÑADIDO! Sin esto, el nodo final falla\n  website: batchItem.website,\n  title: batchItem.title,\n  address: batchItem.address,\n  phone: batchItem.phone,\n  categoryName: batchItem.categoryName,\n  emails: \"None\",\n  email_principal: \"None\",\n  linkedin: \"None\",\n  facebook: \"None\",\n  instagram: \"None\",\n  twitter: \"None\",\n  nombre_responsable: \"None\",\n  htmlContent: textContent.substring(0, 8000),\n  necesita_ia: false,\n  error: null\n};\n\n// EXTRACCIÓN DE EMAILS\nconst emailRegex = /\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b/gi;\nconst allEmails = textContent.match(emailRegex) || [];\n\nconst badPatterns = [\n  'example.com', 'test@', 'noreply', 'no-reply', 'wordpress',\n  'developer', 'theme', 'plugin', 'wix.com', 'squarespace',\n  'sentry.io', 'google.com', 'facebook.com', 'twitter.com',\n  'mailchimp', 'sendgrid', 'amazonaws', 'cloudflare', 'sentry',\n  'jquery', 'bootstrap', 'fontawesome', '.png', '.jpg', '.gif'\n];\n\nconst validEmails = [...new Set(allEmails)].filter(email => {\n  const lower = email.toLowerCase();\n  return !badPatterns.some(bad => lower.includes(bad)) && \n         email.length > 5 && email.length < 50;\n});\n\nconst priorityPatterns = ['info@', 'contacto@', 'citas@', 'recepcion@', 'clinica@', 'consulta@', 'hola@'];\nlet emailPrincipal = null;\n\nfor (const pattern of priorityPatterns) {\n  const found = validEmails.find(e => e.toLowerCase().includes(pattern.replace('@', '')));\n  if (found) { emailPrincipal = found; break; }\n}\n\nif (!emailPrincipal && validEmails.length > 0) {\n  const webDomain = batchItem.website?.replace(/https?:\\/\\/(www\\.)?/, '').split('/')[0];\n  emailPrincipal = validEmails.find(e => e.includes(webDomain?.split('.')[0])) || validEmails[0];\n}\n\nif (validEmails.length > 0) {\n  result.emails = validEmails.join(', ');\n  result.email_principal = emailPrincipal || validEmails[0];\n}\n\n// REDES SOCIALES\nconst linkedinRegex = /(?:https?:\\/\\/)?(?:www\\.)?linkedin\\.com\\/(?:in|company)\\/[a-zA-Z0-9\\-._]+\\/?/gi;\nconst linkedinMatch = textContent.match(linkedinRegex);\nif (linkedinMatch) result.linkedin = 'https://www.' + linkedinMatch[0].replace(/^(?:https?:\\/\\/)?(?:www\\.)?/i, '');\n\nconst facebookRegex = /(?:https?:\\/\\/)?(?:www\\.)?(?:m\\.)?facebook\\.com\\/(?!sharer|share)[a-zA-Z0-9.]+\\/?/gi;\nconst facebookMatch = textContent.match(facebookRegex);\nif (facebookMatch) result.facebook = 'https://www.' + facebookMatch[0].replace(/^(?:https?:\\/\\/)?(?:www\\.)?(?:m\\.)?/i, '').split('?')[0];\n\nconst instagramRegex = /(?:https?:\\/\\/)?(?:www\\.)?instagram\\.com\\/([a-zA-Z0-9._]+)\\/?/gi;\nconst instagramMatch = textContent.match(instagramRegex);\nif (instagramMatch) result.instagram = 'https://www.' + instagramMatch[0].replace(/^(?:https?:\\/\\/)?(?:www\\.)?/i, '').split('?')[0];\n\nconst twitterRegex = /(?:https?:\\/\\/)?(?:www\\.)?(?:twitter\\.com|x\\.com)\\/(?!intent|share)([a-zA-Z0-9_]+)\\/?/gi;\nconst twitterMatch = textContent.match(twitterRegex);\nif (twitterMatch) result.twitter = twitterMatch[0].replace(/^(?:https?:\\/\\/)?(?:www\\.)?/i, 'https://').split('?')[0];\n\n// NOMBRE RESPONSABLE\nconst nombrePatterns = [\n  /(?:Dr\\.|Dra\\.|Doctor|Doctora)\\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){1,3})/gi,\n  /(?:Fisioterapeuta|Directora?|Fundadora?)\\s*:?\\s*([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){1,3})/gi\n];\n\nfor (const pattern of nombrePatterns) {\n  const match = textContent.match(pattern);\n  if (match) { result.nombre_responsable = match[0]; break; }\n}\n\n// Marcar si necesita IA\nif (result.email_principal === \"None\") {\n  result.necesita_ia = true;\n}\n\n// Limpiar URLs\n['linkedin', 'facebook', 'instagram', 'twitter'].forEach(p => {\n  if (result[p] !== \"None\") result[p] = result[p].split('?')[0].split('#')[0].replace(/\\/$/, '');\n});\n\nreturn result;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -3264,
+        48
+      ],
+      "id": "8d337a11-120b-47b6-aba9-974df76e6c55",
+      "name": "Extract Contact Information",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "content": "## Filter numero de emails\n\n**Filtra automáticamente:**\n❌ Donde email_principal = \"None\"\n❌ Donde email_principal está vacío\n❌ Donde contactado = TRUE (checkbox marcado)\n✅ Solo clínicas con email válido y sin contactar\n\n\n**Limita a 40 emails** (aunque tengas 100 válidos, solo procesa 20 por ejecución)",
+        "height": 560,
+        "width": 256,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -5536,
+        1184
+      ],
+      "typeVersion": 1,
+      "id": "ce72563b-5daf-434e-ac71-862ed8cf0afc",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A",
+          "mode": "list",
+          "cachedResultName": "Search Leads - Google Maps Scraper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1948906848,
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit#gid=1948906848"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "contactado",
+              "lookupValue": "false"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cba72653-7b43-4304-b0cf-7b8b6452e9c7",
+      "name": "Leer Clínicas No Contactadas",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -5680,
+        1584
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets (Agent Booster)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Cuenta Agent Booster",
+        "height": 272,
+        "width": 1168,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4096,
+        1280
+      ],
+      "typeVersion": 1,
+      "id": "0ffa63f6-6005-44a3-839e-db1e49540201",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "## Cuenta Tech Booster",
+        "height": 272,
+        "width": 1184,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4096,
+        1824
+      ],
+      "typeVersion": 1,
+      "id": "bcac4c02-67ec-46c8-8610-c8124713c795",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "# PROSPECCION CLINICAS\n\n## GUARDADO DE CONTACTOS EN UN EXCEL",
+        "height": 1696,
+        "width": 4224,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -6016,
+        -912
+      ],
+      "typeVersion": 1,
+      "id": "cdc7167f-ac9d-42c2-9b20-e84658a080b2",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# ENVIO DE CORREOS ELECTRONICOS A LOS LEADS\n\n## ENVIO AUTOMATICO DE CORREOS DESDE AMBAS CUENTAS\n\n### AGENT BOOSTER\n### TECH BOOSTER",
+        "height": 1232,
+        "width": 4240,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -6032,
+        976
+      ],
+      "typeVersion": 1,
+      "id": "47ed188d-b4d4-4bb1-9619-27ca0a71b7a4",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "# 🏛️ INFORME FORENSE\n\n## 🚨 CRÍTICO: BUCLES ROTOS\nEl flujo actual **NO funcionará** para más de un lote. El nodo `Loop Over Items` no recibe la señal de vuelta para continuar.\n\n## 🛠️ CORRECCIONES NECESARIAS:\n1. **Cerrar el Bucle:** Debes conectar el final del proceso de vuelta al `Loop Over Items`.\n2. **Switch Frágil:** Cambia la lógica `$runIndex == 0` por `{{ $runIndex % 2 }}` para que funcione con infinitos lotes, no solo 2.\n3. **Conexiones Extrañas:** El nodo `Espera Aleatoria` conecta a dos sitios a la vez (`Switch` y `Procesar`). Elimina la conexión al `Switch`.\n\n## 📉 CONSISTENCIA\nTu código limita a **4 emails**, pero tus notas dicen 20 o 40. Ajusta la constante `maxEmails` en el nodo Code.",
+        "height": 600,
+        "width": 500,
+        "color": 3
+      },
+      "id": "92509a27-2e57-484d-a2bf-a791e2a3dc3e",
+      "name": "Sentinel Report1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -7312,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 📧 WORKFLOW EMAIL PROSPECCIÓN (Round Robin)\n\n### 1. El filtro de seguridad\nEl nodo `Code` inicial ya recorta la lista a 40. Los sobrantes mueren ahí. Esto es seguro y eficiente.\n\n### 2. La distribución (Switch)\nUsamos la fórmula `{{ $runIndex % 2 }}`.\n- **Par (0, 2, 4...):** Ruta A (Agent Booster)\n- **Impar (1, 3, 5...):** Ruta B (Tech Booster)\n\n### 3. El Secreto: NODO MERGE\nFíjate cómo ambas rutas (A y B) terminan conectándose al nodo **\"Unir Caminos\"**.\n\nEste nodo es el que conecta de vuelta al inicio del Bucle. Así, no importa qué cuenta envió el correo, el bucle siempre sabe cuándo continuar.",
+        "height": 583,
+        "width": 516,
+        "color": 2
+      },
+      "id": "25461af9-a725-4e30-9229-44869aec9e4c",
+      "name": "Nota Explicativa",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -6640,
+        1376
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5edfde68-e4c5-44ef-9587-51693cfb2c02",
+      "name": "Bucle Principal (1 a 1)",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -5168,
+        1584
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $runIndex % 2 }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "89891c8c-d548-4f9b-8643-8237c123aa48"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Cuenta A (Agent)"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $runIndex % 2 }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "b0d0d476-71f9-4cf9-a35b-21739c806da4"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Cuenta B (Tech)"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "618c0a7c-8183-4281-899b-4b0083ea7048",
+      "name": "Router (Par/Impar)",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -4080,
+        1616
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "cc44d773-a607-400a-8e12-38a75ef632a7",
+      "name": "Unir Caminos",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -2768,
+        2000
+      ]
+    },
+    {
+      "parameters": {
+        "content": "AQUÍ TUS NODOS:\n1. Code (Preparar Email)\n2. Gmail (Borrador)\n3. Sheets (Update)\n4. Wait",
+        "height": 326,
+        "width": 218,
+        "color": 4
+      },
+      "id": "bf2af347-87bd-4611-8155-6aa1addd11bf",
+      "name": "Ruta A",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3792,
+        1216
+      ]
+    },
+    {
+      "parameters": {
+        "content": "AQUÍ TUS NODOS:\n1. Code (Preparar Email)\n2. Gmail (Borrador)\n3. Sheets (Update)\n4. Wait",
+        "height": 326,
+        "width": 202,
+        "color": 4
+      },
+      "id": "16d02412-d19d-479f-9674-3a5e53f83045",
+      "name": "Ruta B",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3776,
+        1792
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\n\n// PRIORIDAD: Usamos 'nombre_limpio' si existe, si no, usamos el 'title' original\nlet cleanName = item.json.nombre_limpio || item.json.title || 'la clínica';\n\nconst email = item.json.email_principal;\nconst placeId = item.json.placeId;\n\nconst asunto = 'Buscamos 3 Clínicas Piloto: Tu propia IA (Sin coste de agencia)';\n\nconst cuerpo = `Hola equipo de ${cleanName},\n\nSoy Vasyl Pavlyuchok, de Agent Booster.\n\nSeré radicalmente honesto con ustedes:\n\nNo les escribo para venderles un servicio empaquetado. Les escribo porque acabamos de finalizar la arquitectura de Agent-in-Clinic™, un sistema diseñado para gestionar agendas médicas y filtrar pacientes de forma autónoma con IA.\n\nEn nuestro laboratorio funciona perfecto, pero queremos validarlo en el mundo real.\n\nLa propuesta: buscamos 3 clínicas para probarlo durante 30 días.\n\nCómo funciona (simple y claro):\n• Plataforma: se monta en su cuenta (n8n Cloud).\n• Coste fijo: ~60€/mes (licencia).\n• Coste variable: consumo de IA (céntimos por conversación, según volumen).\n• Implementación: nosotros la hacemos gratis durante el piloto.\n\nSu ventaja: el sistema queda en su cuenta y con sus datos. Si deciden dejar de trabajar con nosotros, ustedes se quedan con el sistema.\n\nSi les interesa, respondan a este correo para que les envíe más detalles y coordinemos una llamada breve.\n\nUn saludo,\nVasyl`;\n\nreturn {\n  placeId: placeId,\n  email: email,\n  nombreClinica: cleanName, // Este ahora sí es el nombre bueno\n  asunto: asunto,\n  cuerpo: cuerpo,\n  fechaContacto: new Date().toISOString()\n};"
+      },
+      "id": "ee745618-302a-424b-943a-9c9477ff5ff7",
+      "name": "Preparar Email Personalizado2",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -3728,
+        1360
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1948906848,
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit#gid=1948906848"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contactado": "TRUE",
+            "fecha_contacto": "={{ $('Preparar Email Personalizado2').item.json.fechaContacto }}",
+            "placeId": "={{ $('Preparar Email Personalizado2').item.json.placeId }}",
+            "nombre_limpio": "={{ $('Preparar Email Personalizado2').item.json.nombreClinica }}"
+          },
+          "matchingColumns": [
+            "placeId"
+          ],
+          "schema": [
+            {
+              "id": "searchString",
+              "displayName": "searchString",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "state",
+              "displayName": "state",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_limpio",
+              "displayName": "nombre_limpio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "categoryName",
+              "displayName": "categoryName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email_principal",
+              "displayName": "email_principal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "emails",
+              "displayName": "emails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_responsable",
+              "displayName": "nombre_responsable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "telefono_movil",
+              "displayName": "telefono_movil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "whatsapp",
+              "displayName": "whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "google_maps_url",
+              "displayName": "google_maps_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "facebook",
+              "displayName": "facebook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "instagram",
+              "displayName": "instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "twitter",
+              "displayName": "twitter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "contactado",
+              "displayName": "contactado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "error email (no found)",
+              "displayName": "error email (no found)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "descartado",
+              "displayName": "descartado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_contacto",
+              "displayName": "fecha_contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "countryCode",
+              "displayName": "countryCode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "placeId",
+              "displayName": "placeId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "scraped_At",
+              "displayName": "scraped_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "permanentlyClosed",
+              "displayName": "permanentlyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "temporarilyClosed",
+              "displayName": "temporarilyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e8654cd7-9108-4de6-84a4-08ecfedfbcd0",
+      "name": "Marcar Contactado2",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -3296,
+        1360
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets (Agent Booster)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": "={{ Math.floor(Math.random() * 136) + 45 }}"
+      },
+      "id": "ce299e7e-b46e-416a-8528-34c28a8d1bae",
+      "name": "Espera Aleatoria 45-180s2",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        -3088,
+        1360
+      ],
+      "typeVersion": 1.1,
+      "webhookId": "random-wait-email"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "={{ $json.asunto }}",
+        "emailType": "text",
+        "message": "={{ $json.cuerpo }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "6542a3ea-f465-48d0-bd79-e02baa4bc6f2",
+      "name": "Crear Borrador Gmail (Agent Booster)1",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        -3504,
+        1360
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "985e72ec-7fc3-4124-800e-c0518a22fbc9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "c2dTdKlzqAgWqWaK",
+          "name": "Gmail (vasyl@agentbooster.ai)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "={{ $json.asunto }}",
+        "emailType": "text",
+        "message": "={{ $json.cuerpo }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "0d58cf17-d8c8-4da4-ae68-aa75b809352d",
+      "name": "Crear Borrador Gmail (Tech Booster)1",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        -3488,
+        1952
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "985e72ec-7fc3-4124-800e-c0518a22fbc9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DgJlLm8ILH9s5Vdx",
+          "name": "Gmail (Tech Booster) VP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\n\n// PRIORIDAD: Usamos 'nombre_limpio' si existe, si no, usamos el 'title' original\nlet cleanName = item.json.nombre_limpio || item.json.title || 'la clínica';\n\nconst email = item.json.email_principal;\nconst placeId = item.json.placeId;\n\nconst asunto = 'Buscamos 3 Clínicas Piloto: Tu propia IA (Sin coste de agencia)';\n\nconst cuerpo = `Hola equipo de ${cleanName},\n\nSoy Vasyl Pavlyuchok, de Agent Booster.\n\nSeré radicalmente honesto con ustedes:\n\nNo les escribo para venderles un servicio empaquetado. Les escribo porque acabamos de finalizar la arquitectura de Agent-in-Clinic™, un sistema diseñado para gestionar agendas médicas y filtrar pacientes de forma autónoma con IA.\n\nEn nuestro laboratorio funciona perfecto, pero queremos validarlo en el mundo real.\n\nLa propuesta: buscamos 3 clínicas para probarlo durante 30 días.\n\nCómo funciona (simple y claro):\n• Plataforma: se monta en su cuenta (n8n Cloud).\n• Coste fijo: ~60€/mes (licencia).\n• Coste variable: consumo de IA (céntimos por conversación, según volumen).\n• Implementación: nosotros la hacemos gratis durante el piloto.\n\nSu ventaja: el sistema queda en su cuenta y con sus datos. Si deciden dejar de trabajar con nosotros, ustedes se quedan con el sistema.\n\nSi les interesa, respondan a este correo para que les envíe más detalles y coordinemos una llamada breve.\n\nUn saludo,\nVasyl`;\n\nreturn {\n  placeId: placeId,\n  email: email,\n  nombreClinica: cleanName, // Este ahora sí es el nombre bueno\n  asunto: asunto,\n  cuerpo: cuerpo,\n  fechaContacto: new Date().toISOString()\n};"
+      },
+      "id": "f5cb60f7-a973-4399-b19c-5c8bd15784fe",
+      "name": "Preparar Email Personalizado3",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -3728,
+        1952
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1948906848,
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uqmbB_AIbX9BSOKsiBO_KExKD5tv43gGLYYgU_xQl-A/edit#gid=1948906848"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contactado": "TRUE",
+            "fecha_contacto": "={{ $('Preparar Email Personalizado3').item.json.fechaContacto }}",
+            "placeId": "={{ $('Preparar Email Personalizado3').item.json.placeId }}",
+            "nombre_limpio": "={{ $('Preparar Email Personalizado3').item.json.nombreClinica }}"
+          },
+          "matchingColumns": [
+            "placeId"
+          ],
+          "schema": [
+            {
+              "id": "searchString",
+              "displayName": "searchString",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "state",
+              "displayName": "state",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "city",
+              "displayName": "city",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_limpio",
+              "displayName": "nombre_limpio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "categoryName",
+              "displayName": "categoryName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email_principal",
+              "displayName": "email_principal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "emails",
+              "displayName": "emails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_responsable",
+              "displayName": "nombre_responsable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "telefono_movil",
+              "displayName": "telefono_movil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "whatsapp",
+              "displayName": "whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "google_maps_url",
+              "displayName": "google_maps_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "facebook",
+              "displayName": "facebook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "instagram",
+              "displayName": "instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "twitter",
+              "displayName": "twitter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "contactado",
+              "displayName": "contactado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "error email (no found)",
+              "displayName": "error email (no found)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "descartado",
+              "displayName": "descartado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_contacto",
+              "displayName": "fecha_contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "countryCode",
+              "displayName": "countryCode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "placeId",
+              "displayName": "placeId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "scraped_At",
+              "displayName": "scraped_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "permanentlyClosed",
+              "displayName": "permanentlyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "temporarilyClosed",
+              "displayName": "temporarilyClosed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f69ce020-2c89-41be-b83d-18148e4f107b",
+      "name": "Marcar Contactado3",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -3280,
+        1952
+      ],
+      "typeVersion": 4.7,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jabQgCb5Jhe1HkJS",
+          "name": "Google Sheets (Agent Booster)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": "={{ Math.floor(Math.random() * 136) + 45 }}"
+      },
+      "id": "d4fb9882-7853-450e-879b-0e49f1de3bcd",
+      "name": "Espera Aleatoria 45-180s3",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        -3072,
+        1952
+      ],
+      "typeVersion": 1.1,
+      "webhookId": "random-wait-email"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extracción mejorada de contactos - Clínicas España\nconst item = $input.first();\nconst batchItem = $('Edit Fields').first().json;\n\n// Obtener HTML\nconst html = item.json.data || item.json.body || '';\n\n// Si no hay HTML, devolver con error\nif (!html || html.length < 100) {\n  return {\n    placeId: batchItem.placeId, // <--- ¡AÑADIDO! IMPORTANTE\n    website: batchItem.website,\n    title: batchItem.title,\n    address: batchItem.address,\n    phone: batchItem.phone,\n    categoryName: batchItem.categoryName,\n    emails: \"None\",\n    email_principal: \"None\",\n    linkedin: \"None\",\n    facebook: \"None\",\n    instagram: \"None\",\n    twitter: \"None\",\n    nombre_responsable: \"None\",\n    htmlContent: \"\",\n    necesita_ia: true,\n    error: \"No se pudo acceder a la web\"\n  };\n}\n\n// Limpiar HTML\nconst textContent = html\n  .replace(/<script[^>]*>[\\s\\S]*?<\\/script>/gi, '')\n  .replace(/<style[^>]*>[\\s\\S]*?<\\/style>/gi, '')\n  .replace(/<!--[\\s\\S]*?-->/g, '');\n\nconst result = {\n  placeId: batchItem.placeId, // <--- ¡AÑADIDO! Sin esto, el nodo final falla\n  website: batchItem.website,\n  title: batchItem.title,\n  address: batchItem.address,\n  phone: batchItem.phone,\n  categoryName: batchItem.categoryName,\n  emails: \"None\",\n  email_principal: \"None\",\n  linkedin: \"None\",\n  facebook: \"None\",\n  instagram: \"None\",\n  twitter: \"None\",\n  nombre_responsable: \"None\",\n  htmlContent: textContent.substring(0, 8000),\n  necesita_ia: false,\n  error: null\n};\n\n// EXTRACCIÓN DE EMAILS\nconst emailRegex = /\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b/gi;\nconst allEmails = textContent.match(emailRegex) || [];\n\nconst badPatterns = [\n  'example.com', 'test@', 'noreply', 'no-reply', 'wordpress',\n  'developer', 'theme', 'plugin', 'wix.com', 'squarespace',\n  'sentry.io', 'google.com', 'facebook.com', 'twitter.com',\n  'mailchimp', 'sendgrid', 'amazonaws', 'cloudflare', 'sentry',\n  'jquery', 'bootstrap', 'fontawesome', '.png', '.jpg', '.gif'\n];\n\nconst validEmails = [...new Set(allEmails)].filter(email => {\n  const lower = email.toLowerCase();\n  return !badPatterns.some(bad => lower.includes(bad)) && \n         email.length > 5 && email.length < 50;\n});\n\nconst priorityPatterns = ['info@', 'contacto@', 'citas@', 'recepcion@', 'clinica@', 'consulta@', 'hola@'];\nlet emailPrincipal = null;\n\nfor (const pattern of priorityPatterns) {\n  const found = validEmails.find(e => e.toLowerCase().includes(pattern.replace('@', '')));\n  if (found) { emailPrincipal = found; break; }\n}\n\nif (!emailPrincipal && validEmails.length > 0) {\n  const webDomain = batchItem.website?.replace(/https?:\\/\\/(www\\.)?/, '').split('/')[0];\n  emailPrincipal = validEmails.find(e => e.includes(webDomain?.split('.')[0])) || validEmails[0];\n}\n\nif (validEmails.length > 0) {\n  result.emails = validEmails.join(', ');\n  result.email_principal = emailPrincipal || validEmails[0];\n}\n\n// REDES SOCIALES\nconst linkedinRegex = /(?:https?:\\/\\/)?(?:www\\.)?linkedin\\.com\\/(?:in|company)\\/[a-zA-Z0-9\\-._]+\\/?/gi;\nconst linkedinMatch = textContent.match(linkedinRegex);\nif (linkedinMatch) result.linkedin = 'https://www.' + linkedinMatch[0].replace(/^(?:https?:\\/\\/)?(?:www\\.)?/i, '');\n\nconst facebookRegex = /(?:https?:\\/\\/)?(?:www\\.)?(?:m\\.)?facebook\\.com\\/(?!sharer|share)[a-zA-Z0-9.]+\\/?/gi;\nconst facebookMatch = textContent.match(facebookRegex);\nif (facebookMatch) result.facebook = 'https://www.' + facebookMatch[0].replace(/^(?:https?:\\/\\/)?(?:www\\.)?(?:m\\.)?/i, '').split('?')[0];\n\nconst instagramRegex = /(?:https?:\\/\\/)?(?:www\\.)?instagram\\.com\\/([a-zA-Z0-9._]+)\\/?/gi;\nconst instagramMatch = textContent.match(instagramRegex);\nif (instagramMatch) result.instagram = 'https://www.' + instagramMatch[0].replace(/^(?:https?:\\/\\/)?(?:www\\.)?/i, '').split('?')[0];\n\nconst twitterRegex = /(?:https?:\\/\\/)?(?:www\\.)?(?:twitter\\.com|x\\.com)\\/(?!intent|share)([a-zA-Z0-9_]+)\\/?/gi;\nconst twitterMatch = textContent.match(twitterRegex);\nif (twitterMatch) result.twitter = twitterMatch[0].replace(/^(?:https?:\\/\\/)?(?:www\\.)?/i, 'https://').split('?')[0];\n\n// NOMBRE RESPONSABLE\nconst nombrePatterns = [\n  /(?:Dr\\.|Dra\\.|Doctor|Doctora)\\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){1,3})/gi,\n  /(?:Fisioterapeuta|Directora?|Fundadora?)\\s*:?\\s*([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+){1,3})/gi\n];\n\nfor (const pattern of nombrePatterns) {\n  const match = textContent.match(pattern);\n  if (match) { result.nombre_responsable = match[0]; break; }\n}\n\n// Marcar si necesita IA\nif (result.email_principal === \"None\") {\n  result.necesita_ia = true;\n}\n\n// Limpiar URLs\n['linkedin', 'facebook', 'instagram', 'twitter'].forEach(p => {\n  if (result[p] !== \"None\") result[p] = result[p].split('?')[0].split('#')[0].replace(/\\/$/, '');\n});\n\nreturn result;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2880,
+        448
+      ],
+      "id": "ee384b64-417a-4e66-9296-8c5782b7fcbf",
+      "name": "Extract Contact Information1",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "content": "## Backup",
+        "height": 288,
+        "width": 896,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3024,
+        352
+      ],
+      "typeVersion": 1,
+      "id": "aef1c404-d939-4236-b3e9-236d7100404e",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "[GROQ_API_URL]",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=={{\n{\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Eres un experto en extracción de datos. Tu salida debe ser siempre un JSON válido.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Analiza el siguiente HTML y extrae los datos de contacto.\\\\n\\\\nCONTEXTO HTML:\\\\n\" + $json.htmlContent.substring(0, 15000) + \"\\\\n\\\\nOBJETIVO:\\\\nDevuelve un JSON con estas claves EXACTAS (si no encuentras algo, pon null):\\\\n\\\\n1. email_principal: El mejor email comercial (info, contacto, citas). Ignora técnicos (wix, sentry).\\\\n2. emails: Todos los emails separados por comas.\\\\n3. nombre_responsable: Doctores o directores.\\\\n4. telefono_movil: Móviles españoles (empiezan por 6 o 7).\\\\n5. linkedin: URL LinkedIn.\\\\n6. facebook: URL Facebook.\\\\n7. instagram: URL Instagram.\\\\n\\\\nResponde SOLO con el objeto JSON.\"\n    }\n  ],\n  \"response_format\": {\n    \"type\": \"json_object\"\n  },\n  \"temperature\": 0.1\n}\n}}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "98f552c3-4722-47fd-b34a-8ee2e417c568",
+      "name": "Groq - Buscar Email1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -2656,
+        448
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "SyYCC0i2AmbppoPf",
+          "name": "Groq Free Key (Agent Booster acc.)"
+        }
+      },
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const groqResponse = $input.first().json;\nconst prevData = $('Necesita IA?').first().json; \n\nlet datosIA = {};\n\ntry {\n  // 1. Extraer el texto JSON de la respuesta de Groq\n  const content = groqResponse.choices?.[0]?.message?.content || '{}';\n  // Limpiamos por si la IA puso bloques de código markdown\n  const jsonString = content.replace(/```json\\n?|```/g, '').trim();\n  datosIA = JSON.parse(jsonString);\n} catch (e) {\n  // Si falla, no pasa nada, usamos los datos previos\n}\n\n// 2. Validar email de la IA\nlet emailIA = null;\nif (datosIA.email_principal && datosIA.email_principal !== 'null' && datosIA.email_principal.includes('@')) {\n   emailIA = datosIA.email_principal.toLowerCase().trim();\n}\n\n// 3. Salida Final (Usando nombres ORIGINALES)\nreturn {\n  ...prevData,\n  // Prioridad: IA > Regex > \"None\"\n  email_principal: emailIA || prevData.email_principal,\n  emails: datosIA.emails || prevData.emails,\n  \n  // Resto de datos\n  nombre_responsable: datosIA.nombre_responsable || prevData.nombre_responsable,\n  telefono_movil: datosIA.telefono_movil || null,\n  linkedin: datosIA.linkedin || prevData.linkedin,\n  facebook: datosIA.facebook || prevData.facebook,\n  instagram: datosIA.instagram || prevData.instagram,\n  \n  fuente_email: emailIA ? 'IA (Groq)' : 'Regex',\n  necesita_ia: false\n};"
+      },
+      "id": "dce72a91-8d62-48f6-ba80-5dcc70fb5598",
+      "name": "Parsear Respuesta Groq1",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -2448,
+        448
+      ],
+      "typeVersion": 2,
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "check-name-exists",
+              "leftValue": "={{ $json.nombre_limpio }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "check-name-length",
+              "leftValue": "={{ $json.nombre_limpio ? $json.nombre_limpio.length : 0 }}",
+              "rightValue": 2,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "de527771-ba76-4e46-815f-f4adc51f660e",
+      "name": "¿Tiene Nombre Limpio?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4960,
+        1728
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "[GROQ_API_URL]",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ \n{\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Eres un experto en limpieza de datos corporativos. Tu salida debe ser un JSON válido.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": `Analiza la siguiente empresa y extrae sus datos.\\n\\nTITULO MAPS: ${$json.title}\\nWEB: ${$json.website}\\nCONTEXTO: No hay HTML disponible, deduce por el dominio y título.\\n\\nOBJETIVO:\\nGenera un JSON con el campo 'nombre_limpio' OBLIGATORIO.\\n\\nREGLAS DE ORO PARA 'nombre_limpio':\\n1. CONTRASTA EL NOMBRE DE MAPS CON EL DOMINIO WEB.\\n   - Ejemplo: Si Maps dice 'Clinica Renacimiento Marbella: Cirugía...' y la web es 'renacimientomarbella.com', el nombre limpio es 'Clinica Renacimiento Marbella'.\\n2. Elimina descripciones de servicios (ej: ': Cirugía', '- Expertos en...').\\n3. Elimina formas jurídicas (S.L., S.A.).\\n4. Mantén la ciudad SOLO si forma parte de la marca. Si es genérico ('Clinica Dental Madrid'), quita la ciudad.\\n5. ESTE CAMPO NO PUEDE SER NULL.\\n\\nFORMATO JSON:\\n{\\n  \"nombre_limpio\": \"... (OBLIGATORIO)\"\\n}`\n    }\n  ],\n  \"response_format\": {\n    \"type\": \"json_object\"\n  },\n  \"temperature\": 0.1\n}\n}}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "49e88ebb-82ba-4069-83e2-b113d5c9c3ca",
+      "name": "IA - Reparar Nombre",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -4704,
+        2320
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "SyYCC0i2AmbppoPf",
+          "name": "Groq Free Key (Agent Booster acc.)"
+        }
+      },
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Recuperamos respuesta IA\nconst aiResponse = $input.first().json.choices?.[0]?.message?.content;\nconst originalItem = $('¿Tiene Nombre Limpio?').first().json;\n\nlet nuevoNombre = originalItem.title; // Fallback\n\ntry {\n  if(aiResponse) {\n     const parsed = JSON.parse(aiResponse);\n     if(parsed.nombre_limpio) nuevoNombre = parsed.nombre_limpio;\n  }\n} catch(e) {}\n\nreturn {\n  ...originalItem,\n  nombre_limpio: nuevoNombre\n};"
+      },
+      "id": "463ad8a5-e843-4c0a-b06e-d075228d5387",
+      "name": "Asignar Nombre Reparado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -4512,
+        2320
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "d78b36f4-5d87-439d-bba5-024ebeb6e1d9",
+      "name": "Nombre Listo",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -4304,
+        1728
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Generar Nombre Limpio",
+        "height": 256,
+        "width": 416,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4800,
+        1824
+      ],
+      "typeVersion": 1,
+      "id": "7d497eaf-41b0-4a41-b525-9e238534fe3b",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -5936,
+        -112
+      ],
+      "id": "ebca25f8-1a22-4ea0-a90b-cd6f82f930dc",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "[GROQ_API_URL]",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ \n{\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Eres un experto en limpieza de datos. Tu trabajo es eliminar redundancias geográficas y de actividad en nombres de empresas.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": `Analiza este nombre y límpialo:\\nTITULO: ${$json.title}\\nWEB: ${$json.website}\\n\\nOBJETIVO: Extraer solo la MARCA. Eliminar la ciudad y la actividad si están al final.\\n\\nEJEMPLO QUE DEBES SEGUIR:\\nEntrada: \"Beauty By Lidia Belmar Estética Murcia\"\\nWeb: beautybylidiabelmar.com\\nRAZONAMIENTO: \"Estética\" es la actividad. \"Murcia\" es la ciudad. El dominio es solo el nombre. Sobran las dos últimas palabras.\\nSALIDA: \"Beauty By Lidia Belmar\"\\n\\nTU TURNO. Devuelve solo el JSON:\\n{\\n  \"nombre_limpio\": \"...\"\\n}`\n    }\n  ],\n  \"response_format\": {\n    \"type\": \"json_object\"\n  },\n  \"temperature\": 0.1\n}\n}}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ce4536df-739f-4897-9b11-9d922892a27c",
+      "name": "IA - Limpiar Nombre (Flujo 2)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -4736,
+        1904
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "SyYCC0i2AmbppoPf",
+          "name": "Groq Free Key (Agent Booster acc.)"
+        }
+      },
+      "continueOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Recuperamos la respuesta de la IA\nconst aiResponse = $input.first().json.choices?.[0]?.message?.content || \"\";\n\n// 2. RECUPERACIÓN SEGURA DE DATOS (EL FIX) 🛠️\n// En lugar de pairedItem, leemos directamente el nodo del Bucle.\n// Asegúrate de que tu nodo SplitInBatches se llame exactamente: \"Bucle Principal (1 a 1)\"\nlet itemOriginal = {};\n\ntry {\n    // Intentamos leer del bucle (lo más seguro)\n    itemOriginal = $('Bucle Principal (1 a 1)').first().json;\n} catch (e) {\n    // Si falla (por cambio de nombre), intentamos pairedItem\n    try {\n        itemOriginal = $input.first().pairedItem.item.json;\n    } catch (e2) {\n        // Si todo falla, creamos un objeto vacío para que NO explote el error rojo\n        itemOriginal = { title: \"Clínica (Error Recuperación)\" };\n    }\n}\n\n// 3. Procesar el Nombre Limpio\n// Usamos el título original como base (fallback)\nlet nombreFinal = itemOriginal.title || \"Clínica\"; \n\ntry {\n  if (aiResponse) {\n     // Limpieza previa por si la IA mete texto antes del JSON\n     const jsonString = aiResponse.substring(\n         aiResponse.indexOf('{'), \n         aiResponse.lastIndexOf('}') + 1\n     );\n     \n     const parsed = JSON.parse(jsonString);\n     \n     // Si la IA nos dio un nombre válido, lo usamos\n     if (parsed.nombre_limpio && parsed.nombre_limpio.length > 2) {\n         nombreFinal = parsed.nombre_limpio;\n     }\n  }\n} catch (e) {\n  // Si la IA devuelve basura, nos quedamos con el original y no rompemos nada\n}\n\n// 4. Salida fusionada\nreturn {\n  ...itemOriginal, // Mantenemos todos los datos viejos (email, web, etc)\n  nombre_limpio: nombreFinal // Sobrescribimos/Creamos el nombre limpio\n};"
+      },
+      "id": "8e22d8de-4262-443f-879f-36f04af25cf9",
+      "name": "Asignar Nombre Limpio",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -4544,
+        1904
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst validItems = [];\n\nfor (const item of items) {\n  const email = item.json.email_principal;\n  \n  // Validar que el email existe, no es \"None\" y tiene formato válido\n  if (email && \n      email !== 'None' && \n      email !== 'none' && \n      email !== '' && \n      email.includes('@') &&\n      !email.includes('example.com')) {\n    validItems.push(item);\n  }\n}\n\n// Limitar a 25 emails máximo por ejecución\nconst maxEmails = 40;\nconst limitedItems = validItems.slice(0, maxEmails);\n\nconsole.log(`Total válidos: ${validItems.length}, Enviando: ${limitedItems.length}`);\n\nreturn limitedItems;"
+      },
+      "id": "73024070-2b9d-4707-a1de-9bf61da034d0",
+      "name": "Filtrar Emails Válidos (Max 40)",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -5456,
+        1584
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "id": "b3b0834e-ed01-4036-9f13-900c6e878b42",
+      "name": "Trigger Diario 10.30AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        -5904,
+        1584
+      ],
+      "typeVersion": 1.1
+    }
+  ],
+  "pinData": {
+    "Schedule Trigger": [
+      {
+        "json": {
+          "timestamp": "2026-01-21T04:32:40.045+01:00",
+          "Readable date": "January 21st 2026, 4:32:40 am",
+          "Readable time": "4:32:40 am",
+          "Day of week": "Wednesday",
+          "Year": "2026",
+          "Month": "January",
+          "Day of month": "21",
+          "Hour": "04",
+          "Minute": "32",
+          "Second": "40",
+          "Timezone": "Europe/Madrid (UTC+01:00)"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Read Pending Queries": [
+      {
+        "json": {
+          "row_number": 12,
+          "Query": "clinica estetica",
+          "Location": "Barcelona",
+          "Status": true,
+          "Busquedas Realizadas (Evitar repeticion)": false,
+          "Prospectados (Leads)": false
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Run an Actor and get dataset": [
+      {
+        "json": {
+          "title": "Institut Mèdic Internacional · Centre medicina estètica IMèI Barcelona",
+          "price": null,
+          "categoryName": "Skin care clinic",
+          "address": "Carrer de Laforja, 62, Sarrià-Sant Gervasi, 08006 Barcelona, Spain",
+          "neighborhood": "Sarrià-Sant Gervasi",
+          "street": "Carrer de Laforja, 62",
+          "city": "Barcelona",
+          "postalCode": "08006",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "https://www.imeibarcelona.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+          "phone": "+34 680 63 92 05",
+          "phoneUnformatted": "+34680639205",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.3980884,
+            "lng": 2.1479171
+          },
+          "totalScore": 4.9,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJ18vj8RWjpBIRuzXb3bbe8Pc",
+          "categories": [
+            "Skin care clinic",
+            "Beautician",
+            "Facial spa",
+            "Medical Center",
+            "Nutritionist",
+            "Women's health clinic",
+            "Plastic surgery clinic",
+            "Specialized clinic",
+            "Weight loss service"
+          ],
+          "fid": "0x12a4a315f1e3cbd7:0xf7f0deb6dddb35bb",
+          "cid": "17866024598766302651",
+          "reviewsCount": 358,
+          "imagesCount": 29,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.195Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Service options": [
+              {
+                "English": true
+              }
+            ],
+            "Accessibility": [
+              {
+                "Wheelchair accessible entrance": true
+              },
+              {
+                "Wheelchair accessible restroom": true
+              }
+            ],
+            "Amenities": [
+              {
+                "Restroom": true
+              }
+            ],
+            "Crowd": [
+              {
+                "LGBTQ+ friendly": true
+              },
+              {
+                "Transgender safespace": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              },
+              {
+                "Credit cards": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Institut%20M%C3%A8dic%20Internacional%20%C2%B7%20Centre%20medicina%20est%C3%A8tica%20IM%C3%A8I%20Barcelona&query_place_id=ChIJ18vj8RWjpBIRuzXb3bbe8Pc",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 2,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/p/AF1QipPv1jmKcv6vYETMkI1YOiPWYN4owG_HlfGLNsV4=w408-h306-k-no",
+          "kgmid": "/g/11s0wk0fn9"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "title": "Centre Mèdic Gaudí. Clínica de Medicina Estètica",
+          "price": null,
+          "categoryName": "Beauty salon",
+          "address": "Pg. de Gràcia, 110, Eixample, 08008 Barcelona, Spain",
+          "neighborhood": "Eixample",
+          "street": "Pg. de Gràcia, 110",
+          "city": "Barcelona",
+          "postalCode": "08008",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "https://www.centromedicogaudi.com/",
+          "phone": "+34 934 67 43 25",
+          "phoneUnformatted": "+34934674325",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.3964074,
+            "lng": 2.1603466
+          },
+          "totalScore": 4.9,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJ5_gagpSipBIR0ryZIFilz7w",
+          "categories": [
+            "Beauty salon",
+            "Medical Center"
+          ],
+          "fid": "0x12a4a294821af8e7:0xbccfa5582099bcd2",
+          "cid": "13605274797232209106",
+          "reviewsCount": 495,
+          "imagesCount": 45,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.195Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "10 AM to 6 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Accessibility": [
+              {
+                "Assistive hearing loop": true
+              },
+              {
+                "Wheelchair accessible restroom": true
+              },
+              {
+                "Wheelchair accessible seating": true
+              },
+              {
+                "Wheelchair accessible entrance": false
+              },
+              {
+                "Wheelchair accessible parking lot": false
+              }
+            ],
+            "Amenities": [
+              {
+                "Gender-neutral restroom": true
+              },
+              {
+                "Restroom": true
+              },
+              {
+                "Free Wi-Fi": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              },
+              {
+                "Credit cards": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Centre%20M%C3%A8dic%20Gaud%C3%AD.%20Cl%C3%ADnica%20de%20Medicina%20Est%C3%A8tica&query_place_id=ChIJ5_gagpSipBIR0ryZIFilz7w",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 3,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/p/AF1QipOx6jdiaHsAdOxvzucnQr3hRFEhQIX8z5jhyF1d=w408-h272-k-no",
+          "kgmid": "/g/11b6_jk_8w"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "title": "Clínica Londres Entença",
+          "price": null,
+          "categoryName": "Beauty salon",
+          "address": "Carrer d'Entença, 321, Les Corts, 08029 Barcelona, Spain",
+          "neighborhood": "Les Corts",
+          "street": "Carrer d'Entença, 321",
+          "city": "Barcelona",
+          "postalCode": "08029",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "https://www.clinicalondres.es/clinicas/barcelona-entenca",
+          "phone": "+34 934 39 16 96",
+          "phoneUnformatted": "+34934391696",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.3897283,
+            "lng": 2.1376651
+          },
+          "totalScore": 4.8,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJhWk_XHqYpBIRtParR8tKE3U",
+          "categories": [
+            "Beauty salon",
+            "Facial spa",
+            "Laser hair removal service"
+          ],
+          "fid": "0x12a4987a5c3f6985:0x75134acb47abf6b4",
+          "cid": "8436168763936339636",
+          "reviewsCount": 1087,
+          "imagesCount": 56,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.195Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Accessibility": [
+              {
+                "Wheelchair accessible entrance": true
+              },
+              {
+                "Wheelchair accessible restroom": true
+              }
+            ],
+            "Amenities": [
+              {
+                "Restroom": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica%20Londres%20Enten%C3%A7a&query_place_id=ChIJhWk_XHqYpBIRtParR8tKE3U",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 4,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzkcMmE0_5Cd3kpLo6mEvQ9WhXaJ_0D6yBlqk0e0P5rlGf1WH5NgU28s80tewctWwa7SveDwIdg2ZmvK8dY8vD8HylxM16PsVXdKMTm937WQ-mEQXRDgP6uuZfGXiMqXd5HYRW0=w472-h240-k-no",
+          "kgmid": "/g/11_v4p6s2"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "title": "Medicina Estética Lago | Balmes",
+          "price": null,
+          "categoryName": "Beauty salon",
+          "address": "Carrer de Balmes, 147, Eixample, 08008 Barcelona, Spain",
+          "neighborhood": "Eixample",
+          "street": "Carrer de Balmes, 147",
+          "city": "Barcelona",
+          "postalCode": "08008",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "http://www.medicinaesteticalago.com/",
+          "phone": "+34 932 18 20 39",
+          "phoneUnformatted": "+34932182039",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.3939406,
+            "lng": 2.1562627
+          },
+          "totalScore": 4.6,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJSX1g85CipBIRjCLGpf4utgw",
+          "categories": [
+            "Beauty salon",
+            "Specialized clinic",
+            "Electrolysis hair removal service",
+            "Laser hair removal service",
+            "Skin care clinic"
+          ],
+          "fid": "0x12a4a290f3607d49:0xcb62efea5c6228c",
+          "cid": "915971245454271116",
+          "reviewsCount": 296,
+          "imagesCount": 38,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.196Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Accessibility": [
+              {
+                "Wheelchair accessible restroom": true
+              },
+              {
+                "Wheelchair accessible parking lot": false
+              }
+            ],
+            "Amenities": [
+              {
+                "Restroom": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Medicina%20Est%C3%A9tica%20Lago%20%7C%20Balmes&query_place_id=ChIJSX1g85CipBIRjCLGpf4utgw",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 15,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwG5ogv9pIBMwjensdIqOZEEmFwy_Pba9hqHN0NzJYheDdbUN6RiccJKzLyuhs4sG-GjBHViLYnrbyYQxsdO6KFlo7DaS09gK1Bk1_jslLnz9JlXlL8XGv-i03IdusJYwHpgzb8=w408-h306-k-no",
+          "kgmid": "/g/1tf2pcq1"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "title": "Clínica Vieira",
+          "price": null,
+          "categoryName": "Skin care clinic",
+          "address": "Carrer de Balmes, 307, Sarrià-Sant Gervasi, 08006 Barcelona, Spain",
+          "neighborhood": "Sarrià-Sant Gervasi",
+          "street": "Carrer de Balmes, 307",
+          "city": "Barcelona",
+          "postalCode": "08006",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "http://www.clinicavieira.com/",
+          "phone": "+34 932 00 32 29",
+          "phoneUnformatted": "+34932003229",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.4023331,
+            "lng": 2.1452144
+          },
+          "totalScore": 4.9,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJcZgDC6CipBIRoXRtMK9e2W0",
+          "categories": [
+            "Skin care clinic"
+          ],
+          "fid": "0x12a4a2a00b039871:0x6dd95eaf306d74a1",
+          "cid": "7915461926605124769",
+          "reviewsCount": 1143,
+          "imagesCount": 65,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.196Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Accessibility": [
+              {
+                "Wheelchair accessible entrance": true
+              },
+              {
+                "Wheelchair accessible restroom": true
+              },
+              {
+                "Wheelchair accessible seating": true
+              }
+            ],
+            "Amenities": [
+              {
+                "Gender-neutral restroom": true
+              },
+              {
+                "Restroom": true
+              }
+            ],
+            "Crowd": [
+              {
+                "LGBTQ+ friendly": true
+              },
+              {
+                "Transgender safespace": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointment required": true
+              },
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica%20Vieira&query_place_id=ChIJcZgDC6CipBIRoXRtMK9e2W0",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 16,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSztHwEtURtPZutjsdiNEESavys6axHta6Nk7rPEHm2DyDPXJqUsZ9PkCKWhYH2-Nc6qsdWrtZ7xtaN8GjVbfWSfFXA3-NXZ3jp4wMqIR1RQmstYr8uJ3rC82yNeCUjLIUumaTdWxFXTvICN=w408-h612-k-no",
+          "kgmid": "/g/1hm43d1xr"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Duplicate Filter": [
+      {
+        "json": {
+          "title": "Institut Mèdic Internacional · Centre medicina estètica IMèI Barcelona",
+          "price": null,
+          "categoryName": "Skin care clinic",
+          "address": "Carrer de Laforja, 62, Sarrià-Sant Gervasi, 08006 Barcelona, Spain",
+          "neighborhood": "Sarrià-Sant Gervasi",
+          "street": "Carrer de Laforja, 62",
+          "city": "Barcelona",
+          "postalCode": "08006",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "https://www.imeibarcelona.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb",
+          "phone": "+34 680 63 92 05",
+          "phoneUnformatted": "+34680639205",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.3980884,
+            "lng": 2.1479171
+          },
+          "totalScore": 4.9,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJ18vj8RWjpBIRuzXb3bbe8Pc",
+          "categories": [
+            "Skin care clinic",
+            "Beautician",
+            "Facial spa",
+            "Medical Center",
+            "Nutritionist",
+            "Women's health clinic",
+            "Plastic surgery clinic",
+            "Specialized clinic",
+            "Weight loss service"
+          ],
+          "fid": "0x12a4a315f1e3cbd7:0xf7f0deb6dddb35bb",
+          "cid": "17866024598766302651",
+          "reviewsCount": 358,
+          "imagesCount": 29,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.195Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "10 AM to 7 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Service options": [
+              {
+                "English": true
+              }
+            ],
+            "Accessibility": [
+              {
+                "Wheelchair accessible entrance": true
+              },
+              {
+                "Wheelchair accessible restroom": true
+              }
+            ],
+            "Amenities": [
+              {
+                "Restroom": true
+              }
+            ],
+            "Crowd": [
+              {
+                "LGBTQ+ friendly": true
+              },
+              {
+                "Transgender safespace": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              },
+              {
+                "Credit cards": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Institut%20M%C3%A8dic%20Internacional%20%C2%B7%20Centre%20medicina%20est%C3%A8tica%20IM%C3%A8I%20Barcelona&query_place_id=ChIJ18vj8RWjpBIRuzXb3bbe8Pc",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 2,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/p/AF1QipPv1jmKcv6vYETMkI1YOiPWYN4owG_HlfGLNsV4=w408-h306-k-no",
+          "kgmid": "/g/11s0wk0fn9"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "title": "Centre Mèdic Gaudí. Clínica de Medicina Estètica",
+          "price": null,
+          "categoryName": "Beauty salon",
+          "address": "Pg. de Gràcia, 110, Eixample, 08008 Barcelona, Spain",
+          "neighborhood": "Eixample",
+          "street": "Pg. de Gràcia, 110",
+          "city": "Barcelona",
+          "postalCode": "08008",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "https://www.centromedicogaudi.com/",
+          "phone": "+34 934 67 43 25",
+          "phoneUnformatted": "+34934674325",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.3964074,
+            "lng": 2.1603466
+          },
+          "totalScore": 4.9,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJ5_gagpSipBIR0ryZIFilz7w",
+          "categories": [
+            "Beauty salon",
+            "Medical Center"
+          ],
+          "fid": "0x12a4a294821af8e7:0xbccfa5582099bcd2",
+          "cid": "13605274797232209106",
+          "reviewsCount": 495,
+          "imagesCount": 45,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.195Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "10 AM to 6 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Accessibility": [
+              {
+                "Assistive hearing loop": true
+              },
+              {
+                "Wheelchair accessible restroom": true
+              },
+              {
+                "Wheelchair accessible seating": true
+              },
+              {
+                "Wheelchair accessible entrance": false
+              },
+              {
+                "Wheelchair accessible parking lot": false
+              }
+            ],
+            "Amenities": [
+              {
+                "Gender-neutral restroom": true
+              },
+              {
+                "Restroom": true
+              },
+              {
+                "Free Wi-Fi": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              },
+              {
+                "Credit cards": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Centre%20M%C3%A8dic%20Gaud%C3%AD.%20Cl%C3%ADnica%20de%20Medicina%20Est%C3%A8tica&query_place_id=ChIJ5_gagpSipBIR0ryZIFilz7w",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 3,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/p/AF1QipOx6jdiaHsAdOxvzucnQr3hRFEhQIX8z5jhyF1d=w408-h272-k-no",
+          "kgmid": "/g/11b6_jk_8w"
+        },
+        "pairedItem": {
+          "item": 1
+        }
+      },
+      {
+        "json": {
+          "title": "Clínica Londres Entença",
+          "price": null,
+          "categoryName": "Beauty salon",
+          "address": "Carrer d'Entença, 321, Les Corts, 08029 Barcelona, Spain",
+          "neighborhood": "Les Corts",
+          "street": "Carrer d'Entença, 321",
+          "city": "Barcelona",
+          "postalCode": "08029",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "https://www.clinicalondres.es/clinicas/barcelona-entenca",
+          "phone": "+34 934 39 16 96",
+          "phoneUnformatted": "+34934391696",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.3897283,
+            "lng": 2.1376651
+          },
+          "totalScore": 4.8,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJhWk_XHqYpBIRtParR8tKE3U",
+          "categories": [
+            "Beauty salon",
+            "Facial spa",
+            "Laser hair removal service"
+          ],
+          "fid": "0x12a4987a5c3f6985:0x75134acb47abf6b4",
+          "cid": "8436168763936339636",
+          "reviewsCount": 1087,
+          "imagesCount": 56,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.195Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "8 AM to 9 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Accessibility": [
+              {
+                "Wheelchair accessible entrance": true
+              },
+              {
+                "Wheelchair accessible restroom": true
+              }
+            ],
+            "Amenities": [
+              {
+                "Restroom": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica%20Londres%20Enten%C3%A7a&query_place_id=ChIJhWk_XHqYpBIRtParR8tKE3U",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 4,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzkcMmE0_5Cd3kpLo6mEvQ9WhXaJ_0D6yBlqk0e0P5rlGf1WH5NgU28s80tewctWwa7SveDwIdg2ZmvK8dY8vD8HylxM16PsVXdKMTm937WQ-mEQXRDgP6uuZfGXiMqXd5HYRW0=w472-h240-k-no",
+          "kgmid": "/g/11_v4p6s2"
+        },
+        "pairedItem": {
+          "item": 2
+        }
+      },
+      {
+        "json": {
+          "title": "Medicina Estética Lago | Balmes",
+          "price": null,
+          "categoryName": "Beauty salon",
+          "address": "Carrer de Balmes, 147, Eixample, 08008 Barcelona, Spain",
+          "neighborhood": "Eixample",
+          "street": "Carrer de Balmes, 147",
+          "city": "Barcelona",
+          "postalCode": "08008",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "http://www.medicinaesteticalago.com/",
+          "phone": "+34 932 18 20 39",
+          "phoneUnformatted": "+34932182039",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.3939406,
+            "lng": 2.1562627
+          },
+          "totalScore": 4.6,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJSX1g85CipBIRjCLGpf4utgw",
+          "categories": [
+            "Beauty salon",
+            "Specialized clinic",
+            "Electrolysis hair removal service",
+            "Laser hair removal service",
+            "Skin care clinic"
+          ],
+          "fid": "0x12a4a290f3607d49:0xcb62efea5c6228c",
+          "cid": "915971245454271116",
+          "reviewsCount": 296,
+          "imagesCount": 38,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.196Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "10 AM to 8 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Accessibility": [
+              {
+                "Wheelchair accessible restroom": true
+              },
+              {
+                "Wheelchair accessible parking lot": false
+              }
+            ],
+            "Amenities": [
+              {
+                "Restroom": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Medicina%20Est%C3%A9tica%20Lago%20%7C%20Balmes&query_place_id=ChIJSX1g85CipBIRjCLGpf4utgw",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 15,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwG5ogv9pIBMwjensdIqOZEEmFwy_Pba9hqHN0NzJYheDdbUN6RiccJKzLyuhs4sG-GjBHViLYnrbyYQxsdO6KFlo7DaS09gK1Bk1_jslLnz9JlXlL8XGv-i03IdusJYwHpgzb8=w408-h306-k-no",
+          "kgmid": "/g/1tf2pcq1"
+        },
+        "pairedItem": {
+          "item": 3
+        }
+      },
+      {
+        "json": {
+          "title": "Clínica Vieira",
+          "price": null,
+          "categoryName": "Skin care clinic",
+          "address": "Carrer de Balmes, 307, Sarrià-Sant Gervasi, 08006 Barcelona, Spain",
+          "neighborhood": "Sarrià-Sant Gervasi",
+          "street": "Carrer de Balmes, 307",
+          "city": "Barcelona",
+          "postalCode": "08006",
+          "state": "Barcelona",
+          "countryCode": "ES",
+          "website": "http://www.clinicavieira.com/",
+          "phone": "+34 932 00 32 29",
+          "phoneUnformatted": "+34932003229",
+          "claimThisBusiness": false,
+          "location": {
+            "lat": 41.4023331,
+            "lng": 2.1452144
+          },
+          "totalScore": 4.9,
+          "permanentlyClosed": false,
+          "temporarilyClosed": false,
+          "placeId": "ChIJcZgDC6CipBIRoXRtMK9e2W0",
+          "categories": [
+            "Skin care clinic"
+          ],
+          "fid": "0x12a4a2a00b039871:0x6dd95eaf306d74a1",
+          "cid": "7915461926605124769",
+          "reviewsCount": 1143,
+          "imagesCount": 65,
+          "imageCategories": [],
+          "scrapedAt": "2026-01-21T03:32:55.196Z",
+          "googleFoodUrl": null,
+          "hotelAds": [],
+          "openingHours": [
+            {
+              "day": "Monday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Tuesday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Wednesday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Thursday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Friday",
+              "hours": "9 AM to 9 PM"
+            },
+            {
+              "day": "Saturday",
+              "hours": "Closed"
+            },
+            {
+              "day": "Sunday",
+              "hours": "Closed"
+            }
+          ],
+          "peopleAlsoSearch": [],
+          "placesTags": [],
+          "reviewsTags": [],
+          "additionalInfo": {
+            "Accessibility": [
+              {
+                "Wheelchair accessible entrance": true
+              },
+              {
+                "Wheelchair accessible restroom": true
+              },
+              {
+                "Wheelchair accessible seating": true
+              }
+            ],
+            "Amenities": [
+              {
+                "Gender-neutral restroom": true
+              },
+              {
+                "Restroom": true
+              }
+            ],
+            "Crowd": [
+              {
+                "LGBTQ+ friendly": true
+              },
+              {
+                "Transgender safespace": true
+              }
+            ],
+            "Planning": [
+              {
+                "Appointment required": true
+              },
+              {
+                "Appointments recommended": true
+              }
+            ],
+            "Payments": [
+              {
+                "Credit cards": true
+              },
+              {
+                "Debit cards": true
+              },
+              {
+                "NFC mobile payments": true
+              }
+            ]
+          },
+          "gasPrices": [],
+          "url": "https://www.google.com/maps/search/?api=1&query=Cl%C3%ADnica%20Vieira&query_place_id=ChIJcZgDC6CipBIRoXRtMK9e2W0",
+          "searchPageUrl": "https://www.google.com/maps/search/clinica%20estetica/@41.43288460215813,2.053079619887979,17z?hl=en",
+          "searchString": "clinica estetica",
+          "language": "en",
+          "rank": 16,
+          "isAdvertisement": false,
+          "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSztHwEtURtPZutjsdiNEESavys6axHta6Nk7rPEHm2DyDPXJqUsZ9PkCKWhYH2-Nc6qsdWrtZ7xtaN8GjVbfWSfFXA3-NXZ3jp4wMqIR1RQmstYr8uJ3rC82yNeCUjLIUumaTdWxFXTvICN=w408-h612-k-no",
+          "kgmid": "/g/1hm43d1xr"
+        },
+        "pairedItem": {
+          "item": 4
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "Read Pending Queries": {
+      "main": [
+        [
+          {
+            "node": "Run an Actor and get dataset",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run an Actor and get dataset": {
+      "main": [
+        [
+          {
+            "node": "Duplicate Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait Flex",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Batch Processing Logic",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Business Data": {
+      "main": [
+        [
+          {
+            "node": "Filter Businesses with Websites",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Batch Processing Logic": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Visitar Web Clinica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Visitar Web Clinica": {
+      "main": [
+        [
+          {
+            "node": "Extract Contact Information",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Necesita IA?": {
+      "main": [
+        [
+          {
+            "node": "Groq - Buscar Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge Resultados",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Groq - Buscar Email": {
+      "main": [
+        [
+          {
+            "node": "Parsear Respuesta Groq",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsear Respuesta Groq": {
+      "main": [
+        [
+          {
+            "node": "Merge Resultados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Resultados": {
+      "main": [
+        [
+          {
+            "node": "Mark as Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark as Processed": {
+      "main": [
+        [
+          {
+            "node": "Wait Anti-Bloqueo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Anti-Bloqueo": {
+      "main": [
+        [
+          {
+            "node": "Batch Processing Logic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Duplicate Filter": {
+      "main": [
+        [
+          {
+            "node": "Batch Processing Logic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Save Business Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Status sin web": {
+      "main": [
+        [
+          {
+            "node": "Batch Processing Logic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Businesses with Websites": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Status sin web",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Flex": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Contact Information": {
+      "main": [
+        [
+          {
+            "node": "Necesita IA?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Clínicas No Contactadas": {
+      "main": [
+        [
+          {
+            "node": "Filtrar Emails Válidos (Max 40)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bucle Principal (1 a 1)": {
+      "main": [
+        [],
+        [
+          {
+            "node": "¿Tiene Nombre Limpio?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Router (Par/Impar)": {
+      "main": [
+        [
+          {
+            "node": "Preparar Email Personalizado2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Email Personalizado3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unir Caminos": {
+      "main": [
+        [
+          {
+            "node": "Bucle Principal (1 a 1)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Email Personalizado2": {
+      "main": [
+        [
+          {
+            "node": "Crear Borrador Gmail (Agent Booster)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar Contactado2": {
+      "main": [
+        [
+          {
+            "node": "Espera Aleatoria 45-180s2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Borrador Gmail (Agent Booster)1": {
+      "main": [
+        [
+          {
+            "node": "Marcar Contactado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Espera Aleatoria 45-180s2": {
+      "main": [
+        [
+          {
+            "node": "Unir Caminos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Borrador Gmail (Tech Booster)1": {
+      "main": [
+        [
+          {
+            "node": "Marcar Contactado3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Email Personalizado3": {
+      "main": [
+        [
+          {
+            "node": "Crear Borrador Gmail (Tech Booster)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar Contactado3": {
+      "main": [
+        [
+          {
+            "node": "Espera Aleatoria 45-180s3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Espera Aleatoria 45-180s3": {
+      "main": [
+        [
+          {
+            "node": "Unir Caminos",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "¿Tiene Nombre Limpio?": {
+      "main": [
+        [
+          {
+            "node": "Nombre Listo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "IA - Limpiar Nombre (Flujo 2)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IA - Reparar Nombre": {
+      "main": [
+        [
+          {
+            "node": "Asignar Nombre Reparado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asignar Nombre Reparado": {
+      "main": [
+        []
+      ]
+    },
+    "Nombre Listo": {
+      "main": [
+        [
+          {
+            "node": "Router (Par/Impar)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read Pending Queries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IA - Limpiar Nombre (Flujo 2)": {
+      "main": [
+        [
+          {
+            "node": "Asignar Nombre Limpio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asignar Nombre Limpio": {
+      "main": [
+        [
+          {
+            "node": "Nombre Listo",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Filtrar Emails Válidos (Max 40)": {
+      "main": [
+        [
+          {
+            "node": "Bucle Principal (1 a 1)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger Diario 10.30AM": {
+      "main": [
+        [
+          {
+            "node": "Leer Clínicas No Contactadas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "HhrYFRpsXaGLQ4zQ"
+  },
+  "versionId": "606bcf64-9bec-4ed1-9b21-5fd4f4730178",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dea0fe42c4fc0a7d4eab96fc208153d329cc0d698330064077ad5d91e5842edc"
+  },
+  "id": "pBEcCyEKbInaRzJNRvL2O",
+  "tags": []
+}
