@@ -1,10 +1,45 @@
-# Agent_Widget_Web
+# Widget_Web_Agent
 
 Embeddable conversational widget collection, organized by implementation type. Built for support, lead capture, and webhook automation.
 
+## Widget Previews
+
+### Boo Widget
+
+![Boo Landing](boo_widget/assets/boo_landing.jpg)
+
+> Live demo: [agentbooster.ai](https://agentbooster.ai)
+
+### Risolvia Alternativo
+
+![Boo Alternative](boo_widget/assets/widget_preview.png)
+
+> Alternative style: [risolvia.com](https://risolvia.com)
+
+### React & Vanilla Widget
+
+<p align="center">
+  <img src="vanilla_widget/assets/vanilla_welcome.png" width="48%" />
+  <img src="vanilla_widget/assets/vanilla_chat.png" width="48%" />
+</p>
+
+### Liquid Glass Widget
+
+<p align="center">
+  <img src="widget_liquid_glass/assets/liquid_glass_welcome.png" width="48%" />
+  <img src="widget_liquid_glass/assets/liquid_glass_chat.png" width="48%" />
+</p>
+
+## Use Cases & Adaptability
+
+This widget structure is designed for **agentic automation** and can be adapted to any sector.
+
+- **Example Implementation (Clinics)**: See how this widget integrates into a real-world scenario for clinics: [https://youtu.be/FZiIpD6OlYc?si=0EAt1zkK3dnfHtz2](https://youtu.be/FZiIpD6OlYc?si=0EAt1zkK3dnfHtz2).
+- Although the video focuses on the clinical sector, the logic is fully adaptable to any other industry requiring automated agentic interaction.
+
 ## Project Structure
 
-This directory (`Agent_Widget_Web`) consolidates different widget implementations and versions:
+This directory (`Widget_Web_Agent`) consolidates different widget implementations and versions:
 
 - **`vanilla_widget/`**: Lightweight, embeddable Vanilla JS version.
   - Contains `widget.js` and `widget-embed.html`.

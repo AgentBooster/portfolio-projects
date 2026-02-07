@@ -4,6 +4,8 @@ Collection of JSON workflows ready to import into n8n. This directory groups
 marketing automations, CRM integrations, and operational tasks that serve as a
 base or template for projects.
 
+![n8n Workflows Preview](assets/n8n_workflow.png)
+
 ## What is inside
 
 - `n8n/`: workflows exported from n8n in JSON.

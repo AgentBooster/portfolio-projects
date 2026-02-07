@@ -4,6 +4,13 @@ Static frontend for a physiotherapy clinic: commercial landing, internal
 software panel design, conversational widget, and agent prompt. The project is
 intended as a functional demo and a product presentation.
 
+![Fisia Main Preview](assets/images/fisia_main.png)
+
+<p align="center">
+  <img src="assets/images/fisia_widget_1.png" width="48%" />
+  <img src="assets/images/fisia_widget_2.png" width="48%" />
+</p>
+
 ## Overview
 
 Fisia combines a commercial experience and an internal panel design for
@@ -55,3 +62,7 @@ data and basic UI behavior in the browser.
 - LocalStorage for state and demo
 - LangChain (agent prompt)
 - n8n (workflow automation, included as workspace)
+
+## License
+
+MIT License.

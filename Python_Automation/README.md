@@ -3,8 +3,12 @@
 Home for Python automation work.
 
 Collection of automation projects built with Python, from quick prototypes to
-more complete solutions with scripts and agents. This space is meant for
+more complete solutions with scripts or agents. This space is meant for
 experimentation, validation, and turning ideas into usable tools.
+
+## Execution Example
+
+![Python Agent Run](assets/python_agent_run.png)
 
 ## How to navigate
 

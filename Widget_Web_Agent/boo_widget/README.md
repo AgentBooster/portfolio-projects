@@ -5,6 +5,13 @@ Embeddable chat widget used on the **Boo** company site. This folder contains th
 - Try it live in our web app: https://agentbooster.ai
 - Test an alternate style here: https://risolvia.com
 
+## Previews
+
+![Boo Landin](assets/boo_landing.jpg)
+![Boo Chat](assets/boo_chat.png)
+
+> **Note:** The widget is the colorful rectangular component and its interactive elements.
+
 ## Contents
 
 - `boowidget.js`: widget script (paste the full code here).
