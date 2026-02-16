@@ -19,7 +19,7 @@ A professional implementation of image classification focused on **Maintainabili
 
 ### Interactive Notebook:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/christianmarcosmp/portfolio-projects/blob/main/Machine_Learning_Deep_Learning/vision_image_classifier_cnn/notebooks/demo_inference.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AgentBooster/portfolio-projects/blob/main/Machine_Learning_Deep_Learning/vision_image_classifier_cnn/notebooks/demo_inference.ipynb)
 
 ---
 
