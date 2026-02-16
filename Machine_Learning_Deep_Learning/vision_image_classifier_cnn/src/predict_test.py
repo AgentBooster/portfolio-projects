@@ -16,7 +16,7 @@ def prep(img):
     return keras.applications.mobilenet_v2.preprocess_input(tf.cast(img,tf.float32))
 for img,label in ds.take(1):
     x=tf.expand_dims(prep(img),0)
-    p=tf.nn.softmax(model.predict(x,verbose=0)[0]).numpy()
+    p=model.predict(x,verbose=0)[0]
     top=int(p.argmax())
     print("GT:",names[int(label.numpy())])
     print("Top-1:",names[top],f"({p[top]:.3f})")

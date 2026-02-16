@@ -1,5 +1,11 @@
 :root {
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Inter",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   color: #1f2933;
   background-color: #f5f7fb;
 }
@@ -7,7 +13,12 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top left, #f5f7fb 0%, #e4ecff 45%, #dce3ff 100%);
+  background: radial-gradient(
+    circle at top left,
+    #f5f7fb 0%,
+    #e4ecff 45%,
+    #dce3ff 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,6 +31,8 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .visually-hidden {
@@ -53,7 +66,11 @@ body {
   inset: -40% 10% auto 10%;
   height: 280px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(56, 67, 208, 0.18), rgba(154, 162, 255, 0.12));
+  background: linear-gradient(
+    135deg,
+    rgba(56, 67, 208, 0.18),
+    rgba(154, 162, 255, 0.12)
+  );
   filter: blur(0px);
   z-index: 0;
 }
@@ -88,7 +105,11 @@ h1 {
   font-weight: 600;
   cursor: pointer;
   background: rgba(92, 106, 196, 0.07);
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
   backdrop-filter: blur(8px);
 }
 
@@ -132,7 +153,10 @@ button {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.2s ease;
   box-shadow: 0 12px 25px rgba(56, 67, 208, 0.28);
   background: linear-gradient(135deg, #3843d0 0%, #6c74f0 100%);
   color: #ffffff;
@@ -272,4 +296,101 @@ button:disabled {
   button {
     width: 100%;
   }
+}
+
+/* Background Decorations */
+.background-decorations {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page {
+  width: min(960px, 92%);
+  margin: 3.5rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.decor-img {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(56, 67, 208, 0.2);
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  opacity: 0.85;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.decor-img:hover {
+  transform: scale(1.1) rotate(0deg) !important;
+  z-index: 10;
+  opacity: 1;
+  box-shadow: 0 20px 40px rgba(56, 67, 208, 0.3);
+  cursor: pointer;
+}
+
+.decor-1 {
+  top: 12%;
+  left: 8%;
+  transform: rotate(-12deg);
+}
+.decor-2 {
+  top: 18%;
+  right: 8%;
+  transform: rotate(8deg);
+  width: 170px;
+  height: 170px;
+}
+.decor-3 {
+  bottom: 15%;
+  left: 10%;
+  transform: rotate(6deg);
+  width: 160px;
+  height: 160px;
+}
+.decor-4 {
+  bottom: 12%;
+  right: 10%;
+  transform: rotate(-9deg);
+}
+.decor-5 {
+  top: 48%;
+  left: 5%;
+  transform: rotate(15deg);
+  width: 130px;
+  height: 130px;
+}
+.decor-6 {
+  top: 55%;
+  right: 5%;
+  transform: rotate(-10deg);
+  width: 140px;
+  height: 140px;
+}
+.decor-7 {
+  top: 8%;
+  left: 45%;
+  transform: rotate(-5deg);
+  width: 120px;
+  height: 120px;
+}
+
+@media (max-width: 1200px) {
+  .decor-img {
+    opacity: 0.4;
+  } /* Fade out on smaller screens to keep focus */
+  .decor-5,
+  .decor-6,
+  .decor-7 {
+    display: none;
+  } /* Remove side images on tablets */
 }

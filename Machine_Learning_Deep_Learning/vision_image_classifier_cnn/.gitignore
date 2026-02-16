@@ -1,0 +1,26 @@
+# Environment
+venv/
+venv_tf/
+.env
+
+# Data
+data/
+downloads/
+stanford_dogs/
+*.tfrecord
+*.tar
+*.tar.gz
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE/System
+.DS_Store
+.vscode/
+.idea/
+
+# Documentation
+TECHNICAL_NOTES.md
+CNN_Upgrade.md
+SPANISH_README.md

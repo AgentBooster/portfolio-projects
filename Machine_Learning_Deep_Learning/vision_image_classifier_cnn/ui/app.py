@@ -80,7 +80,7 @@ def predict(image: Image.Image) -> Tuple[Image.Image, str, str]:
         if raw_predictions.ndim != 2 or raw_predictions.shape[0] != 1:
             raise RuntimeError("The model returned an unexpected output.")
 
-        probabilities = tf.nn.softmax(raw_predictions[0]).numpy()
+        probabilities = raw_predictions[0]
         top_indices = np.argsort(probabilities)[-5:][::-1]
         top1_index = top_indices[0]
         top1_label = LABELS[top1_index] if top1_index < len(LABELS) else f"Label {top1_index}"
@@ -116,7 +116,7 @@ iface = gr.Interface(
 
 def main() -> None:
     """Launch Gradio application."""
-    iface.launch()
+    iface.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 7860)))
 
 
 if __name__ == "__main__":

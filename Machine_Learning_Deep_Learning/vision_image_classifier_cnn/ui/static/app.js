@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/predict";
+const API_URL = "http://127.0.0.1:8080/predict";
 const IMG_SIZE = 224;
 const DEFAULT_DROP_TEXT = "Drag your image here or click to select.";
 

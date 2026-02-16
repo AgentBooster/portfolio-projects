@@ -29,7 +29,7 @@ MODELS_DIR = BASE_DIR.parent / "models"
 MODEL_PATH = MODELS_DIR / "mobilenetv2_dogs.keras"
 LABELS_PATH = MODELS_DIR / "labels.txt"
 IMG_SIZE = 224
-SERVER_ADDRESS = ("127.0.0.1", 8000)
+SERVER_ADDRESS = ("0.0.0.0", int(os.environ.get("PORT", 8080)))
 
 
 def load_labels(path: Path) -> List[str]:
@@ -67,7 +67,7 @@ def run_prediction(image_bytes: bytes) -> Dict[str, object]:
     raw = MODEL.predict(input_array, verbose=0)
     if raw.ndim != 2 or raw.shape[0] != 1:
         raise RuntimeError("Unexpected model output.")
-    probabilities = tf.nn.softmax(raw[0]).numpy()
+    probabilities = raw[0]
 
     top_indices = np.argsort(probabilities)[-5:][::-1]
     top5 = []
