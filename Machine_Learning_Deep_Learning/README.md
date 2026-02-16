@@ -1,26 +1,43 @@
-# Tensorflow_ML_DL
+# TensorFlow ML & DL Inventory
 
-Collection of Machine Learning and Deep Learning projects. This directory
-gathers experiments, prototypes, and demos focused on TensorFlow/Keras, with
-models ready to use and room to iterate or retrain.
+A curated collection of Machine Learning and Deep Learning projects. This directory gathers experiments, prototypes, and demos focused on **TensorFlow/Keras**, featuring production-ready models and modular codebases.
 
-## General structure
+## 📂 Standardized Project Structure
 
-- `*/README.md`: documentation and run steps for each project.
-- `*/src/`: training, evaluation, and utilities code.
-- `*/models/`: trained weights or artifacts when applicable.
-- `*/ui/`: demo interfaces for local testing.
+- `*/README.md`: Specific documentation, metrics, and run steps.
+- `*/notebooks/`: Interactive notebooks (inference demos & exploratory analysis, Open in Colab).
+- `*/src/`: Core modules for data processing, training, and evaluation.
+- `*/models/`: Trained weights or artifacts when applicable.
+- `*/ui/`: User interfaces (Gradio, Streamlit, or Custom APIs) for local testing.
 
-## How to start
+## ▶ How to start
 
-1. Enter the project you are interested in.
-2. Read its `README.md` for dependencies and commands.
-3. Run training, evaluation, or the demo as needed.
+1. **Choose a Project**
 
-## Note
+   Browse the directory and pick the project you are interested in (e.g., `vision_image_classifier_cnn`).
 
-Projects include pre-trained models to speed up demos. If you want your own
-results, retrain or duplicate the project and tune hyperparameters.
+2. **Download the Code (clone only this project folder)**
 
-If you run training locally, keep an eye on resource usage and device
-temperature (it ran fine for me on a MacBook Air M3).
+   Run these commands in your terminal:
+
+   ```bash
+   # 1) Clone the repository in lightweight mode (no full checkout)
+   git clone --filter=blob:none --no-checkout https://github.com/AgentBooster/portfolio-projects.git
+   cd portfolio-projects
+
+   # 2) Enable sparse-checkout and choose the exact project path
+   git sparse-checkout init --cone
+   git sparse-checkout set Machine_Learning_Deep_Learning/vision_image_classifier_cnn
+
+   # 3) Checkout the branch (downloads/materializes only selected paths)
+   git checkout main
+   ```
+
+3. **Run**
+
+   Enter the folder, read its `README.md` for specific dependencies/commands, and run training/evaluation/inference as needed.
+
+## ⚠️ Notes
+
+- **Reproducibility**: Projects may include pre-trained models for immediate testing. Retraining scripts are provided if you wish to tune hyperparameters.
+- **Performance Verification**: Training pipelines have been verified on Apple Silicon (MacBook Air M3). Please monitor resource usage if running heavy training locally.
