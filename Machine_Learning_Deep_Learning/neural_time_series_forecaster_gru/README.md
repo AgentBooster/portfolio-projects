@@ -68,7 +68,7 @@ npm run dev
 ```
 
 **3. Interactive Notebook (Cloud):**
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/StartUp-Dream-Team/neural_time_series_forecaster_gru/blob/main/notebooks/demo_inference.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AgentBooster/portfolio-projects/blob/main/Machine_Learning_Deep_Learning/neural_time_series_forecaster_gru/notebooks/demo_inference.ipynb)
 
 **4. Pre-Trained Models:**
 Includes production-ready weights for all 7 campus buildings in `models/*.keras`, ready for immediate inference.
@@ -458,7 +458,13 @@ python src/train_forecast.py
 python src/train_anomaly.py
 ```
 
+**Data source (Local Training):** By default, the training scripts load `data/processed/synthetic_2022_2026.csv` (generated via `src/data/synthetic.py` using the calendar mock in `src/data/calendar_mock.py`). Raw inputs live under `data/raw/`, and the processed dataset used by the models lives under `data/processed/`.
+
+**Using your own dataset:** place your CSV in `data/processed/` and update the `data_path` variable inside `src/train_forecast.py` and `src/train_anomaly.py` (or replace `synthetic_2022_2026.csv` with your own file). This is the single switch that controls which dataset is used for both local and cloud training containers.
+
 #### Option B: Training on Google Cloud (Vertex AI)
+
+**What the training container encapsulates:** `Dockerfile.train` bundles the training code (`src/train_forecast.py`, `src/train_anomaly.py`) plus the default dataset at `data/processed/synthetic_2022_2026.csv`. To train on your own data in the cloud, replace that CSV before building the image (or change `data_path` in the training scripts), then rebuild and push.
 
 1.  **Build Training Docker**:
     ```bash
