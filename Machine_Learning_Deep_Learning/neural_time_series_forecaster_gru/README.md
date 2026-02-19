@@ -466,6 +466,8 @@ python src/train_anomaly.py
 
 **What the training container encapsulates:** `Dockerfile.train` bundles the training code (`src/train_forecast.py`, `src/train_anomaly.py`) plus the default dataset at `data/processed/synthetic_2022_2026.csv`. To train on your own data in the cloud, replace that CSV before building the image (or change `data_path` in the training scripts), then rebuild and push.
 
+**Clarification:** The **FastAPI container (`Dockerfile.api`) is inference-only**. It does not run training jobs. Cloud training should be executed as a **batch job** with `Dockerfile.train`, and the resulting model artifacts are then deployed to the inference services.
+
 1.  **Build Training Docker**:
     ```bash
     docker build -f Dockerfile.train -t gcr.io/PROJECT-ID/sgee-trainer .
@@ -602,7 +604,7 @@ How does UCU actually deploy this?
 **1. Data Ingestion (The Pipeline)**
 
 - **Current**: Reads from `Consumos 2022.xlsx` for historical validation (Static).
-- **Production**: Update `src/data/loader.py` to connect directly to the **Smart Meter SQL Database** or **BMS (Building Management System)** for live data ingestion.
+- **Production**: Connect the **API ingestion layer** (`src/api/main.py`, and `src/dashboard/core.py` if Gradio stays) to the **Smart Meter SQL Database** or **BMS** for live data ingestion. If you route through `src/data/loader.py`, update it there as the shared data access point. For cloud retraining with **your own model**, use **Custom Training** (`Dockerfile.train`) and wire the data source in your code (BigQuery/BMS or export to GCS). AutoML/Model Garden do not accept custom GRU architectures.
 
 **2. The "Brain" (Inference Engine)**
 
