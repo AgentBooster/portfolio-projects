@@ -1,0 +1,19 @@
+# 🐳 SGEE Dashboard 2.0 (Next.js)
+FROM node:18-alpine
+
+WORKDIR /app
+
+# 1. Install Dependencies
+# Copy package.json and package-lock.json first to cache dependencies
+COPY src/frontend/package*.json ./
+RUN npm ci
+
+# 2. Build Application
+# Copy source code
+COPY src/frontend/ ./
+# Build production bundle
+RUN npm run build
+
+# 3. Serve
+EXPOSE 3000
+CMD ["npm", "start"]

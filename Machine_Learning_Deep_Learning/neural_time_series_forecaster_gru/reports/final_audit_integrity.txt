@@ -1,0 +1,66 @@
+=== UCU ENERGY SYSTEM: FINAL AUDIT REPORT ===
+Date: 2026-02-17 19:51:21.357900
+Total Buildings Verified: 7
+
+--- Building: Edificio Apolonia ---
+[Forecast GRU]
+  > Status: OK
+  > Test MAE: 10.37 kWh
+  > Test RMSE: 26.25 kWh
+[Anomaly AE]
+  > Threshold (99th): 0.5527
+  > Detected Rate: 5.00% (Expected ~1-5%)
+
+--- Building: Edificio Mullin ---
+[Forecast GRU]
+  > Status: OK
+  > Test MAE: 14.22 kWh
+  > Test RMSE: 37.16 kWh
+[Anomaly AE]
+  > Threshold (99th): 0.4214
+  > Detected Rate: 5.00% (Expected ~1-5%)
+
+--- Building: Edificio Athanasius ---
+[Forecast GRU]
+  > Status: OK
+  > Test MAE: 8.44 kWh
+  > Test RMSE: 21.28 kWh
+[Anomaly AE]
+  > Threshold (99th): 0.6052
+  > Detected Rate: 5.00% (Expected ~1-5%)
+
+--- Building: Edificio Semprún ---
+[Forecast GRU]
+  > Status: OK
+  > Test MAE: 23.68 kWh
+  > Test RMSE: 60.37 kWh
+[Anomaly AE]
+  > Threshold (99th): 0.6134
+  > Detected Rate: 5.00% (Expected ~1-5%)
+
+--- Building: Edificio Central ---
+[Forecast GRU]
+  > Status: OK
+  > Test MAE: 67.50 kWh
+  > Test RMSE: 171.91 kWh
+[Anomaly AE]
+  > Threshold (99th): 0.5740
+  > Detected Rate: 5.00% (Expected ~1-5%)
+
+--- Building: Edificio Xalambrí ---
+[Forecast GRU]
+  > Status: OK
+  > Test MAE: 2.14 kWh
+  > Test RMSE: 5.41 kWh
+[Anomaly AE]
+  > Threshold (99th): 0.5381
+  > Detected Rate: 5.00% (Expected ~1-5%)
+
+--- Building: Edificio Madre Marta ---
+[Forecast GRU]
+  > Status: OK
+  > Test MAE: 3.19 kWh
+  > Test RMSE: 8.07 kWh
+[Anomaly AE]
+  > Threshold (99th): 0.6327
+  > Detected Rate: 5.00% (Expected ~1-5%)

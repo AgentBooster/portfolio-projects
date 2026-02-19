@@ -1,0 +1,68 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Context & Logs (User request)
+context/
+logs/
+# reports/ (User wants these visible for portfolio proof)
+# reports/figures/
+# reports/metrics_summary.txt
+
+# Data (Keep raw? Usually synthetic/processed is gitignored if large, but user wants to upload weights)
+# data/processed/synthetic_2022_2026.csv # Maybe too large?
+# data/raw/*.xlsx
+# For now, excluding large CSVs if they exist, but maybe user wants them.
+# The user said "weights already pre-trained", implies models folder IS included.
+
+# Models are included, but maybe ignore intermediate checkpoints if any
+*.ckpt
+*.h5
+# Keep .keras and .pkl as requested
+
+# Local config
+*.env
+
+# SQLite local logs (optional persistence)
+sgee_logs.db

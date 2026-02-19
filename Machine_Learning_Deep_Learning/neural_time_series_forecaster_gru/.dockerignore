@@ -1,0 +1,16 @@
+__pycache__
+venv/
+.git
+.gitignore
+.dockerignore
+context/
+notebooks/
+reports/
+README.md
+EXAMPLE_README.md
+task.md
+implementation_plan.md
+walkthrough.md
+*.png
+*.jpg
+*.jpeg

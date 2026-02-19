@@ -1,0 +1,22 @@
+pandas
+openpyxl
+sdv
+tensorflow
+scikit-learn
+gradio
+matplotlib
+seaborn
+jupyter
+pytest
+pyyaml
+streamlit
+plotly
+watchdog
+fastapi
+uvicorn
+pydantic
+requests
+google-genai
+openai
+# Mac GPU Acceleration (Apple Silicon only)
+tensorflow-metal ; sys_platform == 'darwin' and platform_machine == 'arm64'

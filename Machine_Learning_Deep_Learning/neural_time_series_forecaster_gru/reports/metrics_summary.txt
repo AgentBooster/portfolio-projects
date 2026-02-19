@@ -1,0 +1,20 @@
+--- Audit Report: Edificio Central ---
+
+[Forecasting Metrics]
+Model: Stacked GRU (64 units -> 32 units)
+Test MAE (kWh): 5.3477
+Test RMSE (kWh): 7.0641
+Test MAPE (%): 8.97%
+
+[Anomaly Detection Metrics]
+Model: GRU Autoencoder (Latent Dim 32)
+Reconstruction MSE (Test Mean): 0.075563
+Threshold (99th percentile): 0.118779
+Anomalies Detected in Test: 0 (0.00%)
+Note: Accuracy/F1 cannot be calculated without labeled ground truth anomalies.
+
+[Data Provenance]
+Training Data Range: 2022-01-01 to 2023-12-31 (Synthetic)
+Features Used: ['consumption_kWh', 'sin_hour', 'cos_hour', 'sin_day', 'cos_day', 'sin_month', 'cos_month', 'is_weekend', 'is_holiday', 'is_semester', 'is_exam']
+Note: 'Area (m^2)' was NOT used as a feature (Per-building model verified).
+Note: 'Holiday/Exam' flags were used as Binary Features (0/1).
