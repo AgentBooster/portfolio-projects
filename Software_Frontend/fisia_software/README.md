@@ -28,8 +28,8 @@ data and basic UI behavior in the browser.
 
 ## Demos
 
-- Video demo (healthcare automation): https://youtu.be/FZiIpD6OlYc?si=eMArHdityJL3Hfsg
-- Open to try the agent: https://agentbooster.github.io/BooAgent/fisia_index.html
+- **Video demo (healthcare automation)**: https://youtu.be/FZiIpD6OlYc?si=eMArHdityJL3Hfsg
+- **Open to try the agent**: https://agentbooster.github.io/BooAgent/fisia_index.html
 
 ## Quick use (local)
 

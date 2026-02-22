@@ -2,6 +2,16 @@
 
 Embeddable conversational widget collection, organized by implementation type. Built for support, lead capture, and webhook automation.
 
+#### Video Demo: [https://youtu.be/FZiIpD6OlYc](https://youtu.be/FZiIpD6OlYc) **(IN SPANISH)**
+
+**Stop Losing Patients: How to Automate Your Medical Clinic’s Front Desk**
+
+<a href="https://youtu.be/FZiIpD6OlYc">
+  <img src="https://img.youtube.com/vi/FZiIpD6OlYc/maxresdefault.jpg" width="720" />
+</a>
+
+[![Watch on YouTube](https://img.shields.io/badge/▶%20Watch%20on%20YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/FZiIpD6OlYc)
+
 ## Widget Previews
 
 ### Boo Widget
