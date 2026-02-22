@@ -10,6 +10,16 @@
 ![Core Arch](https://img.shields.io/badge/Core_Arch-GRU_+_Autoencoder-ff69b4?style=flat-square)
 ![Green Metric](https://img.shields.io/badge/Green_Metric-Aligned-green?style=flat-square)
 
+#### Video Demo: [https://youtu.be/RNR1kRk0fzM](https://youtu.be/RNR1kRk0fzM) **(IN SPANISH)**
+
+**SGEE: Energy Management with Deep Learning (GRU + Autoencoders)**
+
+<a href="https://youtu.be/RNR1kRk0fzM">
+  <img src="https://img.youtube.com/vi/RNR1kRk0fzM/maxresdefault.jpg" width="720" />
+</a>
+
+[![Watch on YouTube](https://img.shields.io/badge/▶%20Watch%20on%20YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/RNR1kRk0fzM)
+
 ## 🛠️ Tech Stack & Technologies
 
 | Core AI & Machine Learning                                                            | Backend & Data                                                               | Frontend & Interface                                                          |
@@ -65,9 +75,12 @@ uvicorn src.api.main:app --reload --port 8080
 
 # Terminal 2: Face (Frontend)
 npm run dev
+
+# Review the user guide located below under the rocket icon.
 ```
 
 **3. Interactive Notebook (Cloud):**
+
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AgentBooster/portfolio-projects/blob/main/Machine_Learning_Deep_Learning/neural_time_series_forecaster_gru/notebooks/demo_inference.ipynb)
 
 **4. Pre-Trained Models:**
