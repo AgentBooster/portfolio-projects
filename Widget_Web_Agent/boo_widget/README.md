@@ -34,7 +34,7 @@ If you change the mount ID in the HTML, you must also update `targetDivId` in `b
 
 ## n8n flow
 
-Template location in this repository: `Flows_JSON/n8n/BooWebMeet.json`
+Template location in this repository: `n8n_JSON/flows/BooWebMeet.json`
 
 ## External services
 

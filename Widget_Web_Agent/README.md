@@ -80,7 +80,7 @@ Most versions share a similar configuration object (usually defined in `widget.j
 
 To power the widget with an intelligent agent, you can use our pre-built **n8n workflows**.
 
-1.  Navigate to the `Flows_JSON/flows` directory in this repository.
+1.  Navigate to the `n8n_JSON/flows` directory in this repository.
 2.  Choose a use-case flow that fits your needs.
 3.  Import the JSON file into your n8n instance.
 4.  Activate the workflow and copy the **Production URL** of the Webhook node.
@@ -90,7 +90,7 @@ To power the widget with an intelligent agent, you can use our pre-built **n8n w
 
 For a more robust and scalable solution, you can develop your agent in Python. You can use the **LangChain** library or API to build and test your agent's capabilities.
 
-- We provide a starter template in: `Python_Automation/fisia_agent_langchain`
+- We provide a starter template in: `CS_Projects_Py_CPP_Swift_SQL/python/python_agent/fisia_agent_langchain`
 - This approach is recommended if you need advanced logic, memory management, or custom integrations beyond what n8n offers.
 
 ## Version notes

@@ -24,7 +24,7 @@ Custom Python implementation using LangChain as the base API (no notebooks).
 ## Installation
 
 ```bash
-cd /Users/christianmarcosmp/Documents/GitHub/portfolio-projects/Python_Automation/fisia_agent_langchain
+cd /Users/christianmarcosmp/Documents/GitHub/portfolio-projects/CS_Projects_Py_CPP_Swift_SQL/python/python_agent/fisia_agent_langchain
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt

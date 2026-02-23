@@ -53,7 +53,7 @@ data and basic UI behavior in the browser.
 - `assets/css/base.css`: base styles and utilities.
 - `widget/widget.js`: embeddable widget with configuration (webhook).
 - `widget/widget-embed-example.html`: minimal embed example.
-- `langchain-n8n-agent-fisia/fisia-langchain-n8n-agent.js`: agent prompt and logic (bookings/support), used inside the LangChain node in n8n. Template flow: `Flows_JSON/n8n/Use Cases - Health Clinics.json`.
+- `langchain-n8n-agent-fisia/fisia-langchain-n8n-agent.js`: agent prompt and logic (bookings/support), used inside the LangChain node in n8n. Template flow: `n8n_JSON/flows/Use Cases - Health Clinics.json`.
 
 ## Technologies
 

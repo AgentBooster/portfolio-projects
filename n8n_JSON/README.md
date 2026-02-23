@@ -1,4 +1,4 @@
-# Flows_JSON
+# n8n_JSON
 
 Collection of JSON workflows ready to import into n8n. This directory groups
 marketing automations, CRM integrations, and operational tasks that serve as a
@@ -8,7 +8,7 @@ base or template for projects.
 
 ## What is inside
 
-- `n8n/`: workflows exported from n8n in JSON.
+- `flows/`: workflows exported from n8n in JSON.
 
 ## How to import into n8n
 
