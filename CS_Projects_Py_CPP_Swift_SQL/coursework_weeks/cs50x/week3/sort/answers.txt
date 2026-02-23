@@ -1,0 +1,11 @@
+sort1 uses: Bubble Sort
+
+How do you know?: It is extremely fast on the sorted list (almost instant) because it stops early when no swaps are needed. However, it is very slow on the random and reversed lists, which is typical behavior for Bubble Sort.
+
+sort2 uses: Merge Sort
+
+How do you know?: It has a consistent speed (~1.1s) for all lists: sorted, random, and reversed. Unlike the others, it handles large datasets efficiently regardless of their initial order.
+
+sort3 uses: Selection Sort
+
+How do you know?: It is consistently slow (~3s) on all lists, even the sorted one. This happens because it always searches for the smallest number in the remaining list, making the same number of comparisons every time.

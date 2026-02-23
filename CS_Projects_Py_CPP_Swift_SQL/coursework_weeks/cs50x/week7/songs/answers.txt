@@ -1,0 +1,5 @@
+The data in songs.db would be used by Spotify Wrapped to aggregate statistics about a user's listening habits. 
+For example, by calculating the average 'valence' of all songs streamed by a user, Spotify can characterize the emotional tone (happy vs. sad) of their year.
+Similarly, average 'energy' and 'danceability' can determine if a listener prefers "chill" music or "party" music.
+Using 'artist_id', they can sum stream counts to determine the Top Artist for each user.
+The 'duration_ms' column helps calculate the total minutes listened, a key metric in Wrapped.

@@ -1,0 +1,29 @@
+/* Custom styles to override or augment Bootstrap */
+
+body {
+    background-color: #f8f9fa; /* Light grey background */
+}
+
+h1 {
+    color: #343a40; /* Darker heading color */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+#nameInput {
+    border: 2px solid #3e64ff;
+    border-radius: 20px;
+}

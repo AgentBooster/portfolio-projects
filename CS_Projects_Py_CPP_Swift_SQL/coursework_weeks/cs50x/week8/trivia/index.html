@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // Part 1: Multiple Choice Logic
+            function checkMultiChoice(event) {
+                let button = event.target;
+                
+                // Reset all buttons in this section to default color first? 
+                // Spec doesn't strictly require reset but it's nice. 
+                // For simplicity/strict adherence to "turn red/green", we just toggle the clicked one.
+                
+                if (button.innerHTML === '1 person per 6 sheep') {
+                    button.style.backgroundColor = '#d4edda'; // Greenish
+                    button.parentElement.querySelector('.feedback').innerHTML = 'Correct!';
+                    button.parentElement.querySelector('.feedback').style.color = 'green';
+                } else {
+                    button.style.backgroundColor = '#f8d7da'; // Reddish
+                    button.parentElement.querySelector('.feedback').innerHTML = 'Incorrect';
+                    button.parentElement.querySelector('.feedback').style.color = 'red';
+                }
+            }
+
+            // Part 2: Free Response Logic
+            function checkFreeResponse(event) {
+                let button = event.target;
+                let input = button.parentElement.querySelector('input');
+                let answer = input.value.trim().toLowerCase();
+                
+                // Question: "In which country is it illegal to own only one guinea pig...?"
+                // Answer: Switzerland
+                if (answer === 'switzerland') {
+                    input.style.backgroundColor = '#d4edda';
+                    input.parentElement.querySelector('.feedback').innerHTML = 'Correct!';
+                    input.parentElement.querySelector('.feedback').style.color = 'green';
+                } else {
+                    input.style.backgroundColor = '#f8d7da';
+                    input.parentElement.querySelector('.feedback').innerHTML = 'Incorrect';
+                    input.parentElement.querySelector('.feedback').style.color = 'red';
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What is the approximate ratio of people to sheep in New Zealand?</h3>
+                <!-- Using inline onclick as per spec example suggestion for simplicity -->
+                <button onclick="checkMultiChoice(event)">6 people per 1 sheep</button>
+                <button onclick="checkMultiChoice(event)">3 people per 1 sheep</button>
+                <button onclick="checkMultiChoice(event)">1 person per 1 sheep</button>
+                <button onclick="checkMultiChoice(event)">1 person per 3 sheep</button>
+                <button onclick="checkMultiChoice(event)">1 person per 6 sheep</button>
+                <p class="feedback"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>In which country is it illegal to own only one guinea pig, as a lone guinea pig might get lonely?</h3>
+                <input type="text" placeholder="Type Answer Here">
+                <button onclick="checkFreeResponse(event)">Check Answer</button>
+                <p class="feedback"></p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -2,6 +2,10 @@
 
 A curated collection of Machine Learning and Deep Learning projects. This directory gathers experiments, prototypes, and demos focused on **TensorFlow/Keras**, featuring production-ready models and modular codebases.
 
+<p align="center">
+  <img src="assets/cover.png" alt="Portfolio cover" width="50%">
+</p>
+
 ## 📂 Standardized Project Structure
 
 - `*/README.md`: Specific documentation, metrics, and run steps.

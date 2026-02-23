@@ -1,6 +1,8 @@
 .DS_Store
 venv_tf/
 .venv/
+.venv312/
+.venv*/
 venv/
 __pycache__/
 .pytest_cache/

@@ -1,0 +1,30 @@
+I chose to use Bootstrap to quickly implement a responsive navigation bar and grid system, and I used JavaScript to create a personalized greeting alert based on user input.
+
+HTML Tags Used (10+):
+1. <nav> (Navigation bar container)
+2. <div> (Structural division)
+3. <ul> (Unordered list for menu)
+4. <li> (List item)
+5. <a> (Hyperlink)
+6. <button> (Interactive button)
+7. <span> (Navbar toggler icon)
+8. <h1> (Main heading)
+9. <p> (Paragraph text)
+10. <hr> (Horizontal rule)
+11. <input> (Text field for name)
+12. <form> (Contact form container)
+13. <label> (Form label)
+14. <textarea> (Message input)
+15. <table> (Projects list)
+
+CSS Properties Used (5+):
+1. background-color (Body background, Footer)
+2. color (Text color for headings and links)
+3. font-weight (Bold navbar brand)
+4. letter-spacing (Spacing in brand text)
+5. position (Fixed footer)
+6. bottom (Footer placement)
+7. width (Footer width)
+8. text-align (Centering text)
+9. padding (Spacing inside elements)
+10. border (Custom border for input)

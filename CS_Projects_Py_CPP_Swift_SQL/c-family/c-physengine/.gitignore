@@ -1,0 +1,8 @@
+# Build artifacts
+build/
+phys_engine
+*.o
+*.dSYM
+
+# OS specific
+.DS_Store

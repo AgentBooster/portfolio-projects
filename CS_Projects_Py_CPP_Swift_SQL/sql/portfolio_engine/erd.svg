@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <style>
+    .box { fill: #ffffff; stroke: #111111; stroke-width: 2; }
+    .title { font: bold 14px Arial, sans-serif; }
+    .text { font: 12px Arial, sans-serif; }
+    .line { stroke: #111111; stroke-width: 2; }
+    .label { font: 12px Arial, sans-serif; fill: #111111; }
+  </style>
+
+  <!-- users -->
+  <rect class="box" x="40" y="60" width="170" height="90"/>
+  <text class="title" x="55" y="85">users</text>
+  <text class="text" x="55" y="105">id (PK)</text>
+  <text class="text" x="55" y="123">email (UNIQUE)</text>
+
+  <!-- portfolios -->
+  <rect class="box" x="260" y="60" width="170" height="90"/>
+  <text class="title" x="275" y="85">portfolios</text>
+  <text class="text" x="275" y="105">id (PK)</text>
+  <text class="text" x="275" y="123">user_id (FK)</text>
+
+  <!-- assets -->
+  <rect class="box" x="520" y="60" width="170" height="90"/>
+  <text class="title" x="535" y="85">assets</text>
+  <text class="text" x="535" y="105">id (PK)</text>
+  <text class="text" x="535" y="123">ticker (UNIQUE)</text>
+
+  <!-- transactions -->
+  <rect class="box" x="260" y="220" width="170" height="90"/>
+  <text class="title" x="275" y="245">transactions</text>
+  <text class="text" x="275" y="265">id (PK)</text>
+  <text class="text" x="275" y="283">portfolio_id (FK)</text>
+  <text class="text" x="275" y="301">asset_id (FK)</text>
+
+  <!-- snapshots -->
+  <rect class="box" x="520" y="220" width="170" height="90"/>
+  <text class="title" x="535" y="245">snapshots</text>
+  <text class="text" x="535" y="265">id (PK)</text>
+  <text class="text" x="535" y="283">portfolio_id (FK)</text>
+  <text class="text" x="535" y="301">asset_id (FK)</text>
+
+  <!-- transaction_logs -->
+  <rect class="box" x="260" y="380" width="170" height="90"/>
+  <text class="title" x="275" y="405">transaction_logs</text>
+  <text class="text" x="275" y="425">id (PK)</text>
+  <text class="text" x="275" y="443">transaction_id</text>
+
+  <!-- lines: users -> portfolios -->
+  <line class="line" x1="210" y1="105" x2="260" y2="105"/>
+  <text class="label" x="220" y="95">1</text>
+  <text class="label" x="245" y="95">N</text>
+
+  <!-- lines: portfolios -> transactions -->
+  <line class="line" x1="345" y1="150" x2="345" y2="220"/>
+  <text class="label" x="330" y="170">1</text>
+  <text class="label" x="330" y="210">N</text>
+
+  <!-- lines: assets -> transactions -->
+  <line class="line" x1="520" y1="105" x2="430" y2="245"/>
+  <text class="label" x="500" y="120">1</text>
+  <text class="label" x="445" y="235">N</text>
+
+  <!-- lines: portfolios -> snapshots -->
+  <line class="line" x1="430" y1="105" x2="520" y2="245"/>
+  <text class="label" x="440" y="120">1</text>
+  <text class="label" x="500" y="235">N</text>
+
+  <!-- lines: assets -> snapshots -->
+  <line class="line" x1="605" y1="150" x2="605" y2="220"/>
+  <text class="label" x="590" y="170">1</text>
+  <text class="label" x="590" y="210">N</text>
+
+  <!-- lines: transactions -> transaction_logs -->
+  <line class="line" x1="345" y1="310" x2="345" y2="380"/>
+  <text class="label" x="330" y="330">1</text>
+  <text class="label" x="330" y="370">N</text>
+</svg>
