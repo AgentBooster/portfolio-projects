@@ -3,6 +3,10 @@ Modern landing page for an aesthetic clinic, built with React, Vite, and Tailwin
 ![Estetia Hero Preview](assets/estetia_preview.png)
 ![Estetia Services Preview](assets/estetia_services.png)
 
+## Credits
+
+Design made possible thanks to [Vasyl Pavlyuchok](https://github.com/vasyl-pavlyuchok).
+
 ## Features
 
 - **Responsive Design**: Mobile-first approach using Tailwind CSS.
