@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Risolvia - Soluciones Legales Especializadas al Alcance de Todos</title>
+    <meta name="description" content="Conectamos personas con profesionales legales especializados para resolver tus problemas de manera rápida, confiable y accesible. Consultas gratuitas con nuestro Agente IA." />
+    <meta name="author" content="Risolvia" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://res.cloudinary.com/dcvqw00tq/image/upload/v1750989778/Risolvia_logo_favicon-14_1_gxkzag.png" type="image/png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Risolvia - Soluciones Legales Especializadas al Alcance de Todos" />
+    <meta property="og:description" content="Conectamos personas con profesionales legales especializados para resolver tus problemas de manera rápida, confiable y accesible. Consultas gratuitas con nuestro Agente IA." />
+    <meta property="og:image" content="https://res.cloudinary.com/dcvqw00tq/image/upload/v1750989733/Risolvia_logo_20_zqraoh.png" />
+    <meta property="og:url" content="https://risolvia.com" />
+    <meta property="og:site_name" content="Risolvia" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Risolvia - Soluciones Legales Especializadas al Alcance de Todos" />
+    <meta name="twitter:description" content="Conectamos personas con profesionales legales especializados para resolver tus problemas de manera rápida, confiable y accesible. Consultas gratuitas con nuestro Agente IA." />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dcvqw00tq/image/upload/v1750989733/Risolvia_logo_20_zqraoh.png" />
+    
+    <!-- Preload de imagen de fondo del Hero para carga rápida -->
+    <link rel="preload" href="https://res.cloudinary.com/dcvqw00tq/image/upload/v1751594245/Disen%CC%83o_sin_ti%CC%81tulo_1_bzbwjb.jpg" as="image">
+
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdzHOErAAAAABLFRg8mAZoeJuL3tTHEXLlQk8uz"></script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2370691976659941');
+    
+    // Solo PageView automático al cargar la página
+    fbq('track', 'PageView');
+    
+    // Configurar variable global para indicar que Meta Pixel está listo
+    window.fbq_ready = true;
+    
+    // Función global para trackear eventos personalizados (usada por los hooks)
+    window.trackMetaEvent = function(eventName, eventData) {
+      if (window.fbq && window.fbq_ready) {
+        console.log('🔥 Firing Meta Pixel event:', eventName, eventData);
+        if (eventData && Object.keys(eventData).length > 0) {
+          fbq('track', eventName, eventData);
+        } else {
+          fbq('track', eventName);
+        }
+      }
+    };
+    </script>
+    <!-- End Meta Pixel Code -->
+  </head>
+
+  <body>
+    <!-- Meta Pixel Code - noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2370691976659941&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code - noscript fallback -->
+    
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

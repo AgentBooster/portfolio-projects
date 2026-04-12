@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- Favicons para navegadores -->
+    <link id="favicon" rel="icon" type="image/png" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-08_1_woqpkq.png">
+    <link id="favicon-shortcut" rel="shortcut icon" type="image/png" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-08_1_woqpkq.png">
+    <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-08_1_woqpkq.png">
+    <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-08_1_woqpkq.png">
+    
+    <!-- Íconos para iOS Safari (aparecen al agregar a pantalla de inicio) -->
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-09_zxjxgc.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-09_zxjxgc.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-09_zxjxgc.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-09_zxjxgc.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-09_zxjxgc.png">
+    
+    <!-- Íconos para Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-09_zxjxgc.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-09_zxjxgc.png">
+    
+    <title>Agent Booster - Agentes Inteligentes con Alma</title>
+    <meta name="description" content="Diseñamos agentes de IA personalizados que aprenden, deciden y actúan por tu negocio 24/7. No solo automatizamos, escalamos tu potencial." />
+    <meta name="author" content="Agent Booster" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <meta property="og:title" content="Agent Booster - Agentes Inteligentes con Alma" />
+    <meta property="og:description" content="Diseñamos agentes de IA personalizados que aprenden, deciden y actúan por tu negocio 24/7." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://res.cloudinary.com/dsdnpstgi/image/upload/v1756500256/agent_booster_edit1-07_de7upz.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@agentbooster" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dsdnpstgi/image/upload/v1756500256/agent_booster_edit1-07_de7upz.png" />
+    
+    <script>
+        // Aplica el tema guardado al cargar la página para evitar parpadeos (FOUC)
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light');
+        }
+        
+        // URLs de los favicons en Cloudinary
+        const FAVICON_CLARO = 'https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-09_zxjxgc.png';
+        const FAVICON_OSCURO = 'https://res.cloudinary.com/dsdnpstgi/image/upload/v1757322688/agent_booster_edit1-08_1_woqpkq.png';
+        
+        // Detectar el modo del sistema y establecer el favicon correcto
+        (function() {
+            const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            // Si el sistema está en modo OSCURO → usar favicon CLARO (para que contraste)
+            // Si el sistema está en modo CLARO → usar favicon OSCURO (para que contraste)
+            const faviconUrl = isDarkMode ? FAVICON_CLARO : FAVICON_OSCURO;
+            
+            // Actualizar todos los elementos de favicon inmediatamente
+            const links = [
+                document.getElementById('favicon'),
+                document.getElementById('favicon-shortcut'),
+                document.getElementById('favicon-32'),
+                document.getElementById('favicon-16')
+            ];
+            
+            links.forEach(link => {
+                if (link) {
+                    link.href = faviconUrl + '?v=' + Date.now();
+                }
+            });
+        })();
+        
+        // Función para actualizar el favicon cuando cambia el modo del sistema
+        function updateFavicon() {
+            const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const faviconUrl = isDarkMode ? FAVICON_CLARO : FAVICON_OSCURO;
+            
+            const links = [
+                document.getElementById('favicon'),
+                document.getElementById('favicon-shortcut'),
+                document.getElementById('favicon-32'),
+                document.getElementById('favicon-16')
+            ];
+            
+            links.forEach(link => {
+                if (link) {
+                    link.href = faviconUrl + '?v=' + Date.now();
+                }
+            });
+        }
+        
+        // Escuchar cambios en el modo del sistema
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
