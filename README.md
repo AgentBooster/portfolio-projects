@@ -73,6 +73,18 @@ TensorFlow/Keras projects for forecasting, computer vision, and model-driven int
   </a>
 </p>
 
+### Software Frontend
+
+Web applications, modern interfaces, and frontend-focused tools.
+
+[![Open Folder](https://img.shields.io/badge/Open%20Folder-111827?style=for-the-badge&logo=github&logoColor=white)](Software_Frontend/)
+
+<p align="left">
+  <a href="Software_Frontend/">
+    <img src="Software_Frontend/fisia_software/assets/images/cover_web_app.png" alt="Software Frontend cover" width="52%">
+  </a>
+</p>
+
 ### Widget Agents (Demo)
 
 Embeddable multi-agent demo focused on UX and process automation integration patterns.
