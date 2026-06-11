@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lab Notebook - Module 4</title>
+<style>
+  body { font-family: Arial, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { color: #333; }
+  p { margin-bottom: 10px; }
+  ul { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Lab Notebook</h1>
+<h2>FPGA Capstone Project</h2>
+
+<h3>Academic Integrity Declaration</h3>
+<p>I declare that this work was completed by me and complies with the course's academic integrity standards.</p>
+<p><strong>Name:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04/06/2026</p>
+<p><strong>Signature:</strong> Christian Moraes</p>
+
+<h2>Module 4</h2>
+
+<h3>NIOS II Software Development</h3>
+<p><strong>Author:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04/06/2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>In this final module, the primary objective was to build and execute the application software on top of the soft-core Nios II processor architecture designed in Module 3. Using the Nios II Software Build Tools (SBT) for Eclipse, a blank project was initialized, and custom application source files (including main.c and peripheral driver libraries) were imported. The software was configured to run on a bare-metal environment with standard I/O (stdio) routed to the JTAG-UART terminal. The compiled ELF executable binary was downloaded via the JTAG interface onto the target MAX 10 FPGA, running concurrently with the hardware configuration.</p>
+
+<p><strong>Observations:</strong></p>
+<p>Upon programming the FPGA with the SOF hardware configuration and loading the software binary (ELF) via the USB-JTAG connection, the Nios II soft processor booted up cleanly. Standard output statements correctly routed messages to the JTAG-UART console in Eclipse, verifying the functionality of the system clock, timer interrupts, and memory mapping. Peripherals such as the DIP switches and pushbuttons were active inputs, enabling dynamic control over the LED counts and seven-segment display updates. The hardware-software synchronization operates with zero latency, indicating a fully functional embedded System on a Chip (SoC).</p>
+
+<p><strong>Data:</strong></p>
+<p>The software build completed successfully using optimization level 2, minimizing the memory footprint to fit within the on-chip RAM resources. Serial messages in the terminal confirmed stable runtime execution.</p>
+
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong>Fmax (u3|altpll_0|sd1|pll7|clk[0]):</strong> 103.57 MHz</li>
+    <li><strong>Logic Utilization:</strong> ~25% (12,481 Logic Elements)</li>
+</ul>
+
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>This module provided a comprehensive understanding of the complete hardware-software co-design flow for FPGAs. I learned how to configure Board Support Packages (BSPs), map interrupt service routines, and bridge low-level Avalon memory registers to C code variables. Seeing the processor execute code from the internal memory block of the FPGA highlighted the massive flexibility and power of integrating soft-core processors within programmable logic fabric, successfully concluding the capstone project.</p>
+
+</body>
+</html>

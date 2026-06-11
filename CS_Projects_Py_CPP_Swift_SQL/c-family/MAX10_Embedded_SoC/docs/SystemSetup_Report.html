@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lab Notebook</title>
+<style>
+  body { font-family: Arial, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { color: #333; }
+  p { margin-bottom: 10px; }
+  ul { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Lab Notebook</h1>
+<h2>FPGA Capstone Project</h2>
+
+<h3>Academic Integrity Declaration</h3>
+<p>I declare that this work was completed by me and complies with the course's academic integrity standards.</p>
+<p><strong>Name:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04/06/2026</p>
+<p><strong>Signature:</strong> Christian Moraes</p>
+
+<h2>Module 1</h2>
+
+<h3>Setup</h3>
+<p><strong>Author:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04 June 2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>In this initial setup phase, I programmed the DE10-Lite board with the default baseline configuration project. The primary goal was to verify that the Quartus Prime compilation flow works correctly and that the board operates functionally when the SRAM object file (.sof) is transferred via the USB-Blaster. Furthermore, I analyzed both the "Small" and "Default" configurations provided in the top-level entity by filtering the design to compare their respective resource footprints and maximum clock frequencies (Fmax).</p>
+<p><strong>Observations:</strong></p>
+<p>Upon successful programming, the board behaved precisely as intended. The default demo initialized flawlessly; the 7-segment displays illuminated and cycled, and the LEDs responded adequately to the toggling of the onboard switches. I observed no warnings or errors during the JTAG programming sequence.</p>
+<p><strong>Data:</strong></p>
+<p>The switches mapped accurately to the assigned inputs and the LEDs to the outputs. Extracted data points for Fmax and logic utilization were obtained from the Quartus compilation reports (TimeQuest Timing Analyzer and Fitter reports).</p>
+
+<p><strong>Results:</strong></p>
+<p><strong>DE10_LITE_Small</strong></p>
+<ul>
+    <li><strong>Fmax:</strong> ~253.29 MHz</li>
+    <li><strong>Logic Utilization %:</strong> 0.25% (126 Logic Elements)</li>
+    <li><strong># Flip-Flops:</strong> 75</li>
+</ul>
+<p><strong>DE10_LITE_Default</strong></p>
+<ul>
+    <li><strong>Fmax:</strong> ~230.31 MHz</li>
+    <li><strong>Logic Utilization %:</strong> 1.35% (673 Logic Elements)</li>
+    <li><strong># Flip-Flops:</strong> 236</li>
+</ul>
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>Record your observations of the board behavior once the FPGA is programmed. Does it behave as you might expect?</strong><br>
+    Yes, the board behaves exactly as expected without any discrepancies. The initial loading of the .sof file was smooth. The onboard LEDs accurately reflect the state of the toggle switches in real-time, and the 7-segment displays show the pre-programmed default sequences, proving that both the physical hardware and the programming interface are fully functional.</li>
+</ul>
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I learned the end-to-end workflow of programming an FPGA using Intel Quartus Prime, from opening a project to analyzing its compilation reports. I now understand how to filter the base configuration file to compile either a "Small" or "Default" configuration and how to locate key metrics like Logic Utilization and Fmax to evaluate design efficiency and speed.</p>
+
+<hr>
+
+<h3>Part 1</h3>
+<p><strong>Author:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04 June 2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>For Part 1, I designed and implemented a behavioral 7-segment decoder in VHDL. This decoder acts as a strictly combinational logic circuit that reads a 4-bit binary input from the physical switches and translates it into a 7-bit output to display hexadecimal values (0 through F) on a single 7-segment display unit. I tested every single 4-bit combination to ensure correctness against the truth table.</p>
+<p><strong>Observations:</strong></p>
+<p>The 7-segment display correctly illuminated the specific segments corresponding to the hexadecimal character of the active switch configuration. The transition between characters was instantaneous, which is characteristic of pure combinational logic with no clock dependencies.</p>
+<p><strong>Data:</strong></p>
+<p>Input combinations tested from 0000 to 1111.<br>
+Outputs verified to correctly form the shapes 0-9 and A-F on the active-low 7-segment display.</p>
+
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong>Fmax:</strong> N/A (Pure Combinational Logic)</li>
+    <li><strong>Logic Utilization %:</strong> 0.03% (14 Logic Elements)</li>
+    <li><strong># Flip-Flops:</strong> 0</li>
+</ul>
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>Based on your observations of the board behavior once the FPGA is programmed, does it behave as you might expect?</strong><br>
+    Yes, the behavior perfectly matched my expectations. Every 4-bit combination on the switches accurately decoded to the corresponding hexadecimal digit on the 7-segment display, confirming the structural logic was correctly defined in VHDL.</li>
+    <li><strong>Explain the reason for the number of flip-flops used in the design.</strong><br>
+    The design utilizes 0 flip-flops because it is a purely combinational circuit. It functions essentially as a lookup table (LUT) that maps current inputs directly to outputs. There is no memory, no state preservation, and no clock signal required, hence no sequential elements like flip-flops are synthesized.</li>
+</ul>
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I gained practical experience mapping physical I/O (switches and 7-segment displays) to VHDL inputs and outputs. I learned how to describe combinational logic using conditional statements (such as selected signal assignments) to create a robust and efficient 7-segment decoder.</p>
+
+<hr>
+
+<h3>Part 2</h3>
+<p><strong>Date:</strong> 04 June 2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>I expanded the design by implementing a comparator and a BCD (Binary-Coded Decimal) converter. The logic evaluates the 4-bit input to check if it exceeds 9 (i.e., A-F in hex). If it does, the logic subtracts 10 from the input and asserts a carry bit to activate the tens digit on a second 7-segment display. This allows the system to display 4-bit binary inputs as true decimal numbers (0 to 15) instead of hexadecimal.</p>
+<p><strong>Observations:</strong></p>
+<p>For inputs between 0 and 9, the tens display remained off, and the units display accurately showed the input number. For inputs between 10 (1010) and 15 (1111), the tens display correctly showed a '1', while the units display correctly showed the remainder (0 through 5).</p>
+<p><strong>Data:</strong></p>
+<p>Test case 1: Input 0011 -> Output displays '3'<br>
+Test case 2: Input 1010 -> Output displays '10'<br>
+Test case 3: Input 1111 -> Output displays '15'</p>
+
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong>Fmax:</strong> N/A (Pure Combinational Logic)</li>
+    <li><strong>Logic Utilization %:</strong> 0.02% (8 Logic Elements)</li>
+    <li><strong># Flip-Flops:</strong> 0</li>
+    <li><strong>With V = 0, z:</strong> 0</li>
+    <li><strong>With V = 0, A:</strong> 0</li>
+    <li><strong>With V = F, z:</strong> 1</li>
+    <li><strong>With V = F, A:</strong> 5 (binary 0101)</li>
+</ul>
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>Based on your observations of the board behavior once the FPGA is programmed, does it behave as you might expect?</strong><br>
+    Yes, it successfully behaves as a true BCD converter. Numbers greater than 9 correctly trigger the second digit, providing an intuitive decimal readout of the binary switch values.</li>
+    <li><strong>Does this design use more or less logic than the design in Part 1? Why?</strong><br>
+    It uses slightly less logic (8 Logic Elements compared to 14 in Part 1). This reduction occurs because Part 1 required a full 16-state decoding logic block. In contrast, Part 2 leverages optimized arithmetic subtraction (offsetting the value by 10) and conditional activation for the tens digit, which the Quartus synthesizer optimizes into fewer physical gates.</li>
+</ul>
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I learned how to combine simple arithmetic operations and comparators in VHDL to build a functional BCD converter. This exercise demonstrated the importance of understanding how structural instantiations and conditional assignments can be optimized by the synthesizer to reduce logic element utilization.</p>
+
+<hr>
+
+<h3>Part 3</h3>
+<p><strong>Date:</strong> 04 June 2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>I designed a 4-bit ripple-carry adder using a purely structural approach by cascading four individual 1-bit Full Adder components. The sum of two separate 4-bit switch inputs was wired to be displayed on the 7-segment display, along with the final carry-out bit.</p>
+<p><strong>Observations:</strong></p>
+<p>The adder accurately computed sums for various combinations. The carry propagated correctly from the least significant bit up to the most significant bit. The final carry-out correctly handled overflow scenarios beyond 4 bits.</p>
+<p><strong>Data:</strong></p>
+<p>Tested 0+0=0, 7+1=8, 10+5=15. Also tested 15+1=0 (with an active carry-out bit).</p>
+
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong>Fmax:</strong> N/A (Pure Combinational Logic)</li>
+    <li><strong>Logic Utilization %:</strong> 0.02% (8 Logic Elements)</li>
+    <li><strong>#Flip-Flops:</strong> 0</li>
+</ul>
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>Based on your observations of the board behavior once the FPGA is programmed, does it behave as you might expect?</strong><br>
+    Yes, the cascaded Full Adders function perfectly as a 4-bit adder. The sum and carry-out behave consistently with theoretical truth tables for ripple-carry adders.</li>
+</ul>
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I learned the fundamentals of structural VHDL modeling by instantiating and wiring multiple lower-level components to build a complex datapath. I gained insight into how carry bits propagate physically through cascaded logic gates.</p>
+
+<hr>
+
+<h3>Part 4</h3>
+<p><strong>Date:</strong> 04 June 2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>I constructed a multi-digit structural BCD adder. This complex design required chaining the previously built ripple-carry adders and BCD converters. The goal was to add two separate inputs and display the final sum entirely in decimal format across multiple 7-segment displays, handling multi-digit carry-over appropriately.</p>
+<p><strong>Observations:</strong></p>
+<p>The decimal addition functioned flawlessly. When adding values that resulted in a sum greater than 9, the carry-over seamlessly shifted to the next higher-order BCD converter, ensuring that all digits displayed were valid decimal numbers (0-9).</p>
+<p><strong>Data:</strong></p>
+<p>Tested 8 + 9 = 17 (displayed as '1' and '7').<br>
+Tested 9 + 9 = 18 (displayed as '1' and '8').</p>
+
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong># Logic Cells:</strong> 40</li>
+    <li><strong>Logic Utilization %:</strong> 0.08%</li>
+</ul>
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>Based on your observations of the board behavior once the FPGA is programmed, does it behave as you might expect?</strong><br>
+    Yes, the structural BCD adder correctly handles the complex task of multi-digit addition. It accurately computes the sum and manages carry-out bits to ensure the higher-order 7-segment displays show the correct decimal representation without fail.</li>
+</ul>
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I experienced the challenge of building complex arithmetic circuits using strictly structural modeling. Mapping the intermediate signals between cascaded adders and BCD converters requires careful design, which solidified my understanding of hardware architecture and datapath routing.</p>
+
+<hr>
+
+<h3>Part 5</h3>
+<p><strong>Date:</strong> 04 June 2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>I implemented the exact same BCD adder functionality as in Part 4, but this time using behavioral VHDL modeling. Instead of manually instantiating and wiring structural components, I used high-level arithmetic operators and processes, relying on the Quartus synthesizer to infer the necessary logic gates.</p>
+<p><strong>Observations:</strong></p>
+<p>The functional behavior on the board was identical to the structural implementation in Part 4. The additions were completely accurate, and the BCD format was perfectly maintained across the displays.</p>
+<p><strong>Data:</strong></p>
+<p>All test cases executed in Part 4 (e.g., 8+9=17, 9+9=18) yielded identical, accurate results with the behavioral model.</p>
+
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong># Logic Cells:</strong> 38</li>
+    <li><strong>Logic Utilization %:</strong> 0.08%</li>
+</ul>
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>Based on your observations of the board behavior once the FPGA is programmed, does it behave as you might expect?</strong><br>
+    Yes, the behavioral BCD adder correctly performs the additions and handles the BCD conversions. It is functionally equivalent to the structural version, proving that the high-level description was synthesized accurately by Quartus.</li>
+    <li><strong>How does this compare to the number of Logic Cells in Part 4?</strong><br>
+    The behavioral adder uses slightly fewer logic cells (38 LEs) compared to the structural adder in Part 4 (40 LEs). This demonstrates the synthesizer's ability to optimize higher-level arithmetic descriptions more efficiently than rigid structural maps.</li>
+</ul>
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I learned that writing behavioral VHDL using high-level operators is more efficient for the designer and less prone to manual wiring errors. Furthermore, it allows the synthesis tool the freedom to apply advanced optimizations, resulting in a slightly more compact logic footprint compared to a strict structural implementation.</p>
+
+</body>
+</html>

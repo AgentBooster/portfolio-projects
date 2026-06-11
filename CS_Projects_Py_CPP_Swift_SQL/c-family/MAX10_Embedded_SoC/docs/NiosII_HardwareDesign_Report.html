@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lab Notebook - Module 3</title>
+<style>
+  body { font-family: Arial, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { color: #333; }
+  p { margin-bottom: 10px; }
+  ul { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Lab Notebook</h1>
+<h2>FPGA Capstone Project</h2>
+
+<h3>Academic Integrity Declaration</h3>
+<p>I declare that this work was completed by me and complies with the course's academic integrity standards.</p>
+<p><strong>Name:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04/06/2026</p>
+<p><strong>Signature:</strong> Christian Moraes</p>
+
+<h2>Module 3</h2>
+
+<h3>NIOS II Hardware Design</h3>
+<p><strong>Author:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04/06/2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>In this module, the primary objective was to design, integrate, and compile the underlying hardware architecture of a System on a Chip (SoC) using Platform Designer (Qsys). The system features a Nios II soft processor, on-chip RAM, a JTAG-UART interface, and various Avalon Memory-Mapped (Avalon-MM) peripherals. After generating the Qsys system and synthesizing the VHDL top-level entity in Quartus Prime, the resulting .sof file was programmed into the MAX 10 FPGA.</p>
+<p><strong>Observations:</strong></p>
+<p>Upon programming the FPGA, the device was successfully configured without any hardware errors. However, because this module focuses exclusively on the static hardware layer (without loading the compiled C executable code), the system did not perform any interactive, visible actions. Internally, the Nios II processor, VGA controller, memory, and PLLs are completely mapped and initialized in the hardware fabric, waiting in an idle state for software commands.</p>
+<p><strong>Data:</strong></p>
+<p>The design compiled cleanly. The static mapping of memory addresses for all Qsys components was verified, ensuring no overlaps in the Avalon-MM bus address space. TimeQuest Timing Analyzer confirmed the critical paths met timing requirements.</p>
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong>Fmax:</strong> 103.57 MHz</li>
+    <li><strong>Logic Utilization:</strong> ~25% (12,481 Logic Elements)</li>
+</ul>
+
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>1. What is the purpose of the Avalon Memory-Mapped Clock-Crossing Bridge?</strong><br>
+    The purpose of the Avalon Memory-Mapped Clock-Crossing Bridge is to allow safe and reliable communication between different clock domains within the same SoC architecture. In complex designs like this one, peripherals often run at different frequencies than the main processor core (for instance, the Nios II might run at 100 MHz while a specific peripheral operates at 50 MHz). The clock-crossing bridge handles the synchronization of data, address, and control signals across these asynchronous boundaries using FIFOs and synchronizers. This prevents metastability and ensures that data is safely transferred without corruption or timing violations.</li>
+</ul>
+
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I learned how to architect a complete embedded system from scratch using Intel's Platform Designer. This module provided deep insights into the Avalon Memory-Mapped interface and how different hardware IP cores (like memory, processors, and custom peripherals) communicate over a shared bus infrastructure. Additionally, seeing the logic utilization jump to 25% (12,481 LEs) gave me a clear perspective on the significant hardware cost of instantiating a soft processor and its associated buses compared to simple state machines.</p>
+
+</body>
+</html>

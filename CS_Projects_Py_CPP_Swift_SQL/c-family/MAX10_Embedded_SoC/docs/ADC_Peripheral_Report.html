@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lab Notebook - Module 2</title>
+<style>
+  body { font-family: Arial, sans-serif; line-height: 1.6; }
+  h1, h2, h3 { color: #333; }
+  p { margin-bottom: 10px; }
+  ul { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Lab Notebook</h1>
+<h2>FPGA Capstone Project</h2>
+
+<h3>Academic Integrity Declaration</h3>
+<p>I declare that this work was completed by me and complies with the course's academic integrity standards.</p>
+<p><strong>Name:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04/06/2026</p>
+<p><strong>Signature:</strong> Christian Moraes</p>
+
+<h2>Module 2</h2>
+
+<h3>PWM</h3>
+<p><strong>Author:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04/06/2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>In this part of the module, a Pulse Width Modulation (PWM) core was implemented to control the brightness of the onboard LEDs. The design uses basic counters and comparators to generate a variable duty cycle signal based on the input from the first three switches on the DE10-Lite board. The logic was synthesized and programmed onto the MAX 10 device to verify the visual response of the LEDs.</p>
+<p><strong>Observations:</strong></p>
+<p>The generated PWM signals successfully modulated the LED brightness. As the switch combination increased in binary value, the duty cycle of the PWM signal increased, which visibly increased the LED intensity. The visual feedback confirms that the control logic correctly translates the switch inputs into the proportional duty cycle without any flickering or instability.</p>
+<p><strong>Data:</strong></p>
+<p>Switch inputs effectively mapped to duty cycle percentages. An input of 000 corresponds to minimum brightness (effectively off), and an input of 111 corresponds to maximum brightness, with distinguishable intermediate levels of intensity.</p>
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong>Fmax:</strong> 602.41 MHz (pll1|clk[0])</li>
+    <li><strong>% Logic Utilization:</strong> &lt; 1% (41 Logic Elements)</li>
+    <li><strong>Total registers:</strong> 41</li>
+</ul>
+
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>1. Did the LED change brightness depending on the setting of the first 3 switches?</strong><br>
+    Yes, the LED brightness changed proportionally depending on the settings of the first three switches. The switches served as the input to set the duty cycle of the PWM signal. A higher binary value on the switches resulted in a larger duty cycle, which translated to a visibly brighter LED due to the longer high-time in the signal period.</li>
+</ul>
+
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I learned how to successfully implement a parameterized PWM generator in hardware using VHDL. By utilizing base timers and comparators, I was able to control the power delivered to an LED, visibly modulating its intensity. This demonstrated the practical application of high-frequency digital signals to achieve analog-like control over peripheral devices. The design proved to be highly efficient, consuming less than 1% of the FPGA's logic resources.</p>
+
+<hr>
+
+<h3>ADC</h3>
+<p><strong>Author:</strong> Christian Moraes</p>
+<p><strong>Date:</strong> 04/06/2026</p>
+<p><strong>Procedure/Description of Test:</strong></p>
+<p>This part of the lab involved interfacing with the MAX 10's built-in Analog-to-Digital Converter (ADC) hard IP. Platform Designer (Qsys) was used to instantiate the ADC block, a Phase-Locked Loop (PLL) for clock generation, and the necessary Avalon Memory-Mapped interconnects to route the analog readings to the user logic. The top-level entity was wrapped in VHDL to continuously sample analog voltage inputs and interpret the corresponding digital values.</p>
+<p><strong>Observations:</strong></p>
+<p>The ADC successfully sampled the analog inputs at the defined frequency. The digital outputs accurately reflected changes in the voltage applied to the analog pins. The integration of the Qsys components with the top-level VHDL wrapper functioned smoothly, proving that the Avalon interconnect successfully managed the data acquisition pipeline without dropping samples or causing bus stalls.</p>
+<p><strong>Data:</strong></p>
+<p>Varying analog voltages applied to the input pins were successfully sampled and mapped to their corresponding digital conversion values. The TimeQuest timing analyzer reported stable clock domains across the PLL.</p>
+<p><strong>Results:</strong></p>
+<ul>
+    <li><strong>Fmax:</strong> 507.61 MHz (pll1|clk[0])</li>
+    <li><strong>%Logic Utilization:</strong> ~10% (5,010 Logic Elements)</li>
+</ul>
+
+<p><strong>Questions:</strong></p>
+<ul>
+    <li><strong>1. Does the board behave as you expected?</strong><br>
+    Yes, the board behaves precisely as expected. The hardware successfully captures the varying analog voltages and converts them into reliable digital values. The Qsys-generated interconnects seamlessly manage the data transfer between the ADC IP and the logic fabric.</li>
+    <li><strong>2. Is this a good voltmeter as is?</strong><br>
+    As it stands, it functions as a basic voltmeter, but it is not a highly precise or user-friendly one. The raw ADC values are captured, but they lack calibration, proper scaling to real-world voltage units (like volts or millivolts), and signal averaging to stabilize the readings against inherent electrical noise.</li>
+    <li><strong>3. What could you change in either the board hardware or FPGA logic to make it perform better?</strong><br>
+    To improve its performance as a voltmeter, I could implement a digital low-pass filter or a moving average algorithm in the FPGA logic to smooth out signal noise. Additionally, scaling logic could be added to convert the raw digital values directly into human-readable voltage formats (e.g., 0.00V to 3.30V) for the 7-segment displays. On the hardware side, adding dedicated filtering capacitors or a more stable external analog reference voltage to the input pins would significantly increase sampling accuracy and reduce jitter.</li>
+</ul>
+
+<p><strong>Conclusions:</strong></p>
+<p><strong>Lessons Learned (What did you learn?):</strong></p>
+<p>I learned how to instantiate and configure complex hard IP blocks, specifically the MAX 10 ADC and a PLL, using the Platform Designer (Qsys) tool. Furthermore, I gained practical experience working with the Avalon Memory-Mapped interface to bridge system-level components and integrate them successfully into a custom VHDL top-level entity. The stark increase in logic utilization (~10%, compared to &lt;1% for the PWM) highlighted the significant resource overhead associated with Qsys interconnects and managing complex mixed-signal IPs.</p>
+
+</body>
+</html>
